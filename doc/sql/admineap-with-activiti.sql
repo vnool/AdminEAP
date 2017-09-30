@@ -2235,6 +2235,10 @@ INSERT INTO `tbl_user_star` VALUES ('402880eb5c4c8e52015c4c9bc5240003','2017-05-
 UNLOCK TABLES;
 
 --
+-- Dumping events for database 'adminlte'
+--
+
+--
 -- Dumping routines for database 'adminlte'
 --
 
@@ -2301,4 +2305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-24 21:37:07
+-- Dump completed on 2017-09-30  9:50:38
