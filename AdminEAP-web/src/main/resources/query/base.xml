@@ -87,7 +87,7 @@
 		<column key="id" header="id" hidden="true"/>
 		<column key="version" header="version" hidden="true"/>
 		<column key="name" header="用户名" operator="like" width="100" allowSort="true" />
-		<column key="login_name" header="登录名" operator="eq" width="100" allowSort="true"/>
+		<column key="login_name" header="登录名" classType="java.lang.Integer" operator="eq" width="100" allowSort="true"/>
 	</query>
 
 	<!--通用用户选择-->
