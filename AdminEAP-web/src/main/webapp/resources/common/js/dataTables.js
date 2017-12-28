@@ -50,6 +50,7 @@
      */
     CommonTable.prototype.initTable = function (tableId, queryId, searchDiv) {
         this.data = this.getServerData(null, tableId);
+        if(this.data == null ) return;
         this.dataCache.data("data", this.data);
         // console.log(JSON.stringify(this.data));
         var that = this;
@@ -404,6 +405,7 @@
         ajaxPost(basePath + "/query/loadData", {"reqObj": this.toJSONString(reqParam)}, function (result, status) {
             retData = result;
         });
+        if( retData == null)  return null;
         var start = 0;
         if (pageInfo) {
             start = pageInfo.pageSize * (pageInfo.pageNum - 1)
