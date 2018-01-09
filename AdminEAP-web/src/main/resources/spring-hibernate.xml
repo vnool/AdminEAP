@@ -16,44 +16,33 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 		<!-- destroy-method="close" -->
 	<!-- 配置c3p0数据源 -->
 	<bean id="dataSource" name="dataSource"
-		class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-		<property name="driverClass" value="${driverClassName}" />
-		<property name="jdbcUrl" value="${jdbc_url}" />
-		<property name="user" value="${jdbc_username}" />
+		class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close" init-method="init">
+		<property name="driverClassName" value="${driverClassName}" />
+		<property name="url" value="${jdbc_url}" />
+		<property name="username" value="${jdbc_username}" />
 		<property name="password" value="${jdbc_password}" />
 
-		<!--连接池中保留的最小连接数。 -->
-		<property name="minPoolSize" value="5" />
-		<!--连接池中保留的最大连接数。Default: 15 -->
-		<property name="maxPoolSize" value="100" />
-		<!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
-		<property name="maxIdleTime" value="60" />
-		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
-		<property name="acquireIncrement" value="10" />
-		<!--JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements 属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。 
-			如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 -->
-		<property name="maxStatements" value="1000" />
-		<!--初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
-		<property name="initialPoolSize" value="5" />
-		<!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
-		<property name="idleConnectionTestPeriod" value="60" />
-		<!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
-		<property name="acquireRetryAttempts" value="30" />
-		<!--获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍有效 保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试 
-			获取连接失败后该数据源将申明已断开并永久关闭。Default: false -->
-		<property name="breakAfterAcquireFailure" value="true" />
-		<!--因性能消耗大请只在需要的时候使用它。如果设为true那么在每个connection提交的 时候都将校验其有效性。建议使用idleConnectionTestPeriod或automaticTestTable 
-			等方法来提升连接测试的性能。Default: false -->
-		<property name="testConnectionOnCheckout" value="false" />
-		
-		<!-- <property name="preferredTestQuery" value="${validationQuery}" />  -->
-		<!--
-		<property name="testOnBorrow" value="false" /> 
-		<property name="testOnReturn" value="false" /> 
-		<property name="testWhileIdle" value="true" /> -->
+		<property name="connectionProperties" value="config.decrypt=false"/>
+		<property name="filters" value="stat" />
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="1" />
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="20" />
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="60000" />
 
-		<!-- 关闭abanded连接时输出错误日志 -->
-		<!-- <property name="logAbandoned" value="true" /> -->
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
 	</bean>
 	
 	
@@ -100,7 +89,6 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
 		
 	<bean id="SpringContextUtil" class="com.cnpc.framework.utils.SpringContextUtil" scope="singleton"></bean>
-	
 
 	<!-- 拦截器方式配置事务 -->
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
@@ -116,7 +104,7 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 			<tx:method name="remove*" propagation="REQUIRED" />
 			<tx:method name="repair*" propagation="REQUIRED" />
 			<tx:method name="delAndRepair*" propagation="REQUIRED" />
-			<tx:method name="execute*" propagation="REQUIRED" />
+			<tx:method name="execute*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="submit*" propagation="REQUIRED" />
 			<tx:method name="start*" propagation="REQUIRED" />
 			<tx:method name="batch*" propagation="REQUIRED" />
