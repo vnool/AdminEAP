@@ -13,31 +13,31 @@
   <link rel="shortcut icon" type="image/x-icon" href="${basePath}/resources/common/favicon.ico" media="screen" />
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="${basePath}/resources/adminlte/bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome --> 
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="${basePath}/resources/common/libs/font-awesome/css/font-awesome.min.css">
 
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 
   <link rel="stylesheet" href="${basePath}/resources/common/css/base.css">
- 
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script src="${basePath}/resources/common/libs/html5shiv/html5shiv.min.js"></script>
   <script src="${basePath}/resources/common/libs/respond/respond.min.js"></script>
   <![endif]-->
-    <!-- table and edit -->
-	<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/datatables/dataTables.bootstrap.css">
-	<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/datatables/select.bootstrap.min.css">
-	<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css"/>
-	<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/iCheck/all.css">
-    <!-- daterangepicker -->
-    <!--<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/daterangepicker/daterangepicker.css">-->
-	<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/datepicker/datepicker3.css">
-    <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/select2/select2.min.css">
-	<!-- treeview -->
-	<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/bootstrap-treeview/bootstrap-treeview.min.css" />
+  <!-- table and edit -->
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/datatables/select.bootstrap.min.css">
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css"/>
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/iCheck/all.css">
+  <!-- daterangepicker -->
+  <!--<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/daterangepicker/daterangepicker.css">-->
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/datepicker/datepicker3.css">
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/select2/select2.min.css">
+  <!-- treeview -->
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/bootstrap-treeview/bootstrap-treeview.min.css" />
   <!-- Theme style -->
   <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/skins/_all-skins.css">
@@ -143,7 +143,7 @@
               </li>
               <li class="footer"><a href="#">See All Messages</a></li>
             </ul>
-          </li>  
+          </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -321,15 +321,15 @@
           <img src="${basePath}/resources/adminlte/dist/img/user0-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>${user.name}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <!-- search form --> 
+      <!-- search form -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
+          <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
               </span>
@@ -345,7 +345,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" id="mainDiv">
-    
+
   </div>
   <!-- /.content-wrapper -->
 
@@ -546,12 +546,12 @@
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div> 
-  
+  <div class="control-sidebar-bg"></div>
+
 </div>
 <!-- ./wrapper -->
 <script type="text/javascript">
-var basePath="${basePath}";//给外部js文件传递路径参数
+    var basePath="${basePath}";//给外部js文件传递路径参数
 </script>
 <!-- jQuery 2.2.0 -->
 <script src="${basePath}/resources/adminlte/plugins/jQuery/jQuery-2.2.0.min.js"></script>
@@ -580,7 +580,7 @@ var basePath="${basePath}";//给外部js文件传递路径参数
 <script src="${basePath}/resources/adminlte/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
 <!-- treeview -->
 <script src="${basePath}/resources/adminlte/plugins/bootstrap-treeview/bootstrap-treeview.min.js"></script>
-		
+
 <!-- AdminLTE for demo purposes -->
 <script src="${basePath}/resources/adminlte/dist/js/demo.js"></script>
 <!--select2-->
@@ -593,41 +593,41 @@ var basePath="${basePath}";//给外部js文件传递路径参数
 <script type="text/javascript" src="${basePath}/resources/common/js/base-org.js"></script>
 <!-- 加入页面的的脚本 -->
 <script>
-   //加载菜单
-   ajaxPost(basePath+"/function/all",null,function(data){
-	  var $li,$menu_f_ul;
-	  $.each(data,function(index,item){
-		  if(item.levelCode.length==6){	
-			  $li=$('<li class="treeview"></li>');
-			  var $menu_f=$('<a href="#">\n'+
-					           '<i class="'+item.icon+'"></i> <span>'+item.name+'</span>\n'+
-                                ' <span class="pull-right-container">\n'+
-					           '<i class="fa fa-angle-left pull-right"></i>\n'+
-				            '</span></a>');
-			  $li.append($menu_f);
-			  $menu_f_ul=$('<ul class="treeview-menu"></ul>');
-			  $li.append($menu_f_ul);
-			  $("ul.sidebar-menu").append($li); 
-		  } 
-		  else if(item.levelCode.length==12){
-			  $menu_s=$('<li><a href="#" data-url="${basePath}'+item.url+'"><i class="'+item.icon+'"></i>'+item.name+'</a></li>');
-			  $menu_f_ul.append($menu_s); 
-		  }
-	  });
-   });  
-   
-   $(function(){ 
-	   //首页默认加载
-       loadPage("${basePath}/homePage");
-       //loadPage("${basePath}/activiti/task/todo/list");
-       //loadPage("${basePath}/activiti/delegate/list");
-	   //loadPage("${basePath}/markdown/preview?id=402880e958ecdff60158ed0c62ba0001")
-	   $("a[data-url]").click(function(evt){
-		   loadPage($(this).data("url"));
-		   $("ul.treeview-menu li").removeClass("active");
-		   $(this).parent().addClass("active");
-	   });  
-   });
+    //加载菜单
+    ajaxPost(basePath+"/function/getlist",null,function(data){
+        var $li,$menu_f_ul;
+        $.each(data,function(index,item){
+            if(item.levelCode.length==6){
+                $li=$('<li class="treeview"></li>');
+                var $menu_f=$('<a href="#">\n'+
+                    '<i class="'+item.icon+'"></i> <span>'+item.name+'</span>\n'+
+                    ' <span class="pull-right-container">\n'+
+                    '<i class="fa fa-angle-left pull-right"></i>\n'+
+                    '</span></a>');
+                $li.append($menu_f);
+                $menu_f_ul=$('<ul class="treeview-menu"></ul>');
+                $li.append($menu_f_ul);
+                $("ul.sidebar-menu").append($li);
+            }
+            else if(item.levelCode.length==12){
+                $menu_s=$('<li><a href="#" data-url="${basePath}'+item.url+'"><i class="'+item.icon+'"></i>'+item.name+'</a></li>');
+                $menu_f_ul.append($menu_s);
+            }
+        });
+    });
+
+    $(function(){
+        //首页默认加载
+        loadPage("${basePath}/homePage");
+        //loadPage("${basePath}/activiti/task/todo/list");
+        //loadPage("${basePath}/activiti/delegate/list");
+        //loadPage("${basePath}/markdown/preview?id=402880e958ecdff60158ed0c62ba0001")
+        $("a[data-url]").click(function(evt){
+            loadPage($(this).data("url"));
+            $("ul.treeview-menu li").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+    });
 
 </script>
 </body>
