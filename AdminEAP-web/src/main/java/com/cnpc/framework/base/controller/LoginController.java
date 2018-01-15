@@ -1,5 +1,6 @@
 package com.cnpc.framework.base.controller;
 
+import com.cnpc.framework.base.entity.Function;
 import com.cnpc.framework.base.entity.User;
 import com.cnpc.framework.base.pojo.ResultCode;
 import com.cnpc.framework.base.service.FunctionService;
@@ -10,6 +11,7 @@ import com.cnpc.framework.oauth.common.CustomOAuthService;
 import com.cnpc.framework.oauth.entity.OAuthUser;
 import com.cnpc.framework.oauth.service.OAuthServices;
 import com.cnpc.framework.oauth.service.OAuthUserService;
+import com.cnpc.framework.util.SecurityUtil;
 import com.cnpc.framework.utils.EncryptUtil;
 import com.cnpc.framework.utils.PropertiesUtil;
 import com.cnpc.framework.utils.StrUtil;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -139,6 +142,18 @@ public class LoginController {
         return LOGIN_PAGE;
     }
 
+
+    @RequestMapping(value="/function/getlist",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Function> getUserFunctions(){
+        User user= SecurityUtil.getUser();
+        Set<String> roles = roleService.getRoleCodeSet(user.getId());
+        if("1".equals(user.getIsSuperAdmin())){
+            return  functionService.getAll();
+        }else{
+            return functionService.getFunctionList(roles,user.getId());
+        }
+    }
 
  /*   @RequestMapping(value = "/logout")
     private String doLogout(HttpServletRequest request) {
