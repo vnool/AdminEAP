@@ -388,9 +388,9 @@
      */
     CommonTable.prototype.getServerData = function (pageInfo, tableId) {
         var dataCache = $("#dataCache" + tableId);
+        console.log(document.getElementById("mainDiv"));
         var reqParam = {
             queryId: dataCache.data("queryId"),
-            pageName: window.document.location.pathname,
             pageInfo: pageInfo,
             query: null,
             sortInfo: dataCache.data("sortInfo"),
@@ -398,14 +398,14 @@
         };
         dataCache.data("pageInfo", pageInfo);
         var retData = null;
-        console.log("reqObj:");
-        console.log(reqParam);
-        console.log(JSON);
+        //console.log("reqObj:");
+        //console.log(reqParam);
+        //console.log(JSON);
         //注释以上部分，统一用ajaxPost处理，以便处理session超时（ajax请求超时）
         ajaxPost(basePath + "/query/loadData", {"reqObj": this.toJSONString(reqParam)}, function (result, status) {
             retData = result;
         });
-        if( retData == null)  return null;
+        if( retData == null) return null;
         var start = 0;
         if (pageInfo) {
             start = pageInfo.pageSize * (pageInfo.pageNum - 1)

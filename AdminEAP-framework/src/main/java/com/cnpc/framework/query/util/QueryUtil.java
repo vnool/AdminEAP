@@ -1,5 +1,7 @@
 package com.cnpc.framework.query.util;
 
+import com.cnpc.framework.base.entity.Function;
+import com.cnpc.framework.base.entity.FunctionFilter;
 import com.cnpc.framework.base.pojo.PageInfo;
 import com.cnpc.framework.exception.QueryException;
 import com.cnpc.framework.query.entity.Column;
@@ -10,13 +12,16 @@ import com.cnpc.framework.query.filter.IFilter;
 import com.cnpc.framework.query.filter.StringFilter;
 import com.cnpc.framework.query.pojo.QueryDefinition;
 import com.cnpc.framework.utils.*;
+import org.apache.shiro.SecurityUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.type.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.ParseException;
 import java.util.*;
 
 /**
@@ -26,7 +31,7 @@ import java.util.*;
  */
 public class QueryUtil {
 
-    private static final Logger logger= LoggerFactory.getLogger(QueryUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(QueryUtil.class);
 
     /**
      * 根据类名获取类
@@ -141,7 +146,7 @@ public class QueryUtil {
      * @param query 查询配置
      * @return 注入条件后的查询sql及参数
      */
-    public static Map getSqlParams(QueryCondition queryCondition, Query query) throws QueryException{
+    public static Map getSqlParams(QueryCondition queryCondition, Query query) throws QueryException {
         Map<String, Object> map = new HashMap<>();
         StringBuilder sqlBuilder = new StringBuilder(query.getSql());
         Object[] objArr = new Object[]{};
@@ -181,23 +186,23 @@ public class QueryUtil {
      * @return 排序
      */
     private static String getSortInfo(QueryCondition condition, Query query) {
-        String sortInfo=!StrUtil.isEmpty(condition.getSortInfo()) ? condition.getSortInfo() : query.getOrder();
-        if(StrUtil.isEmpty(sortInfo))
+        String sortInfo = !StrUtil.isEmpty(condition.getSortInfo()) ? condition.getSortInfo() : query.getOrder();
+        if (StrUtil.isEmpty(sortInfo))
             return sortInfo;
-        String[] arr=sortInfo.split(",");
+        String[] arr = sortInfo.split(",");
         for (String str : arr) {
-            String[] keyArr=str.split(" ");
-            String key=keyArr[0].trim();
-            String id=getColumnIdByKey(query,key);
-            if(!StrUtil.isEmpty(id))
-            sortInfo=sortInfo.replace(key,id);
+            String[] keyArr = str.split(" ");
+            String key = keyArr[0].trim();
+            String id = getColumnIdByKey(query, key);
+            if (!StrUtil.isEmpty(id))
+                sortInfo = sortInfo.replace(key, id);
         }
         return sortInfo;
     }
 
-    private static String getColumnIdByKey(Query query,String key){
+    private static String getColumnIdByKey(Query query, String key) {
         for (Column column : query.getColumnList()) {
-            if(column.getKey().equals(key)){
+            if (column.getKey().equals(key)) {
                 return column.getId();
             }
         }
@@ -220,7 +225,7 @@ public class QueryUtil {
     /**
      * 获取查询操作符
      *
-     * @param map 前台参数
+     * @param map    前台参数
      * @param column 列配置
      * @return 操作符
      */
@@ -313,7 +318,7 @@ public class QueryUtil {
             }
         }
         //只选取了开始时间
-        if(values.length==1){
+        if (values.length == 1) {
             list.add(null);
         }
         return list;
@@ -349,7 +354,7 @@ public class QueryUtil {
      */
     private static Map<String, Object> getValueForDate(ConditionOperator operator, Object value) throws Exception {
         Map<String, Object> map = new HashMap<>();
-        if (!value.toString().contains(":")||value.toString().contains("00:00:00")) {
+        if (!value.toString().contains(":") || value.toString().contains("00:00:00")) {
             if (operator.equals(ConditionOperator.BETWEEN)) {
                 List list = (List) value;
                 if (list.get(1) != null) {
@@ -432,6 +437,52 @@ public class QueryUtil {
 
 
     /**
+     * 获取角色授权中的数据权限
+     *
+     * @param query 查询配置
+     * @return 数据权限
+     */
+    private static List<Map<String, Object>> getFunctionFilterCondition(Query query) {
+        Map<String, Function> functions = (Map<String, Function>) SecurityUtils.getSubject().getSession().getAttribute("functionMap");
+        Function function = functions.get(query.getId());
+        List<Map<String, Object>> ffConditions = new ArrayList<>();
+        if (function != null) {
+            List<FunctionFilter> fflist = function.getFflist();
+            if(fflist==null||fflist.isEmpty())
+                return ffConditions;
+            for (FunctionFilter functionFilter : fflist) {
+                Map<String, Object> conditionMap = new HashMap<>();
+                conditionMap.put("value", getFunctionFilterValue(functionFilter.getClassType(), functionFilter.getValue()));
+                conditionMap.put("operator", functionFilter.getOperator());
+                conditionMap.put("key", functionFilter.getKey());
+                conditionMap.put("classType", functionFilter.getClassType());
+                ffConditions.add(conditionMap);
+            }
+        }
+        return ffConditions;
+    }
+
+
+    private static Object getFunctionFilterValue(String classType, String value) {
+        if (StrUtil.isBlank(value))
+            return value;
+        try {
+            Object obj;
+            if (value.startsWith("@user.")) {
+                value = value.replace("@user.", "").replace("#", "");
+                obj = ObjectUtil.getValueByKey(SecurityUtils.getSubject().getSession().getAttribute("user"), value);
+            } else {
+                obj = JSonHelper.getValue(classType, value);
+            }
+            return obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return value;
+        }
+    }
+
+
+    /**
      * 拼接sql查询条件
      *
      * @param condition  查询条件
@@ -464,12 +515,12 @@ public class QueryUtil {
         List<Map<String, Object>> conditions = condition.getConditions();
         //注入服务器查询条件 通过column的 isServerCondition operator value注入
         conditions.addAll(getServerConditions(query));
-        //TODO 数据权限注入
+        conditions.addAll(getFunctionFilterCondition(query));
         if (conditions.isEmpty()) {
             return filter;
         }
 
-        logger.debug("-------"+query.getId()+"的filter查询条件-----------");
+        logger.debug("-------" + query.getId() + "的filter查询条件-----------");
         for (Map<String, Object> map : conditions) {
             String key = map.get("key").toString();
             Object value = map.get("value");
@@ -478,9 +529,15 @@ public class QueryUtil {
             if (column == null) {
                 column = new Column();
                 column.setKey(key);
+                if (map.get("classType") != null) {
+                    column.setClassType(map.get("classType").toString());
+                }
+                if (map.get("operator") != null&& StrUtil.isNotBlank(map.get("operator").toString())) {
+                    column.setOperator(map.get("operator").toString());
+                }
             }
             String operatorStr = getOperatorStr(map, column);
-            logger.debug("condition:"+key+" "+operatorStr+" "+ value);
+            logger.debug("condition:" + key + " " + operatorStr + " " + value);
 
             ConditionOperator operator = getOperator(operatorStr);
 
@@ -490,12 +547,11 @@ public class QueryUtil {
             } catch (Exception ex) {
                 throw new QueryException("转化类【" + column.getClassType() + "】出现异常！");
             }
-            //操
-            // 作需要值，并且有值
+            //操作需要值，并且有值
             Object newValue = value;
             if (isNeedValue(operator) && isNotEmptyValue(value)) {
                 //对值进行处理
-                Map<String, Object> value_map = getValueForOperator( operator, value, clazz);
+                Map<String, Object> value_map = getValueForOperator(operator, value, clazz);
                 if (value_map == null)
                     continue;
                 newValue = value_map.get("value");
@@ -612,12 +668,14 @@ public class QueryUtil {
 
         //查询条件注入
         List<Map<String, Object>> conditions = condition.getConditions();
+        //配置在xml上的服务端查询条件
         conditions.addAll(getServerConditions(query));
-        //TODO 数据权限注入
+        //配置在数据权限上的查询条件
+        conditions.addAll(getFunctionFilterCondition(query));
         if (conditions.isEmpty()) {
             return criteria;
         }
-        logger.debug("-------"+query.getId()+"的filter查询条件-----------");
+        logger.debug("-------" + query.getId() + "的filter查询条件-----------");
         for (Map<String, Object> map : conditions) {
             String key = map.get("key").toString();
             Object value = map.get("value");
@@ -625,9 +683,15 @@ public class QueryUtil {
             if (column == null) {
                 column = new Column();
                 column.setKey(key);
+                if (map.get("classType") != null) {
+                    column.setClassType(map.get("classType").toString());
+                }
+                if (map.get("operator") != null&& StrUtil.isNotBlank(map.get("operator").toString())) {
+                    column.setOperator(map.get("operator").toString());
+                }
             }
             String operatorStr = getOperatorStr(map, column);
-            logger.debug("condition:"+key+" "+operatorStr+" "+ value);
+            logger.debug("condition:" + key + " " + operatorStr + " " + value);
             ConditionOperator operator = getOperator(operatorStr);
             //类型处理
             Class clazz;
@@ -639,17 +703,17 @@ public class QueryUtil {
 
             Object newValue = value;
             if (isNeedValue(operator) && isNotEmptyValue(value)) {
-               //值处理
+                //值处理
                 Map<String, Object> value_map = getValueForOperator(operator, value, clazz);
                 if (value_map == null)
                     continue;
                 newValue = value_map.get("value");
                 operator = (ConditionOperator) value_map.get("operator");
-                criteria=ObjectUtil.getCriteriaWithAlias(criteria,key);
-                criteria=operator.getCriteria(criteria,key,newValue);
+                criteria = ObjectUtil.getCriteriaWithAlias(criteria, key);
+                criteria = operator.getCriteria(criteria, key, newValue);
             } else if (!isNeedValue(operator)) {
-                criteria=ObjectUtil.getCriteriaWithAlias(criteria,key);
-                criteria=operator.getCriteria(criteria,key,newValue);
+                criteria = ObjectUtil.getCriteriaWithAlias(criteria, key);
+                criteria = operator.getCriteria(criteria, key, newValue);
             }
         }
 

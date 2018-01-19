@@ -51,6 +51,10 @@ public class Function extends BaseEntity {
     @Column(name = "functype")
     private String functype;
 
+    @Header(name="关联queryId")
+    @Column(name="queryId")
+    private String queryId;
+
     @Header(name = "备注")
     @Column(name = "remark", length = 1000)
     private String remark;
@@ -63,6 +67,14 @@ public class Function extends BaseEntity {
 
     @Transient
     private String roleId;
+
+    public String getQueryId() {
+        return queryId;
+    }
+
+    public void setQueryId(String queryId) {
+        this.queryId = queryId;
+    }
 
     public String getRoleId() {
         return roleId;

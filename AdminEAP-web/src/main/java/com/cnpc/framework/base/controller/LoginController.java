@@ -30,10 +30,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class LoginController {
@@ -92,7 +89,7 @@ public class LoginController {
             if (subject.isAuthenticated()) {
                 String userId = subject.getPrincipal().toString();
                 Set<String> roles = roleService.getRoleCodeSet(userId);
-                Set<String> functions = functionService.getFunctionCodeSet(roles, userId);
+                //Set<String> functions = functionService.getFunctionCodeSet(roles, userId);
                 //---------调用realm doGetAuthorizationInfo----------
                 boolean isPermitted = subject.isPermitted("user");
                 if (!roles.isEmpty()) {
@@ -143,17 +140,31 @@ public class LoginController {
     }
 
 
-    @RequestMapping(value="/function/getlist",method = RequestMethod.POST)
+    @RequestMapping(value = "/function/getlist", method = RequestMethod.POST)
     @ResponseBody
-    public List<Function> getUserFunctions(){
-        User user= SecurityUtil.getUser();
+    public List<Function> getUserFunctions() {
+        List<Function> functionList = new ArrayList<>();
+        User user = SecurityUtil.getUser();
         Set<String> roles = roleService.getRoleCodeSet(user.getId());
-        if("1".equals(user.getIsSuperAdmin())){
-            return  functionService.getAll();
-        }else{
-            return functionService.getFunctionList(roles,user.getId());
+        if ("1".equals(user.getIsSuperAdmin())) {
+            functionList = functionService.getAll();
+        } else {
+            functionList = functionService.getFunctionList(roles, user.getId());
         }
+
+        Map<String,Function> map=new HashMap<>();
+        for (Function function : functionList) {
+            if(StrUtil.isNotBlank(function.getQueryId())&&!map.containsKey(function.getQueryId())){
+                map.put(function.getQueryId(),function);
+            }
+        }
+        SecurityUtils.getSubject().getSession().setAttribute("functionMap", map);
+        return functionList;
     }
+
+
+
+
 
  /*   @RequestMapping(value = "/logout")
     private String doLogout(HttpServletRequest request) {

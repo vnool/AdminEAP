@@ -16,6 +16,32 @@
 		<column key="mobile" header="手机" operator="eq" width="200" align="center"/>
 	    <column key="qq" header="QQ" operator="eq" width="200" align="center" />
 	</query>
+
+
+	<!-- 用户列表 用于演示数据权限  显示和当前登录人所在部门的用户  测试帐号 zrA/bill -->
+	<query id="user_ff_list" key="id" tableName="用户列表-数据权限"
+		   pageSize="10"  widthType="px" order="u.id asc">
+		<sql>
+			<![CDATA[
+			  select u.id,u.version,u.name,u.dept_id deptId,u.sex,u.birthday,
+			  u.login_name loginName,email,mobile,qq
+			  from tbl_user u
+			  left join tbl_org o on u.dept_id=o.id
+              where 1=1
+			]]>
+		</sql>
+		<column key="rowIndex" header="序号" width="50" allowSort="false"/>
+		<column key="id" header="id" hidden="true"/>
+		<column key="version" header="version" hidden="true"/>
+		<column key="name" header="姓名" operator="like" width="100" allowSort="true" />
+		<column key="deptId" header="所在部门" align="left" width="100" fnRender="fnRenderDept"/>
+		<column key="sex" header="性别" operator="eq" width="150" allowSort="true" render="1=男,0=女" />
+		<column key="birthday" header="出生年月" operator="like" width="80" allowSort="true" dateFormat="yyyy-mm-dd" />
+		<column key="loginName" header="登录名" operator="like" width="80" allowSort="true" />
+		<column key="email" header="邮箱" align="left" operator="eq" width="100"  />
+		<column key="mobile" header="手机" operator="eq" width="200" align="center"/>
+		<column key="qq" header="QQ" operator="eq" width="200" align="center" />
+	</query>
 	
 	<!-- 角色列表 -->
 	<query id="role_list" key="id" tableName="角色列表" className="com.cnpc.framework.base.entity.Role"
@@ -87,7 +113,7 @@
 		<column key="id" header="id" hidden="true"/>
 		<column key="version" header="version" hidden="true"/>
 		<column key="name" header="用户名" operator="like" width="100" allowSort="true" />
-		<column key="login_name" header="登录名" classType="java.lang.Integer" operator="eq" width="100" allowSort="true"/>
+		<column key="login_name" header="登录名" operator="eq" width="100" allowSort="true"/>
 	</query>
 
 	<!--通用用户选择-->

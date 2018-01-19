@@ -12,6 +12,7 @@ import com.cnpc.framework.base.service.UserService;
 import com.cnpc.framework.utils.EncryptUtil;
 import com.cnpc.framework.utils.PropertiesUtil;
 import com.cnpc.framework.utils.StrUtil;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
@@ -54,16 +55,16 @@ public class UserController {
     /**
      * 用户列表
      */
+
     @RequestMapping(method = RequestMethod.GET, value = "/list")
     private String list() {
         return "base/user/user_list";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/get")
-    @ResponseBody
-    private User getUser(String id) {
-
-        return userService.get(User.class, id);
+    //用户列表 测试数据权限
+    @RequestMapping(method = RequestMethod.GET, value="/list_ff")
+    private String listForFf(){
+        return "base/user/user_ff_list";
     }
 
     @VerifyCSRFToken
@@ -79,10 +80,10 @@ public class UserController {
             userService.updateUserAvatar(user, request.getRealPath("/"));
         } else {
             User oldUser=this.getUser(user.getId());
-            if(oldUser.getLoginName().equals(user.getLoginName())){
-               oldUser.setPassword(EncryptUtil.getPassword(initPassword,user.getLoginName()));
+            BeanUtils.copyProperties(user,oldUser,"password");
+            if(!oldUser.getLoginName().equals(user.getLoginName())){
+                oldUser.setPassword(EncryptUtil.getPassword(initPassword,user.getLoginName()));
             }
-            BeanUtils.copyProperties(user,oldUser);
             oldUser.setUpdateDateTime(new Date());
             userService.update(oldUser);
         }
@@ -100,6 +101,14 @@ public class UserController {
             return new Result(false);
         }
         return new Result(true);
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/get")
+    @ResponseBody
+    private User getUser(String id) {
+        //return userService.getUserById(id);
+        return userService.get(User.class, id);
     }
 
     /**
