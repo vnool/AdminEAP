@@ -10,6 +10,8 @@ public interface FunctionService extends BaseService {
 
     List<TreeNode> getTreeData();
 
+    List<TreeNode> getTreeDataByRoleId(String roleId);
+
     List<Function> getAll();
 
     Set<String> getFunctionCodeSet(Set<String> roleCodes,String userId);
@@ -17,4 +19,6 @@ public interface FunctionService extends BaseService {
     Set<String> getAllFunctionCode();
 
     List<Function> getFunctionList(Set<String> roleCodes,String userId);
+
+
 }

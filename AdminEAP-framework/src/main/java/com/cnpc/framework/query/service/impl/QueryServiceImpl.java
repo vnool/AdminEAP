@@ -14,6 +14,7 @@ import com.cnpc.framework.utils.StrUtil;
 import jxl.Workbook;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+import org.apache.shiro.SecurityUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.Type;
@@ -21,8 +22,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +53,8 @@ public class QueryServiceImpl extends BaseServiceImpl implements QueryService {
         //table自定义方法，以后有需要的话可放开
         //List<Call> callList = getCallList(query);
         //query.setCallList(callList);
+        //String userid= SecurityUtils.getSubject().getSession().getAttribute("userId").toString();
+        //query=QueryUtil.getQueryCustomColumns(query,this.getSelectedColumns(query.getId(),queryCondition.getPageName(),userid));
         map.put("query", query);
         map.put("pageInfo", pageInfo);
         map.put("rows", objList);
@@ -98,6 +103,20 @@ public class QueryServiceImpl extends BaseServiceImpl implements QueryService {
     }
 
 
+    @Override
+    public List<String> getSelectedColumns(String queryId, String pageName, String userid){
+        List<String> colsName = new ArrayList<String>();
+        if(StrUtil.isEmpty(pageName))
+            return colsName;
+        DetachedCriteria criteria = DetachedCriteria.forClass(QueryConfig.class);
+        criteria.add(Restrictions.eq("queryId", queryId));
+        criteria.add(Restrictions.eq("pageName", pageName));
+        criteria.add(Restrictions.eq("userid", userid));
+        List<QueryConfig> list = this.findByCriteria(criteria);
+        if (list.size() > 0)
+            colsName = list.get(0).getColumns();
+        return colsName;
+    }
     /**
      * 获取查询结果数据
      *

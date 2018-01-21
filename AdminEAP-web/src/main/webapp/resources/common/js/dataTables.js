@@ -13,8 +13,11 @@
 (function ($, window, document, undefined) {
 //'use strict';
 
-    //window.CommonTable=window.CommonTable;
+    window.Table = function (config) {
+        return new CommonTable(config.tableId, config.queryId, config.searchDiv, config.config);
+    }
 
+    //window.CommonTable=window.CommonTable;
     window.CommonTable = function (tableId, queryId, searchDiv, config) {
         this.tableId = tableId;
         this.queryId = queryId;
@@ -33,11 +36,15 @@
         }
         this.dataCache = dataCache;
         this.dataCache.data("queryId", this.queryId);
-        //
+        //绑定查询事件
         var searchButton = $("#" + searchDiv + " button[data-btn-type='search']");
         this.searchButton = searchButton;
         var resetButton = $("#" + searchDiv + " button[data-btn-type='reset']");
         this.resetButton = resetButton;
+
+        //用户自定义列
+        var customButton = $("#" + searchDiv + " button[data-btn-type='custom']");
+        this.customButton = customButton;
         // 表格横向自适应
         $("#" + this.tableId).css("width", "100%");
         // 初始化表格
@@ -50,11 +57,12 @@
      */
     CommonTable.prototype.initTable = function (tableId, queryId, searchDiv) {
         this.data = this.getServerData(null, tableId);
-        if(this.data == null ) return;
+        if (this.data == null) return;
         this.dataCache.data("data", this.data);
-        // console.log(JSON.stringify(this.data));
+        //console.log(JSON.stringify(this.data));
         var that = this;
         var columns = [];
+        var hiddenCols = this.getCustomHiddenColumns(queryId, this.customButton.data('pagename'));
         for (var i = 0; i < this.data.query.columnList.length; i++) {
             var column = this.data.query.columnList[i];
             var obj = {};
@@ -77,6 +85,13 @@
                 }
                 obj["mRender"] = fnRender;
             }
+            //判断是否通过自定义隐藏
+            if (hiddenCols && hiddenCols.length > 0) {
+                for (var j = 0; j < hiddenCols.length; j++) {
+                    if (column.key == hiddenCols[j])
+                        obj["visible"] = false;
+                }
+            }
             columns.push(obj);
         }
         // alert(JSON.stringify(columns));
@@ -89,7 +104,6 @@
             "searching": false, // 过滤
             "ordering": true, // 排序
             "rowId": rowId,
-            //"dom": '<"top"iflp<"clear">>rt<"bottom"iflp<"clear">>',
             "info": allowPaging, // 分页明细
             "autoWidth": false,
             //"stateSave" : true,// 这样就可以在删除返回时，保留在同一页上
@@ -120,6 +134,26 @@
             });
         }
 
+        //用户自定义列
+        if (this.customButton) {
+            this.customButton.click(function () {
+                var pagename = that.customButton.data("pagename");
+                if (!pagename) {
+                    modals.info("该按钮未定义data-pagename属性，请先定义");
+                    return;
+                }
+                modals.openWin({
+                    winId: 'customWin',
+                    title: '【' + that.data.query.tableName + '】自定义列',
+                    width: '400px',
+                    url: basePath + "/query/tableConfig?queryId=" + that.data.query.id + "&pageName=" + pagename,
+                    hideFunc: function () {
+                        that.setVisible();
+                    }
+                });
+            })
+        }
+
         if (this.resetButton) {
             this.resetButton.click(function () {
                 //清除查询条件
@@ -131,6 +165,28 @@
                 }
             });
         }
+    }
+
+    //自定义单元格的可见性
+    CommonTable.prototype.setVisible = function () {
+        var hiddenCols = this.getCustomHiddenColumns(queryId, this.customButton.data('pagename'));
+        if (!hiddenCols)
+            return;
+        var dataArr = this.table.columns().dataSrc();
+        var self = this;
+        $.each(dataArr, function (index, columnName) {
+            var column = self.data.query.columnList[index];
+            if (column.hidden) {
+                self.table.column(index).visible(false, false);
+            } else {
+                self.table.column(index).visible(true, false);
+            }
+            $.each(hiddenCols, function (hindex, hcolName) {
+                if (columnName == hcolName)
+                    self.table.column(index).visible(false, false);
+            })
+        })
+        this.table.columns.adjust().draw(false);
     }
 
 
@@ -161,13 +217,6 @@
         //行单选
         if (oSettings.oInit.singleSelect == true) {
             $('#' + this.tableId + ' tbody').on('click', 'tr', function () {
-                //HNAZO modify
-                /*if ( $(this).hasClass('selected') ) {
-                 $(this).removeClass('selected');
-                 } else {
-                 _this.table.$('tr.selected').removeClass('selected');
-                 $(this).addClass('selected');
-                 } */
                 if (!$(this).hasClass('selected')) {
                     _this.table.$('tr.selected').removeClass('selected');
                     $(this).addClass('selected');
@@ -181,6 +230,10 @@
             $('#' + this.tableId + ' tbody').on('click', 'tr', function () {
                 $(this).toggleClass('selected');
             })
+        }
+
+        if (oSettings.oInit.loadComplete) {
+            oSettings.oInit.loadComplete.call(this);
         }
 
         //如果分页不可选 则空出位置 让条件区域更宽
@@ -357,8 +410,8 @@
                         value = "%" + value + "%";
                     }
                 }
-                if(!type&&likeOption=="true"&&value){
-                    value="%"+value+"%";
+                if (!type && likeOption == "true" && value) {
+                    value = "%" + value + "%";
                 }
                 if (isExist) {
                     map.value += "," + value;
@@ -388,9 +441,10 @@
      */
     CommonTable.prototype.getServerData = function (pageInfo, tableId) {
         var dataCache = $("#dataCache" + tableId);
-        console.log(document.getElementById("mainDiv"));
+        //console.log(document.getElementById("mainDiv"));
         var reqParam = {
             queryId: dataCache.data("queryId"),
+            pageName: this.customButton.data("pagename"),
             pageInfo: pageInfo,
             query: null,
             sortInfo: dataCache.data("sortInfo"),
@@ -405,7 +459,7 @@
         ajaxPost(basePath + "/query/loadData", {"reqObj": this.toJSONString(reqParam)}, function (result, status) {
             retData = result;
         });
-        if( retData == null) return null;
+        if (retData == null) return null;
         var start = 0;
         if (pageInfo) {
             start = pageInfo.pageSize * (pageInfo.pageNum - 1)
@@ -496,6 +550,17 @@
 
             }
         }
+        return retData;
+    }
+
+    //获取用户自定义的隐藏列
+    CommonTable.prototype.getCustomHiddenColumns = function (queryId, pageName) {
+        var retData = null;
+        if (!pageName)
+            return retData;
+        ajaxPost(basePath + "/query/getSelectedColumns", {queryId: queryId, pageName: pageName}, function (hideCols) {
+            retData = hideCols;
+        });
         return retData;
     }
 

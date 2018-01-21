@@ -56,6 +56,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
             }
             //这样前端页面可取到数据
             SecurityUtils.getSubject().getSession().setAttribute("user",user);
+            SecurityUtils.getSubject().getSession().setAttribute("userId",user.getId());
             // 注意此处的返回值没有使用加盐方式,如需要加盐，可以在密码参数上加
             return new SimpleAuthenticationInfo(user.getId(), token.getPassword(), token.getUsername());
         }

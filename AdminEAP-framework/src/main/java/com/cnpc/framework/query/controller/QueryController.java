@@ -1,12 +1,16 @@
 package com.cnpc.framework.query.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.cnpc.framework.base.entity.Function;
+import com.cnpc.framework.base.pojo.Result;
+import com.cnpc.framework.base.pojo.TreeNode;
 import com.cnpc.framework.query.entity.Column;
-import com.cnpc.framework.query.entity.ColumnConfig;
 import com.cnpc.framework.query.entity.Query;
 import com.cnpc.framework.query.entity.QueryConfig;
 import com.cnpc.framework.query.pojo.QueryDefinition;
 import com.cnpc.framework.query.service.QueryService;
+import com.cnpc.framework.utils.StrUtil;
+import com.cnpc.framework.utils.TreeUtil;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -24,10 +28,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 基于xml配置的query 需要优化
@@ -65,7 +66,7 @@ public class QueryController {
      * @throws Exception
      */
     @RequestMapping(value = "/exportData")
-    public void exportData(String reqObjs, String tableName,  HttpServletResponse response)
+    public void exportData(String reqObjs, String tableName, HttpServletResponse response)
             throws Exception {
         String tempFile = queryService.exportData(reqObjs, tableName);
         response.getWriter().print(tempFile);
@@ -114,125 +115,50 @@ public class QueryController {
      */
     @RequestMapping(value = "tableConfig")
     public String tableConfig(String queryId, String pageName, Model model) {
-
         model.addAttribute("queryId", queryId);
         model.addAttribute("pageName", pageName);
         return "base/query/table_config";
     }
 
+
     /**
-     * 跳转到自定义表格配置界面 配置其中一个query,与其绑定的query也随着改变 XXB
+     * 获取query的所有列配置
      *
-     * @param queryId     主query
-     * @param bindQueryId 次query
-     * @param pageName
-     * @param model
+     * @param queryId
+     * @param session
      * @return
      */
-    @RequestMapping(value = "tableConfigForMultQuery")
-    public String tableConfigForMultQuery(String queryId, String bindQueryId, String pageName, Model model) {
-
-        model.addAttribute("queryId", queryId);
-        model.addAttribute("bindQueryId", bindQueryId);
-        model.addAttribute("pageName", pageName);
-        return "base/query/table_config_multquery";
-    }
-
-    @RequestMapping(value = "getConfigData")
+    @RequestMapping(value = "getColumns")
     @ResponseBody
-    public ColumnConfig getConfigData(String queryId, String pageName, HttpSession session) {
-
-        ColumnConfig config = new ColumnConfig();
-        // 得到已选择的Column
-        //TODO
-        String userid = "todo";
-        DetachedCriteria criteria = DetachedCriteria.forClass(QueryConfig.class);
-        criteria.add(Restrictions.eq("queryId", queryId));
-        criteria.add(Restrictions.eq("pageName", pageName));
-        criteria.add(Restrictions.eq("userid", userid));
-        List<QueryConfig> list = queryService.findByCriteria(criteria);
-        // 如果数据库不为空，则取数据库，否则取xml配置文档
+    public List<TreeNode> getColumns(String queryId, HttpSession session) {
         Query query = QueryDefinition.getQueryById(queryId);
-        Object[][] selected = new Object[][]{};
-        Object[][] unSelected = new Object[][]{};
-        List<Column> columnList = new ArrayList<Column>();
+        Map<String, TreeNode> nodelist = new LinkedHashMap<String, TreeNode>();
         for (Column column : query.getColumnList()) {
-            columnList.add(column);
+            if (column.getHidden()) {
+                continue;
+            }
+            TreeNode node = new TreeNode();
+            node.setText(column.getHeader());
+            node.setId(column.getKey());
+            nodelist.put(node.getId(), node);
         }
-        int left = 0;
-        int right = 0;
-
-        if (list.size() > 0) {
-            QueryConfig configExist = list.get(0);
-            List<String> columnNames = configExist.getColumns();
-            // 选中的列
-            int i = 0;
-            for (String columnName : columnNames) {
-                for (Column column : query.getColumnList()) {
-                    if (columnName.equals(column.getId() != null ? column.getId() : column.getKey())) {
-                        Object[] objs = new Object[2];
-                        objs[0] = column.getHeader();
-                        objs[1] = columnName;
-                        selected[i++] = objs;
-                        columnList.remove(column);
-                    }
-                }
-            }
-            config.setSelected(selected);
-            // 未选中的列
-            int j = 0;
-            for (Column column : columnList) {
-                if (!column.getHidden() && !column.getIsServerCondition()) {
-                    Object[] objs = new Object[2];
-                    objs[0] = column.getHeader();
-                    objs[1] = column.getId() != null ? column.getId() : column.getKey();
-                    unSelected[j++] = objs;
-                }
-            }
-            config.setUnSelected(unSelected);
-        } else {
-            // 初始化选中列
-            int i = 0;
-            for (Column column : columnList) {
-                if (!column.getHidden() && !column.getIsServerCondition()) {
-                    Object[] objs = new Object[2];
-                    objs[0] = column.getHeader();
-                    objs[1] = column.getId() != null ? column.getId() : column.getKey();
-                    selected[i++] = objs;
-                }
-            }
-            config.setSelected(selected);
-            config.setUnSelected(unSelected);
-        }
-        return config;
+        // 构造树形结构
+        return TreeUtil.getNodeList(nodelist);
     }
 
     /**
+     * 获取用户隐藏的列配置
+     *
      * @param queryId
      * @param pageName
      * @param session
      * @return
      */
-    @RequestMapping(value = "getColumnConfig")
+    @RequestMapping(value = "getSelectedColumns")
     @ResponseBody
-    public Map<String, Object> getColumnConfig(String queryId, String pageName, HttpSession session) throws Exception {
-
-        Query query = QueryDefinition.getQueryById(queryId);
-        //TODO
-        String userid = "todo";
-        DetachedCriteria criteria = DetachedCriteria.forClass(QueryConfig.class);
-        criteria.add(Restrictions.eq("queryId", queryId));
-        criteria.add(Restrictions.eq("pageName", pageName));
-        criteria.add(Restrictions.eq("userid", userid));
-        List<QueryConfig> list = queryService.findByCriteria(criteria);
-        List<String> colsName = new ArrayList<String>();
-        if (list.size() > 0)
-            colsName = list.get(0).getColumns();
-        Map<String, Object> map = new HashMap<String, Object>();
-        //query.setCallList(getCallList(query));
-        map.put("query", query);
-        map.put("columnName", colsName);
-        return map;
+    public List<String> getSelectedColumns(String queryId, String pageName, HttpSession session) {
+        String userid = session.getAttribute("userId").toString();
+        return queryService.getSelectedColumns(queryId, pageName, userid);
     }
 
     /**
@@ -240,16 +166,19 @@ public class QueryController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "saveUserDefine")
+    @RequestMapping(value = "saveQueryConfig")
     @ResponseBody
-    public String saveUserDefine(String configObj, HttpSession session) {
+    public Result saveQueryConfig(String configObj, HttpSession session) {
 
         QueryConfig config = JSON.parseObject(configObj, QueryConfig.class);
-        //TODO
-        String userid = "todo";
+        String userid = session.getAttribute("userId").toString();
         config.setUserid(userid);
-        queryService.deleteAndSave(config);
-        return "200";
+        if (StrUtil.isEmpty(config.getColumnsName())) {
+            queryService.delete(config);
+        } else {
+            queryService.deleteAndSave(config);
+        }
+        return new Result();
     }
 
     /**
@@ -261,50 +190,14 @@ public class QueryController {
      */
     @RequestMapping(value = "setDefault")
     @ResponseBody
-    public String setDefault(String configObj, HttpSession session) {
+    public Result setDefault(String configObj, HttpSession session) {
 
         QueryConfig config = JSON.parseObject(configObj, QueryConfig.class);
-        //TODO
-        config.setUserid(null);
+        String userid = session.getAttribute("userId").toString();
+        config.setUserid(userid);
         queryService.delete(config);
-        return "200";
+        return new Result();
     }
 
-    @RequestMapping(value = "saveUserDefines")
-    @ResponseBody
-    public String saveUserDefines(String configList, HttpSession session) {
-
-        List<QueryConfig> cfgList = JSON.parseArray(configList, QueryConfig.class);
-        if (cfgList == null || cfgList.size() < 1)
-            return "";
-        //TODO
-        for (QueryConfig cfg : cfgList) {
-            cfg.setUserid(null);
-            queryService.deleteAndSave(cfg);
-        }
-        return "200";
-    }
-
-    /**
-     * 恢复默认设置
-     *
-     * @param configList
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "setDefaults")
-    @ResponseBody
-    public String setDefaults(String configList, HttpSession session) {
-
-        List<QueryConfig> cfgList = JSON.parseArray(configList, QueryConfig.class);
-        if (cfgList == null || cfgList.size() < 1)
-            return "";
-        //TODO
-        for (QueryConfig cfg : cfgList) {
-            cfg.setUserid(null);
-            queryService.delete(cfg);
-        }
-        return "200";
-    }
 
 }

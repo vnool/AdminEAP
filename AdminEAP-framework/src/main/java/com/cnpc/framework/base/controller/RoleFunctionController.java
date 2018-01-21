@@ -48,6 +48,12 @@ public class RoleFunctionController {
         return roleFunctionService.deleteRoleFunction(id);
     }
 
+    @RequestMapping(value="/deleterf/{roleId}/{functionId}",method = RequestMethod.POST)
+    @ResponseBody
+    private Result deleteRF(@PathVariable("roleId") String roleId,@PathVariable("functionId") String functionId) {
+        return roleFunctionService.deleteRoleFunction(roleId,functionId);
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
     private Result save(RoleFunction rfobj) {

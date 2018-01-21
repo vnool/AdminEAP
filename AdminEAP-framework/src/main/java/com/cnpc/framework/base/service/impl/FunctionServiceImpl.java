@@ -42,13 +42,37 @@ public class FunctionServiceImpl extends BaseServiceImpl implements FunctionServ
     }
 
     @Override
+    public List<TreeNode> getTreeDataByRoleId(String roleId) {
+        String sql="select f.* from tbl_role_function rf " +
+                "left join tbl_function f on rf.functionId=f.id " +
+                "left join tbl_role r on rf.roleId=r.id " +
+                "where r.id=:roleId";
+        //String[] strs = (String[])roleCodes.toArray();
+        Map<String, Object> params = new HashMap<>();
+        params.put("roleId", roleId);
+        List<Function> funcs = super.findBySql(sql, params, Function.class);
+        Map<String, TreeNode> nodelist = new LinkedHashMap<String, TreeNode>();
+        for (Function func : funcs) {
+            TreeNode node = new TreeNode();
+            node.setText(func.getName());
+            node.setId(func.getId());
+            node.setParentId(func.getParentId());
+            node.setLevelCode(func.getLevelCode());
+            node.setIcon(func.getIcon());
+            nodelist.put(node.getId(), node);
+        }
+        // 构造树形结构
+        return TreeUtil.getNodeList(nodelist);
+    }
+
+    @Override
     public List<Function> getAll() {
         String hql = "from Function where (deleted=0 or deleted is null) order by levelCode";
         return this.find(hql);
     }
 
     @Override
-    public Set<String> getFunctionCodeSet(Set<String> roleCodes,String userId) {
+    public Set<String> getFunctionCodeSet(Set<String> roleCodes, String userId) {
         /*int len = roleCodes.size();
         if (len == 0)
             return null;
@@ -69,9 +93,9 @@ public class FunctionServiceImpl extends BaseServiceImpl implements FunctionServ
         }
         return retSet;*/
         //以上注释，如放开需要将shiro.sql.permissions f.* 改为f.code
-        if(roleCodes.size()==0)
+        if (roleCodes.size() == 0)
             return null;
-        List<Function> functions = getFunctionList(roleCodes,userId);
+        List<Function> functions = getFunctionList(roleCodes, userId);
         Set<String> retSet = new HashSet<>();
         for (Function function : functions) {
             retSet.add(function.getCode());
@@ -91,9 +115,9 @@ public class FunctionServiceImpl extends BaseServiceImpl implements FunctionServ
 
 
     @Override
-    public List<Function> getFunctionList(Set<String> roleCodes,String userId) {
+    public List<Function> getFunctionList(Set<String> roleCodes, String userId) {
         String key = RedisConstant.PERMISSION_PRE + userId;
-        List<Function> functionList = redisDao.getList(key,Function.class);
+        List<Function> functionList = redisDao.getList(key, Function.class);
         if (functionList == null) {
             String sql = "select rf.* from tbl_role_function rf left join tbl_role r on rf.roleId=r.id where r.code in (:roleCodes)";
             //String[] strs = (String[])roleCodes.toArray();
@@ -109,45 +133,45 @@ public class FunctionServiceImpl extends BaseServiceImpl implements FunctionServ
     }
 
     //functionList去重，并注入数据权限FunctionFilter
-    public List<Function> getFunctionListWithoutRepeat(List<RoleFunction> roleFunctions){
-        List<Function> list=new ArrayList<Function>();
-        Map<String,Boolean> map=new HashMap<>();
+    public List<Function> getFunctionListWithoutRepeat(List<RoleFunction> roleFunctions) {
+        List<Function> list = new ArrayList<Function>();
+        Map<String, Boolean> map = new HashMap<>();
         for (RoleFunction roleFunction : roleFunctions) {
-           if(map.containsKey(roleFunction.getFunctionId())){
-               Function function=getFunctionById(roleFunction.getFunctionId(),list);
-               List<FunctionFilter> fflist=getFunctionFilters(roleFunction.getRoleId(),roleFunction.getFunctionId());
-               // 数据权限合并，以大数据范围优先，
-               // TODO 数据权限选择逻辑还需要进一步优化，可设置优先级
-               if(fflist.size()<function.getFflist().size()){
-                 function.setFflist(fflist);
-               }
-           }else{
-               map.put(roleFunction.getFunctionId(),true);
-               Function function=this.get(Function.class,roleFunction.getFunctionId());
-               //获取数据权限
-               List<FunctionFilter> fflist=getFunctionFilters(roleFunction.getRoleId(),roleFunction.getFunctionId());
-               function.setFflist(fflist);
-               list.add(function);
-           }
+            if (map.containsKey(roleFunction.getFunctionId())) {
+                Function function = getFunctionById(roleFunction.getFunctionId(), list);
+                List<FunctionFilter> fflist = getFunctionFilters(roleFunction.getRoleId(), roleFunction.getFunctionId());
+                // 数据权限合并，以大数据范围优先，
+                // TODO 数据权限选择逻辑还需要进一步优化，可设置优先级
+                if (fflist.size() < function.getFflist().size()) {
+                    function.setFflist(fflist);
+                }
+            } else {
+                map.put(roleFunction.getFunctionId(), true);
+                Function function = this.get(Function.class, roleFunction.getFunctionId());
+                //获取数据权限
+                List<FunctionFilter> fflist = getFunctionFilters(roleFunction.getRoleId(), roleFunction.getFunctionId());
+                function.setFflist(fflist);
+                list.add(function);
+            }
 
         }
         return list;
     }
 
-    public Function getFunctionById(String id,List<Function> functions){
+    public Function getFunctionById(String id, List<Function> functions) {
         for (Function function : functions) {
-            if(function.getId().equals(id)){
+            if (function.getId().equals(id)) {
                 return function;
             }
         }
         return null;
     }
 
-    public List<FunctionFilter> getFunctionFilters(String roleId,String functionId){
-        String hql="from FunctionFilter where roleId=:roleId and functionId=:functionId order by sort";
-        Map<String,Object> param=new HashMap<>();
-        param.put("roleId",roleId);
-        param.put("functionId",functionId);
-        return this.find(hql,param);
+    public List<FunctionFilter> getFunctionFilters(String roleId, String functionId) {
+        String hql = "from FunctionFilter where roleId=:roleId and functionId=:functionId order by sort";
+        Map<String, Object> param = new HashMap<>();
+        param.put("roleId", roleId);
+        param.put("functionId", functionId);
+        return this.find(hql, param);
     }
 }

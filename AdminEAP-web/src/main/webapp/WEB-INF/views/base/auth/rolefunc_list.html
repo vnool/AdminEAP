@@ -12,7 +12,7 @@
 
     <div class="row">
         <!-- /.col -->
-        <div class="col-md-7">
+        <div class="col-md-8">
             <div class="box box-primary">
                 <!-- /.box-header -->
                 <div class="dataTables_filter" id="searchDiv">
@@ -28,15 +28,15 @@
                 <!-- /.box-body -->
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <!-- Profile Image -->
             <div class="box box-primary">
                 <!-- /.box-header -->
-                <div class="dataTables_filter" id="searchDiv_roleFunc">
+                <div class="dataTables_filter" style="margin:10px 10px 0 0" id="searchDiv_roleFunc">
                     <input type="hidden" name="roleId" value="-1" id="roleId"/>
-                    <input placeholder="请输入功能名" name="name" class="form-control" type="search" likeOption="true"/>
+                    <input placeholder="请输入功能名" name="name" id="functionName" class="form-control" type="search" likeOption="true"/>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-primary" data-btn-type="search">查询</button>
+                        <button type="button" class="btn btn-primary" data-btn-type="searchRoleFunc">查询</button>
                     </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default" data-btn-type="selectRoleFunc">授权</button>
@@ -44,8 +44,7 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <table id="roleFunc_table" class="table table-bordered table-striped table-hover">
-                    </table>
+                    <div id="rftree"></div>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -57,71 +56,137 @@
 </section>
 
 <script>
-    //tableId,queryId,conditionContainer
-    var roleTable, roleFuncTable;
-    $(function () {
-        //init table and fill data
-        var role_config = {
-            rowClick: function (row, isSelected) {
-                $("#roleId").val(isSelected ? row.id : "-1");
-                $("#roleName").remove();
-                if (isSelected)
-                    $("#searchDiv_roleFunc").prepend("<h5 id='roleName' class='pull-left'>【" + row.name + "】</h5>");
-                roleFuncTable.reloadData();
+    var roleTable;
+
+    var roleObj = {
+        loadData: function () {
+            var role_config = {
+                //定义选中行事件
+                rowClick: function (row, isSelected) {
+                    $("#roleId").val(isSelected ? row.id : "-1");
+                    $("#roleName").remove();
+                    if (isSelected)
+                        $("#searchDiv_roleFunc").prepend("<h5 id='roleName' class='pull-left'>【" + row.name + "】</h5>");
+                    roleObj.reloadTreeData();
+                },
+                //数据加载后，默认选中第一行
+                loadComplete: function () {
+                    roleTable.selectFirstRow(true);
+                }
             }
+
+            roleTable = new Table({
+                tableId: "role_table",
+                queryId: "role_list",
+                searchDiv: "searchDiv",
+                config: role_config
+            });
+            this.reloadTreeData();
+        },
+        //菜单树的初始化
+        reloadTreeData: function () {
+            var selectNodeId = 0;
+            var treeData = null;
+            var rowId = roleTable.getSelectedRowId();
+            if (!rowId)
+                return;
+            ajaxPost(basePath + "/function/listTree/" + rowId, null, function (data) {
+                treeData = data;
+            });
+            $("#rftree").treeview({
+                data: treeData,
+                showBorder: true,
+                levels: 3,
+                showCheckbox: false,
+                showIcon: false
+            });
+            if (treeData.length == 0)
+                return;
+            //默认选中第一个节点
+            selectNodeId = selectNodeId || 0;
+            $("#rftree").data('treeview').selectNode(selectNodeId);
+            $("#rftree").data('treeview').expandNode(selectNodeId);
+            $("#rftree").data('treeview').revealNode(selectNodeId);
+        },
+        searchRoleFunc: function () {
+            $('#rftree').treeview('search', [$("#functionName").val(), {
+                ignoreCase: true,    // case insensitive
+                exactMatch: false,   // like or equals
+                revealResults: true, // reveal matching nodes
+            }], 'name');
+        },
+        //授权
+        selectRoleFunc: function (rowId) {
+            if (!rowId) {
+                modals.info('请选择角色');
+                return;
+            }
+            var self=this;
+            modals.openWin({
+                winId: 'roleFuncWin',
+                width: 1000,
+                title: '角色【' + roleTable.getSelectedRowData().name + '】绑定功能',
+                url: basePath + '/rolefunc/select/' + rowId,
+                hideFunc: function () {
+                    self.reloadTreeData();
+                }
+            });
+        },
+        deleteRoleFunc:function (rowId) {
+            var nodes = $("#rftree").data('treeview').getSelected();
+            if (!nodes||nodes.length==0) {
+                modals.info("请选择要解绑的功能");
+                return false;
+            }
+            console.log(nodes);
+            if(this.hasChildNode(nodes[0].levelCode)){
+                modals.info("当前选中节点含有子节点，请先删除子节点");
+                return false;
+            }
+            modals.confirm("是否要删除该行数据", function () {
+                ajaxPost(basePath + "/rolefunc/deleterf/" + rowId+"/"+nodes[0].id, null, function (data) {
+                    if (data.success) {
+                        roleObj.reloadTreeData();
+                    } else {
+                        modals.info(data.message);
+                    }
+                })
+            });
+        },
+        //校验当前的节点是否含有下级菜单
+        hasChildNode:function (levelCode) {
+            var nodes=$("#rftree").data('treeview').findNodes(levelCode+"0", 'g', 'levelCode');
+            console.log('--------------------'+nodes);
+            if(nodes&&nodes.length>0)
+                return true;
+            return false;
         }
-        roleTable = new CommonTable("role_table", "role_list", "searchDiv", role_config);
 
-        //init userrole table
-        roleFuncTable = new CommonTable("roleFunc_table", "roleFunc_selected_list", "searchDiv_roleFunc");
+    }
 
-        //默认选中第一行
-        setTimeout(function () {
-            roleTable.selectFirstRow(true);
-        }, 10);
+    $(function () {
+        //初始化数据
 
+        roleObj.loadData();
         //button event
         $('button[data-btn-type]').click(function () {
             var action = $(this).attr('data-btn-type');
             var rowId = roleTable.getSelectedRowId();
             switch (action) {
                 case 'selectRoleFunc':
-                    if (!rowId) {
-                        modals.info('请选择角色');
-                        return;
-                    }
-                    modals.openWin({
-                        winId: 'roleFuncWin',
-                        width: 900,
-                        title: '角色【' + roleTable.getSelectedRowData().name + '】绑定功能',
-                        url: basePath + '/rolefunc/select/'+rowId,
-                        hideFunc: function () {
-                            roleFuncTable.reloadData();
-                        }
-                    });
+                    roleObj.selectRoleFunc(rowId);
                     break;
                 case 'deleteRoleFunc':
-                    var rowId_ur = roleFuncTable.getSelectedRowId();
-                    if (!rowId_ur) {
-                        modals.info("请选择要解绑的功能");
-                        return false;
-                    }
-                    modals.confirm("是否要删除该行数据", function () {
-                        ajaxPost(basePath + "/rolefunc/delete/"+rowId_ur,null, function (data) {
-                            if (data.success) {
-                                roleFuncTable.reloadData();
-                            } else {
-                                modals.info(data.message);
-                            }
-                        })
-                    });
+                    roleObj.deleteRoleFunc(rowId);
+                    break;
+                case 'searchRoleFunc':
+                    roleObj.searchRoleFunc(rowId);
                     break;
                 default:
                     break;
             }
 
         });
-        //form_init();
     })
 
 

@@ -80,6 +80,17 @@ public class User extends BaseEntity {
     @Transient
     private int isSelected;
 
+    @Transient
+    private String deptLevelCode;
+
+    public String getDeptLevelCode() {
+        return deptLevelCode;
+    }
+
+    public void setDeptLevelCode(String deptLevelCode) {
+        this.deptLevelCode = deptLevelCode;
+    }
+
     public String getDeptId() {
         return deptId;
     }

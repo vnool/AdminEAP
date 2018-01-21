@@ -3,6 +3,7 @@ package com.cnpc.framework.query.service;
 import com.cnpc.framework.base.service.BaseService;
 import com.cnpc.framework.query.entity.QueryConfig;
 
+import java.util.List;
 import java.util.Map;
 
 public interface QueryService extends BaseService {
@@ -27,16 +28,25 @@ public interface QueryService extends BaseService {
     String exportData(String reqObj, String tableName) throws Exception;
 
     /**
+     * 用户自定义的隐藏列
+     * @param queryId
+     * @param pageName
+     * @param userid
+     * @return
+     */
+    List<String> getSelectedColumns(String queryId, String pageName, String userid);
+
+    /**
      * 保存用户自定义设置
      *
      * @param queryConfig
      */
-    public void deleteAndSave(QueryConfig queryConfig);
+    void deleteAndSave(QueryConfig queryConfig);
 
     /**
      * 恢复默认
      *
      * @param queryConfig
      */
-    public void delete(QueryConfig queryConfig);
+    void delete(QueryConfig queryConfig);
 }

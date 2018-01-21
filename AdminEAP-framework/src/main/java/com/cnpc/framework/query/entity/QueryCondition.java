@@ -24,6 +24,9 @@ public class QueryCondition {
 
     private QueryConfig queryConfig;
 
+
+    private String pageName;
+
     // ----------------------表格---------------------------
     // 导出Excel
     private String sheetName;
@@ -38,6 +41,15 @@ public class QueryCondition {
     private String sheetMethod;
 
     // --------------------------------------------------
+
+    public String getPageName() {
+        return pageName;
+    }
+
+    public void setPageName(String pageName) {
+        this.pageName = pageName;
+    }
+
     public String getQueryId() {
 
         return queryId;

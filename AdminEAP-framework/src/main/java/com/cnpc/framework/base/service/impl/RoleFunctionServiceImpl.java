@@ -35,6 +35,21 @@ public class RoleFunctionServiceImpl extends BaseServiceImpl implements RoleFunc
     }
 
     @Override
+    public Result deleteRoleFunction(String roleId,String functionId) {
+        //delete functionfilter first
+        RoleFunction roleFunction = this.getRoleFunction(roleId,functionId);
+        String hql = "delete from FunctionFilter where roleId='" + roleFunction.getRoleId() + "' and functionId='"+roleFunction.getFunctionId()+"'";
+        this.executeHql(hql);
+        //delete rolefunction entity
+        this.delete(roleFunction);
+        //-----------update redis-----------
+        this.deleteAuthInRedis(roleId);
+        //----------------------------------
+        return new Result();
+    }
+
+
+    @Override
     public Result saveRoleFunction(RoleFunction rfobj) {
         if (!StrUtil.isEmpty(rfobj.getId())) {
             deleteRoleFunction(rfobj.getId());

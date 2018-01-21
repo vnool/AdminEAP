@@ -1,7 +1,6 @@
 package com.cnpc.framework.base.dao.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.BooleanCodec;
 import com.cnpc.framework.base.dao.RedisDao;
 import com.cnpc.framework.utils.StrUtil;
 import org.springframework.dao.DataAccessException;

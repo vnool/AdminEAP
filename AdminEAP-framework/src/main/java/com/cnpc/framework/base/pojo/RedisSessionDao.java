@@ -5,6 +5,7 @@ import com.cnpc.framework.base.dao.RedisDao;
 import com.cnpc.framework.base.entity.BaseEntity;
 import com.cnpc.framework.constant.RedisConstant;
 import com.cnpc.framework.utils.StrUtil;
+import org.apache.http.HttpRequest;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
@@ -13,8 +14,12 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.SerializationUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
@@ -51,7 +56,11 @@ public class RedisSessionDao extends AbstractSessionDAO {
             logger.error("session id is null");
             return null;
         }
-
+       /* HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        System.out.println(request.getRequestURI());
+        if(request.getRequestURI().indexOf("/resources/")>-1){
+            return null;
+        }*/
         logger.debug("Read Redis.SessionId=" + new String(getKey(RedisConstant.SHIRO_REDIS_SESSION_PRE, sessionId.toString())));
 
         Session session = (Session) SerializationUtils.deserialize(redisDao.getByte(getKey(RedisConstant.SHIRO_REDIS_SESSION_PRE, sessionId.toString())));
@@ -60,6 +69,8 @@ public class RedisSessionDao extends AbstractSessionDAO {
 
     @Override
     public void update(Session session) throws UnknownSessionException {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        //System.out.println("---------update---------------"+request.getRequestURI());
         this.saveSession(session);
     }
 

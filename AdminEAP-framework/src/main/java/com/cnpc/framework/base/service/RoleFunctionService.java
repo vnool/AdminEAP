@@ -16,6 +16,8 @@ public interface RoleFunctionService extends BaseService {
      */
     Result deleteRoleFunction(String id);
 
+    Result deleteRoleFunction(String roleId,String functionId);
+
     /**
      * 保存角色授权
      * @param rfobj 角色功能对象

@@ -5,11 +5,11 @@
     <h5 class="modal-title">新增用户</h5>
 </div>
 
-<div class="modal-body" style="height:500px;">
+<div class="modal-body" style="height:600px;">
     <div class="row">
         <!-- /.col -->
         <div class="col-md-4">
-            <div class="box box-primary" style="height: 477px;overflow-y:auto">
+            <div class="box box-primary" style="height: 577px;overflow-y:auto">
                 <div class="box-body box-profile">
                     <div id="tree"></div>
                 </div>
@@ -32,7 +32,7 @@
                             <i class="fa fa-remove">&nbsp;删除</i></button>
                     </div>
                 </div>
-                <div class="box-body" style="min-height: 420px">
+                <div class="box-body" style="min-height: 520px">
                     <table id="ff_table" class="table table-bordered table-striped table-hover">
                     </table>
                 </div>
@@ -120,14 +120,12 @@
         var treeData = null;
         ajaxPost(basePath + "/function/treeData", null, function (data) {
             treeData = data;
-            console.log(JSON.stringify(treeData));
+            //console.log(JSON.stringify(treeData));
         });
         $("#tree").treeview({
             data: treeData,
             showBorder: true,
-            /*expandIcon : "glyphicon glyphicon-stop",
-             collapseIcon : "glyphicon glyphicon-unchecked",*/
-            levels: 2,
+            levels: 3,
             showCheckbox: true,
             showIcon: false,
             onNodeSelected: function (event, data) {
@@ -137,23 +135,19 @@
 
             },
             onNodeChecked: function (event, data) {
-                if (!data.parentId) {
-                    return;
-                }
+                //选中所有子节点
+                checkChildren(data,true);
                 setCheckedNodeMsg(data);
                 //点击同时选中
                 $("#tree").data('treeview').selectNode(data.nodeId, {silent: true});
-                var pnode = $('#tree').data('treeview').getParent(data.nodeId);
-                while (pnode) {
-                    $('#tree').treeview('checkNode', [pnode.nodeId, {silent: true}]);
-                    pnode = $("#tree").treeview('getParent', pnode.nodeId);
-                }
+                //父节点选中
+                checkParent(data,true);
             },
             onNodeUnchecked: function (event, data) {
-                if (!data.parentId) {
-                    return false;
-                }
                 disableButtons();
+                checkChildren(data,false);
+                checkParent(data,false);
+
             }
         });
         if (treeData.length == 0)
@@ -166,6 +160,45 @@
         //默认选中对应的角色
         checkNodes();
 
+    }
+
+    function checkChildren(node,checked){
+        if(node.nodes&&node.nodes.length>0){
+            for(var i=0;i<node.nodes.length;i++) {
+                if(checked)
+                    $('#tree').treeview('checkNode', [node.nodes[i].nodeId, {silent: true}]);
+                else
+                    $('#tree').treeview('uncheckNode', [node.nodes[i].nodeId, {silent: true}]);
+                 checkChildren(node.nodes[i],checked);
+            }
+        }
+    }
+
+    function checkParent(node,checked){
+        var pnode = $('#tree').data('treeview').getParent(node.nodeId);
+        if (pnode) {
+            if(checked) {
+                $('#tree').treeview('checkNode', [pnode.nodeId, {silent: true}]);
+                checkParent(pnode,checked);
+            }
+            else{
+                //查看兄弟节点状态
+                var brothers=  $('#tree').data('treeview').getSiblings(node.nodeId);
+                var flag=true;
+                if(brothers&&brothers.length>0){
+                    for(var i=0;i<brothers.length;i++){
+                        if(brothers[i].state.checked){
+                            flag=false;
+                        }
+                    }
+                }
+                if(flag){
+                    $('#tree').treeview('uncheckNode', [pnode.nodeId, {silent: true}]);
+                    checkParent(pnode,checked);
+                }
+            }
+
+        }
     }
 
     function checkNodes() {

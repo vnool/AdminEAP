@@ -275,6 +275,11 @@
         });
     });
 
+    //set title for current tab
+    function setTitle(title){
+       $("ul.nav-tabs li.header small").text(title);
+    }
+
     function fnRenderDept(value) {
         if (value) {
             var ret=value;
@@ -284,11 +289,6 @@
             return ret;
         } else
             return value;
-    }
-
-    //set title for current tab
-    function setTitle(title){
-       $("ul.nav-tabs li.header small").text(title);
     }
 </script>
 

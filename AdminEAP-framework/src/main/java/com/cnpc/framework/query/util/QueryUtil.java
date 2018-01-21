@@ -73,6 +73,25 @@ public class QueryUtil {
     }
 
     /**
+     * 根据用户自定义列将某些列设置为隐藏
+     * @param query
+     * @param hiddenCols
+     * @return
+     */
+    public static Query getQueryCustomColumns(Query query,List<String> hiddenCols){
+       if(hiddenCols.isEmpty())
+           return query;
+       for(Column column:query.getColumnList()){
+           for(String key:hiddenCols) {
+               if (column.getKey().equals(key)){
+                   column.setHidden(true);
+               }
+           }
+       }
+       return query;
+    }
+
+    /*
      * 获取分页信息
      *
      * @param queryCondition 查询条件

@@ -60,6 +60,12 @@ public class FunctionController {
         return functionService.getTreeData();
     }
 
+    @RequestMapping(value = "/listTree/{roleId}", method = RequestMethod.POST)
+    @ResponseBody
+    public List<TreeNode> getTreeDataByRoleId(@PathVariable("roleId") String roleId) {
+        return functionService.getTreeDataByRoleId(roleId);
+    }
+
     @RequestMapping(value = "/get/{id}", method = RequestMethod.POST)
     @ResponseBody
     public Function get(@PathVariable("id") String id) {
