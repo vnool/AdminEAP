@@ -462,9 +462,11 @@ public class QueryUtil {
      * @return 数据权限
      */
     private static List<Map<String, Object>> getFunctionFilterCondition(Query query) {
-        Map<String, Function> functions = (Map<String, Function>) SecurityUtils.getSubject().getSession().getAttribute("functionMap");
-        Function function = functions.get(query.getId());
         List<Map<String, Object>> ffConditions = new ArrayList<>();
+        Map<String, Function> functions = (Map<String, Function>) SecurityUtils.getSubject().getSession().getAttribute("functionMap");
+        if(functions==null)
+            return ffConditions;
+        Function function = functions.get(query.getId());
         if (function != null) {
             List<FunctionFilter> fflist = function.getFflist();
             if(fflist==null||fflist.isEmpty())

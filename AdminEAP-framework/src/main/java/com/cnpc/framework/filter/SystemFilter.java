@@ -37,6 +37,7 @@ public class SystemFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+        response.setHeader("Access-Control-Allow-Origin","*");
         System.out.println(request.getRequestURL());
         String basePath = request.getContextPath();
         request.setAttribute("basePath", basePath);
