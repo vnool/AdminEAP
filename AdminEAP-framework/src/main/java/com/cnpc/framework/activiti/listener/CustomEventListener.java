@@ -3,8 +3,6 @@ package com.cnpc.framework.activiti.listener;
 import com.cnpc.framework.utils.SpringContextUtil;
 import org.activiti.engine.delegate.event.ActivitiEvent;
 import org.activiti.engine.delegate.event.ActivitiEventListener;
-import org.activiti.engine.delegate.event.ActivitiEventType;
-import org.activiti.engine.delegate.event.impl.ActivitiEventImpl;
 
 import java.util.Map;
 

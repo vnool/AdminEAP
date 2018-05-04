@@ -108,646 +108,1034 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:jcl-over-slf4j:1.7.19" level="project"/>  
     <orderEntry type="library" name="Maven: org.springframework:spring-oxm:4.2.5.RELEASE" level="project"/>  
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.4.2" level="project"/>  
-    <orderEntry type="module" module-name="AdminEAP-framework"/>
-    <orderEntry type="module-library" exported="">
-      <library>
+    <orderEntry type="module" module-name="AdminEAP-framework"/>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-core/4.0.8.RELEASE/spring-core-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-webmvc/4.0.8.RELEASE/spring-webmvc-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-beans/4.0.8.RELEASE/spring-beans-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-context/4.0.8.RELEASE/spring-context-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-aop/4.0.8.RELEASE/spring-aop-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-expression/4.0.8.RELEASE/spring-expression-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-web/4.0.8.RELEASE/spring-web-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-test/4.0.8.RELEASE/spring-test-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-context-support/4.0.8.RELEASE/spring-context-support-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/hibernate/hibernate-core/4.3.6.Final/hibernate-core-4.3.6.Final.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/jboss/logging/jboss-logging/3.1.3.GA/jboss-logging-3.1.3.GA.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/jboss/logging/jboss-logging-annotations/1.2.0.Beta1/jboss-logging-annotations-1.2.0.Beta1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.0.0.Final/jboss-transaction-api_1.2_spec-1.0.0.Final.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/hibernate/common/hibernate-commons-annotations/4.0.5.Final/hibernate-commons-annotations-4.0.5.Final.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/jboss/jandex/1.1.0.Final/jandex-1.1.0.Final.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/commons-fileupload/commons-fileupload/1.3.1/commons-fileupload-1.3.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/commons-io/commons-io/1.3.2/commons-io-1.3.2.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/apache/commons/commons-digester3/3.2/commons-digester3-3.2.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/cglib/cglib/2.2.2/cglib-2.2.2.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/asm/asm/3.3.1/asm-3.3.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/com/alibaba/fastjson/1.2.9/fastjson-1.2.9.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/com/fasterxml/jackson/core/jackson-core/2.5.1/jackson-core-2.5.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/com/fasterxml/jackson/core/jackson-databind/2.5.1/jackson-databind-2.5.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/com/fasterxml/jackson/core/jackson-annotations/2.5.1/jackson-annotations-2.5.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/freemarker/freemarker/2.3.20/freemarker-2.3.20.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/apache/shiro/shiro-core/1.3.2/shiro-core-1.3.2.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/apache/shiro/shiro-web/1.3.2/shiro-web-1.3.2.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/apache/poi/poi/3.8/poi-3.8.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/commons-codec/commons-codec/1.5/commons-codec-1.5.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/net/sourceforge/jexcelapi/jxl/2.6.12/jxl-2.6.12.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/net/sf/jxls/jxls-core/1.0.5/jxls-core-1.0.5.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/commons-digester/commons-digester/2.0/commons-digester-2.0.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/apache/commons/commons-jexl/2.0.1/commons-jexl-2.0.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/apache/poi/poi-ooxml/3.9/poi-ooxml-3.9.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/apache/poi/poi-ooxml-schemas/3.9/poi-ooxml-schemas-3.9.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/apache/xmlbeans/xmlbeans/2.3.0/xmlbeans-2.3.0.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/stax/stax-api/1.0.1/stax-api-1.0.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/net/sf/jxls/jxls-examples/1.0.5/jxls-examples-1.0.5.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/hsqldb/hsqldb/1.8.0.10/hsqldb-1.8.0.10.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/net/sf/jxls/jxls-reader/1.0.5/jxls-reader-1.0.5.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/net/sf/supercsv/super-csv/2.4.0/super-csv-2.4.0.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/testng/testng/6.9.10/testng-6.9.10.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/com/beust/jcommander/1.48/jcommander-1.48.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/slf4j/slf4j-log4j12/1.7.21/slf4j-log4j12-1.7.21.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/javax/mail/mail/1.4.7/mail-1.4.7.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES> 
+          <root url="jar:///home/billjiang/maven/repository/javax/activation/activation/1.1/activation-1.1-sources.jar!/"/>
+        </SOURCES>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/javax/activation/activation/1.1/activation-1.1.jar!/"/>
         </CLASSES>
-        <SOURCES>
-          <root url="jar:///home/billjiang/maven/repository/javax/activation/activation/1.1/activation-1.1-sources.jar!/"/>
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/scribe/scribe/1.3.7/scribe-1.3.7.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/com/belerweb/pinyin4j/2.5.0/pinyin4j-2.5.0.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/quartz-scheduler/quartz/2.2.1/quartz-2.2.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/c3p0/c3p0/0.9.1.2/c3p0-0.9.1.2.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/data/spring-data-redis/1.7.1.RELEASE/spring-data-redis-1.7.1.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/data/spring-data-keyvalue/1.1.1.RELEASE/spring-data-keyvalue-1.1.1.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/data/spring-data-commons/1.12.1.RELEASE/spring-data-commons-1.12.1.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry scope="RUNTIME" type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar:///home/billjiang/maven/repository/org/slf4j/jcl-over-slf4j/1.7.19/jcl-over-slf4j-1.7.19.jar!/"/>
-        </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-tx/4.0.8.RELEASE/spring-tx-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-oxm/4.2.5.RELEASE/spring-oxm-4.2.5.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/redis/clients/jedis/2.8.1/jedis-2.8.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/apache/commons/commons-pool2/2.4.2/commons-pool2-2.4.2.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/apache/shiro/shiro-spring/1.3.2/shiro-spring-1.3.2.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-jdbc/4.0.8.RELEASE/spring-jdbc-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/springframework/spring-orm/4.0.8.RELEASE/spring-orm-4.0.8.RELEASE.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/aspectj/aspectjweaver/1.7.1/aspectjweaver-1.7.1.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/apache/shiro/shiro-cas/1.3.2/shiro-cas-1.3.2.jar!/"/>
         </CLASSES>
-        <SOURCES/>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
         <CLASSES>
           <root url="jar:///home/billjiang/maven/repository/org/jasig/cas/client/cas-client-core/3.2.2/cas-client-core-3.2.2.jar!/"/>
         </CLASSES>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported=""> 
+      <library> 
+        <SOURCES/>  
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/mysql/mysql-connector-java/5.1.31/mysql-connector-java-5.1.31.jar!/"/>
+        </CLASSES>
+      </library> 
+    </orderEntry>  
+    <orderEntry scope="PROVIDED" type="module-library"> 
+      <library> 
+        <SOURCES/>  
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar!/"/>
+        </CLASSES>
+      </library> 
+    </orderEntry>  
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/slf4j/jcl-over-slf4j/1.7.6/jcl-over-slf4j-1.7.6.jar!/"/>
+        </CLASSES>
         <SOURCES/>
       </library>
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar:///home/billjiang/maven/repository/mysql/mysql-connector-java/5.1.31/mysql-connector-java-5.1.31.jar!/"/>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/"/>
         </CLASSES>
         <SOURCES/>
       </library>
     </orderEntry>
-    <orderEntry scope="PROVIDED" type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar:///home/billjiang/maven/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar!/"/>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-bpmn-converter/5.22.0/activiti-bpmn-converter-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-bpmn-model/5.22.0/activiti-bpmn-model-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/joda-time/joda-time/2.6/joda-time-2.6.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-process-validation/5.22.0/activiti-process-validation-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-image-generator/5.22.0/activiti-image-generator-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/commons/commons-email/1.4/commons-email-1.4.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/mybatis/mybatis/3.3.0/mybatis-3.3.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-spring/5.22.0/activiti-spring-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/commons-pool/commons-pool/1.5.4/commons-pool-1.5.4.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-modeler/5.22.0/activiti-modeler-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-common-rest/5.22.0/activiti-common-rest-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-json-converter/5.22.0/activiti-json-converter-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/math/geom2d/javaGeom/0.11.1/javaGeom-0.11.1.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/springframework/security/spring-security-config/3.2.3.RELEASE/spring-security-config-3.2.3.RELEASE.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/springframework/security/spring-security-core/3.2.3.RELEASE/spring-security-core-3.2.3.RELEASE.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/springframework/security/spring-security-crypto/3.2.3.RELEASE/spring-security-crypto-3.2.3.RELEASE.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/springframework/security/spring-security-web/3.2.3.RELEASE/spring-security-web-3.2.3.RELEASE.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-parser/1.7/batik-parser-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-awt-util/1.7/batik-awt-util-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-util/1.7/batik-util-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-xml/1.7/batik-xml-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-transcoder/1.7/batik-transcoder-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/fop/0.94/fop-0.94.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/xmlgraphics-commons/1.2/xmlgraphics-commons-1.2.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/avalon/framework/avalon-framework-api/4.3.1/avalon-framework-api-4.3.1.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/avalon/framework/avalon-framework-impl/4.3.1/avalon-framework-impl-4.3.1.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-bridge/1.7/batik-bridge-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-anim/1.7/batik-anim-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-dom/1.7/batik-dom-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-css/1.7/batik-css-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-ext/1.7/batik-ext-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/xml-apis/xml-apis-ext/1.3.04/xml-apis-ext-1.3.04.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-svg-dom/1.7/batik-svg-dom-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-gvt/1.7/batik-gvt-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-script/1.7/batik-script-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-svggen/1.7/batik-svggen-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-codec/1.7/batik-codec-1.7.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-diagram-rest/5.22.0/activiti-diagram-rest-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-rest/5.22.0/activiti-rest-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-simple-workflow/5.22.0/activiti-simple-workflow-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/activiti/activiti-bpmn-layout/5.22.0/activiti-bpmn-layout-5.22.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/org/tinyjee/jgraphx/jgraphx/1.10.4.1/jgraphx-1.10.4.1.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar!/"/>
+        </CLASSES>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/billjiang/maven/repository/com/alibaba/druid/1.1.6/druid-1.1.6.jar!/"/>
         </CLASSES>
         <SOURCES/>
       </library>
     </orderEntry>
   </component>  
-  <component name="WebModuleBuildComponent">
-    <setting name="EXPLODED_URL" value="file://$MODULE_DIR$/target/AdminEAP-web"/>
-  </component>
-  <component name="WebModuleProperties">
+  <component name="WebModuleBuildComponent"> 
+    <setting name="EXPLODED_URL" value="file://$MODULE_DIR$/target/AdminEAP-web"/> 
+  </component>  
+  <component name="WebModuleProperties"> 
+    <deploymentDescriptor version="2.3" name="web.xml" optional="false" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml"/>  
+    <webroots> 
+      <root relative="/" url="file://$MODULE_DIR$/src/main/webapp"/>
+    </webroots>  
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
       <attribute name="URI" value="/WEB-INF/lib/poi-3.8.jar"/>
@@ -830,13 +1218,183 @@
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/spring-test-4.0.8.RELEASE.jar"/>
-      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-test/4.0.8.RELEASE/spring-test-4.0.8.RELEASE.jar!/</url>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-rest-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-rest/5.22.0/activiti-rest-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-common-rest-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-common-rest/5.22.0/activiti-common-rest-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-engine-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-bpmn-converter-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-bpmn-converter/5.22.0/activiti-bpmn-converter-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-bpmn-model-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-bpmn-model/5.22.0/activiti-bpmn-model-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/commons-lang3-3.3.2.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/jcl-over-slf4j-1.7.6.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/slf4j/jcl-over-slf4j/1.7.6/jcl-over-slf4j-1.7.6.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/joda-time-2.6.jar"/>
+      <url>jar:///home/billjiang/maven/repository/joda-time/joda-time/2.6/joda-time-2.6.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-process-validation-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-process-validation/5.22.0/activiti-process-validation-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-image-generator-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-image-generator/5.22.0/activiti-image-generator-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/commons-email-1.4.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/commons/commons-email/1.4/commons-email-1.4.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/javax.mail-1.5.2.jar"/>
+      <url>jar:///home/billjiang/maven/repository/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activation-1.1.jar"/>
+      <url>jar:///home/billjiang/maven/repository/javax/activation/activation/1.1/activation-1.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/mybatis-3.3.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/mybatis/mybatis/3.3.0/mybatis-3.3.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-beans-4.1.5.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-beans/4.1.5.RELEASE/spring-beans-4.1.5.RELEASE.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
       <attribute name="URI" value="/WEB-INF/lib/spring-core-4.0.8.RELEASE.jar"/>
       <url>jar:///home/billjiang/maven/repository/org/springframework/spring-core/4.0.8.RELEASE/spring-core-4.0.8.RELEASE.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-simple-workflow-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-simple-workflow/5.22.0/activiti-simple-workflow-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-bpmn-layout-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-bpmn-layout/5.22.0/activiti-bpmn-layout-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/jgraphx-1.10.4.1.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/tinyjee/jgraphx/jgraphx/1.10.4.1/jgraphx-1.10.4.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/slf4j-log4j12-1.7.21.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/slf4j/slf4j-log4j12/1.7.21/slf4j-log4j12-1.7.21.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/log4j-1.2.17.jar"/>
+      <url>jar:///home/billjiang/maven/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/commons-io-1.3.2.jar"/>
+      <url>jar:///home/billjiang/maven/repository/commons-io/commons-io/1.3.2/commons-io-1.3.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/commons-fileupload-1.3.1.jar"/>
+      <url>jar:///home/billjiang/maven/repository/commons-fileupload/commons-fileupload/1.3.1/commons-fileupload-1.3.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/jsr250-api-1.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-context-4.1.5.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-context/4.1.5.RELEASE/spring-context-4.1.5.RELEASE.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-aop-4.1.5.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-aop/4.1.5.RELEASE/spring-aop-4.1.5.RELEASE.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/aopalliance-1.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-expression-4.0.8.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-expression/4.0.8.RELEASE/spring-expression-4.0.8.RELEASE.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-tx-4.0.8.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-tx/4.0.8.RELEASE/spring-tx-4.0.8.RELEASE.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-web-4.1.5.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-web/4.1.5.RELEASE/spring-web-4.1.5.RELEASE.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-webmvc-4.0.8.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-webmvc/4.0.8.RELEASE/spring-webmvc-4.0.8.RELEASE.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-security-core-3.2.3.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/security/spring-security-core/3.2.3.RELEASE/spring-security-core-3.2.3.RELEASE.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-security-config-3.2.3.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/security/spring-security-config/3.2.3.RELEASE/spring-security-config-3.2.3.RELEASE.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-security-crypto-3.2.3.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/security/spring-security-crypto/3.2.3.RELEASE/spring-security-crypto-3.2.3.RELEASE.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-security-web-3.2.3.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/security/spring-security-web/3.2.3.RELEASE/spring-security-web-3.2.3.RELEASE.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/spring-test-4.0.8.RELEASE.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-test/4.0.8.RELEASE/spring-test-4.0.8.RELEASE.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
@@ -852,6 +1410,126 @@
       <attribute name="method" value="1"/>
       <attribute name="URI" value="/WEB-INF/lib/c3p0-0.9.1.2.jar"/>
       <url>jar:///home/billjiang/maven/repository/c3p0/c3p0/0.9.1.2/c3p0-0.9.1.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-modeler-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-modeler/5.22.0/activiti-modeler-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-json-converter-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-json-converter/5.22.0/activiti-json-converter-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/javaGeom-0.11.1.jar"/>
+      <url>jar:///home/billjiang/maven/repository/math/geom2d/javaGeom/0.11.1/javaGeom-0.11.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-parser-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-parser/1.7/batik-parser-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-awt-util-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-awt-util/1.7/batik-awt-util-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-util-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-util/1.7/batik-util-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-xml-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-xml/1.7/batik-xml-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-transcoder-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-transcoder/1.7/batik-transcoder-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/fop-0.94.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/fop/0.94/fop-0.94.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/xmlgraphics-commons-1.2.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/xmlgraphics-commons/1.2/xmlgraphics-commons-1.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/avalon-framework-api-4.3.1.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/avalon/framework/avalon-framework-api/4.3.1/avalon-framework-api-4.3.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/avalon-framework-impl-4.3.1.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/avalon/framework/avalon-framework-impl/4.3.1/avalon-framework-impl-4.3.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-bridge-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-bridge/1.7/batik-bridge-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-anim-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-anim/1.7/batik-anim-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-dom-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-dom/1.7/batik-dom-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-css-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-css/1.7/batik-css-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-ext-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-ext/1.7/batik-ext-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/xml-apis-ext-1.3.04.jar"/>
+      <url>jar:///home/billjiang/maven/repository/xml-apis/xml-apis-ext/1.3.04/xml-apis-ext-1.3.04.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-svg-dom-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-svg-dom/1.7/batik-svg-dom-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-gvt-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-gvt/1.7/batik-gvt-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-script-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-script/1.7/batik-script-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-svggen-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-svggen/1.7/batik-svggen-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/xml-apis-1.3.04.jar"/>
+      <url>jar:///home/billjiang/maven/repository/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/batik-codec-1.7.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/apache/xmlgraphics/batik-codec/1.7/batik-codec-1.7.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
@@ -915,52 +1593,12 @@
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/xml-apis-1.0.b2.jar"/>
-      <url>jar:///home/billjiang/maven/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
       <attribute name="URI" value="/WEB-INF/lib/hsqldb-1.8.0.10.jar"/>
       <url>jar:///home/billjiang/maven/repository/hsqldb/hsqldb/1.8.0.10/hsqldb-1.8.0.10.jar!/</url>
     </containerElement>
     <containerElement type="module" name="AdminEAP-framework">
       <attribute name="method" value="5"/>
       <attribute name="URI" value="/WEB-INF/lib/AdminEAP-framework-1.0-SNAPSHOT.jar"/>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/spring-webmvc-4.0.8.RELEASE.jar"/>
-      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-webmvc/4.0.8.RELEASE/spring-webmvc-4.0.8.RELEASE.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/spring-beans-4.0.8.RELEASE.jar"/>
-      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-beans/4.0.8.RELEASE/spring-beans-4.0.8.RELEASE.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/spring-context-4.0.8.RELEASE.jar"/>
-      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-context/4.0.8.RELEASE/spring-context-4.0.8.RELEASE.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/spring-aop-4.0.8.RELEASE.jar"/>
-      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-aop/4.0.8.RELEASE/spring-aop-4.0.8.RELEASE.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/aopalliance-1.0.jar"/>
-      <url>jar:///home/billjiang/maven/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/spring-expression-4.0.8.RELEASE.jar"/>
-      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-expression/4.0.8.RELEASE/spring-expression-4.0.8.RELEASE.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/spring-web-4.0.8.RELEASE.jar"/>
-      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-web/4.0.8.RELEASE/spring-web-4.0.8.RELEASE.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
@@ -1014,16 +1652,6 @@
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/commons-fileupload-1.3.1.jar"/>
-      <url>jar:///home/billjiang/maven/repository/commons-fileupload/commons-fileupload/1.3.1/commons-fileupload-1.3.1.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/commons-io-1.3.2.jar"/>
-      <url>jar:///home/billjiang/maven/repository/commons-io/commons-io/1.3.2/commons-io-1.3.2.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
       <attribute name="URI" value="/WEB-INF/lib/commons-digester3-3.2.jar"/>
       <url>jar:///home/billjiang/maven/repository/org/apache/commons/commons-digester3/3.2/commons-digester3-3.2.jar!/</url>
     </containerElement>
@@ -1054,11 +1682,6 @@
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/log4j-1.2.17.jar"/>
-      <url>jar:///home/billjiang/maven/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
       <attribute name="URI" value="/WEB-INF/lib/jxls-reader-1.0.5.jar"/>
       <url>jar:///home/billjiang/maven/repository/net/sf/jxls/jxls-reader/1.0.5/jxls-reader-1.0.5.jar!/</url>
     </containerElement>
@@ -1069,18 +1692,8 @@
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/slf4j-log4j12-1.7.21.jar"/>
-      <url>jar:///home/billjiang/maven/repository/org/slf4j/slf4j-log4j12/1.7.21/slf4j-log4j12-1.7.21.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
       <attribute name="URI" value="/WEB-INF/lib/mail-1.4.7.jar"/>
       <url>jar:///home/billjiang/maven/repository/javax/mail/mail/1.4.7/mail-1.4.7.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/activation-1.1.jar"/>
-      <url>jar:///home/billjiang/maven/repository/javax/activation/activation/1.1/activation-1.1.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
@@ -1104,16 +1717,6 @@
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/jcl-over-slf4j-1.7.19.jar"/>
-      <url>jar:///home/billjiang/maven/repository/org/slf4j/jcl-over-slf4j/1.7.19/jcl-over-slf4j-1.7.19.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/spring-tx-4.0.8.RELEASE.jar"/>
-      <url>jar:///home/billjiang/maven/repository/org/springframework/spring-tx/4.0.8.RELEASE/spring-tx-4.0.8.RELEASE.jar!/</url>
-    </containerElement>
-    <containerElement type="library" level="module">
-      <attribute name="method" value="1"/>
       <attribute name="URI" value="/WEB-INF/lib/spring-oxm-4.2.5.RELEASE.jar"/>
       <url>jar:///home/billjiang/maven/repository/org/springframework/spring-oxm/4.2.5.RELEASE/spring-oxm-4.2.5.RELEASE.jar!/</url>
     </containerElement>
@@ -1134,8 +1737,8 @@
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
-      <attribute name="URI" value="/WEB-INF/lib/mysql-connector-java-5.1.31.jar"/>
-      <url>jar:///home/billjiang/maven/repository/mysql/mysql-connector-java/5.1.31/mysql-connector-java-5.1.31.jar!/</url>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-spring-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-spring/5.22.0/activiti-spring-5.22.0.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1"/>
@@ -1147,9 +1750,30 @@
       <attribute name="URI" value="/WEB-INF/lib/spring-orm-4.0.8.RELEASE.jar"/>
       <url>jar:///home/billjiang/maven/repository/org/springframework/spring-orm/4.0.8.RELEASE/spring-orm-4.0.8.RELEASE.jar!/</url>
     </containerElement>
-    <deploymentDescriptor version="2.3" name="web.xml" optional="false" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml"/>
-    <webroots>
-      <root relative="/" url="file://$MODULE_DIR$/src/main/webapp"/>
-    </webroots>
-  </component>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/commons-dbcp-1.4.jar"/>
+      <url>jar:///home/billjiang/maven/repository/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/commons-pool-1.5.4.jar"/>
+      <url>jar:///home/billjiang/maven/repository/commons-pool/commons-pool/1.5.4/commons-pool-1.5.4.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/activiti-diagram-rest-5.22.0.jar"/>
+      <url>jar:///home/billjiang/maven/repository/org/activiti/activiti-diagram-rest/5.22.0/activiti-diagram-rest-5.22.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/mysql-connector-java-5.1.31.jar"/>
+      <url>jar:///home/billjiang/maven/repository/mysql/mysql-connector-java/5.1.31/mysql-connector-java-5.1.31.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1"/>
+      <attribute name="URI" value="/WEB-INF/lib/druid-1.1.6.jar"/>
+      <url>jar:///home/billjiang/maven/repository/com/alibaba/druid/1.1.6/druid-1.1.6.jar!/</url>
+    </containerElement>
+  </component> 
 </module>

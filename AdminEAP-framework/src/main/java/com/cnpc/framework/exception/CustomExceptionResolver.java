@@ -19,7 +19,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
         ModelAndView model = new ModelAndView();
         if(ex instanceof QueryException) {
             model.addObject("errorName","查询异常");
-            model.addObject("message", ex.getMessage().toString());
+            model.addObject("message", ex.getMessage());
             model.addObject("detail", ErrorConstant.ERROR_DETAIL);
         }else if(ex instanceof ClassCastException) {
             model.addObject("errorName","404");
@@ -27,7 +27,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
             model.addObject("detail", ex.getMessage());
         }else{
             model.addObject("errorName", ex.getClass().getSimpleName());
-            model.addObject("message", ex.getMessage().toString());
+            model.addObject("message", ex.getMessage());
             model.addObject("detail", ErrorConstant.ERROR_DETAIL);
         }
         model.setViewName("base/error/error");
