@@ -80,14 +80,14 @@ public class FreeMarkerUtil {
 			throws TemplateException, IOException {
 		Writer writer = null;
 		Template template = getTemplate(templateName);
-		String dir = filePath.substring(0, filePath.lastIndexOf("\\"));
-		File fdir = new File(dir);
-		if (!fdir.exists()) {
-			if (!fdir.mkdirs()) {
-				System.out.println("创建目录" + fdir.getAbsolutePath() + "失败");
-				return;
-			}
-		}
+//		String dir = filePath.substring(0, filePath.lastIndexOf(File.seprator));
+//		File fdir = new File(dir);
+//		if (!fdir.exists()) {
+//			if (!fdir.mkdirs()) {
+//				System.out.println("创建目录" + fdir.getAbsolutePath() + "失败");
+//				return;
+//			}
+//		}   
 		File file = new File(filePath);
 		if(file.exists())
 			file.delete(); 
