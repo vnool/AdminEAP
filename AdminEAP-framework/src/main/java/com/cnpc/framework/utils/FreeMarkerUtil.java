@@ -80,7 +80,7 @@ public class FreeMarkerUtil {
 			throws TemplateException, IOException {
 		Writer writer = null;
 		Template template = getTemplate(templateName);
-		String dir = filePath.substring(0, filePath.lastIndexOf(File.seprator));
+		String dir = filePath.substring(0, filePath.lastIndexOf(File.separator));
 		File fdir = new File(dir);
 		if (!fdir.exists()) {
 			if (!fdir.mkdirs()) {
