@@ -291,6 +291,7 @@ public class CodeGeneratorController {
  
 		//setting.setHtmlTypes(htmlTypes);
 		//return GenerateCodeDo(setting);
+		return new Result();
 	}
 
 	// 代码生成
@@ -302,18 +303,9 @@ public class CodeGeneratorController {
 		return GenerateCodeDo(setting);
 	}
 
-	public Result GenerateCodeDo(GenerateSetting setting) {
+	public Result GenerateCodeDo(GenerateSetting setting) throws IOException, TemplateException{
 		setting.setCurTime(new Date());
 		setting.setAllFields(setting.getFields());
-//		List<FieldSetting> selectFields = new ArrayList<>();
-//		List<FieldSetting> leftFields = new ArrayList<>();
-//		for (FieldSetting fs : setting.getFields()) {
-//			if ("1".equals(fs.getIsSelected())) {
-//				selectFields.add(fs);
-//			} else {
-//				leftFields.add(fs);
-//			}
-//		}
 
 		// 创建功能菜单
 		if ("1".equals(setting.getIsCreateFunction()) && !StrUtil.isEmpty(setting.getParFuncCode())) {
@@ -352,7 +344,7 @@ public class CodeGeneratorController {
 		return new Result();
 	}
 
-	void makeHTMLCode(GenerateSetting setting) {
+	void makeHTMLCode(GenerateSetting setting) throws IOException, TemplateException{
 		// html文件生成
 		String[] htmlArr;
 		String fileName;
@@ -409,7 +401,7 @@ public class CodeGeneratorController {
 
 	}
 
-	void makeJavaCode(GenerateSetting setting) {
+	void makeJavaCode(GenerateSetting setting) throws IOException, TemplateException{
 		// 生成java后台文件
 		String fileName;
 		String[] javaArr;

@@ -19,3 +19,5 @@ AdminEAP-framework/target/*
 AdminEAP-web/target/*
 .gitignore.bak
 
+.DS_Store
+.DS_Store
