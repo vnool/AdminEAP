@@ -9,6 +9,9 @@
 }
 </style>
 <section class="content-header">
+
+
+
     <h1>代码生成器</h1>
     <ol class="breadcrumb">
         <li><a href="${basePath}"><i class="fa fa-dashboard"></i> 首页</a></li>
@@ -246,13 +249,13 @@ $(function() {
     });
 
 
-    $('#className').keydown(function() {
+    $('#className').keyup(function() {
         var className = $(this).val();
         var keys = className.split(".");
         if (keys.length < 2) return;
 
         var key = keys[keys.length - 1].toLowerCase();
-        var ukey = ucfirst(key);
+        var ukey = keys[keys.length - 1];
         var nameSpaceKey = keys[keys.length - 3];
 
         $('#queryId').val(key);
@@ -262,14 +265,19 @@ $(function() {
         var space = keys.concat();
         space.splice(-2);
 
-        var htmlPath = "view/" + nameSpaceKey.toLowerCase();
+        var webroot = "${rootPath}";
+
+        var htmlPath = webroot + "/WEB-INF/views/" + nameSpaceKey.toLowerCase();
         $('#htmlPath').val(htmlPath);
         $('#businessPackage').val(space[space.length - 1]);
 
-        var nameSpace = space.join('.') + '.controller';
-        var javaPath = space.join('/');
-
+        var nameSpace = space.join('.') ;
         $('#nameSpace').val(nameSpace);
+
+        var javaroot = webroot.substr(0, webroot.lastIndexOf('/'))+"/java";
+        var javaPath = javaroot+"/"+space.join('/');
+
+        
         $('#javaPath').val(javaPath);
     });
 
@@ -478,13 +486,10 @@ function QuerySetting() {
 }
 
 function ucfirst(str) {
-    var str = str.toLowerCase();
-    var strarr = str.split(' ');
-    var result = '';
-    for (var i in strarr) {
-        result += strarr[i].substring(0, 1).toUpperCase() + strarr[i].substring(1) + ' ';
-    }
-    return result;
+    var str = str.toLowerCase(); 
+  
+    return str.substring(0, 1).toUpperCase() + str.substring(1)  ;
+     
 }
 
 function XMLmake(queryId) {

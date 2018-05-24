@@ -44,7 +44,9 @@ public class CodeGeneratorController {
 	private CodeGeneratorService codeGeneratorService;
 
 	@RequestMapping(value = "/setting", method = RequestMethod.GET)
-	public String setting() {
+	public String setting(HttpServletRequest request) {
+		request.setAttribute("rootPath", request.getRealPath("/") );
+		//request.setAttribute("rootPath", "xxxxx");
 		return "tool/generator/generator_setting";
 	}
 
