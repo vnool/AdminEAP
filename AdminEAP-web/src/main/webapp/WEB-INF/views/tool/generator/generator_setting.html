@@ -300,15 +300,15 @@ $(function() {
             modals.confirm('确认生成代码？', function() {
                 var params = codeform.getFormSimpleData();
                 //收集编辑字段数据
-                var len = fieldTable.data().length;
-                var fields = [];
-                for (var i = 0; i < len; i++) {
-                    var obj = fieldTable.row(i).data();
-                    obj.isCondition = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(7)").find("input:eq(0)").is(":checked") ? 1 : 0;
-                    obj.isSelected = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(8)").find("input:eq(0)").is(":checked") ? 1 : 0;
-                    fields.push(obj);
-                }
-                params["fields"] = fields;
+                //var len = fieldTable.data().length;
+                // var fields = [];
+                // for (var i = 0; i < len; i++) {
+                //     var obj = fieldTable.row(i).data();
+                //     obj.isCondition = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(7)").find("input:eq(0)").is(":checked") ? 1 : 0;
+                //     obj.isSelected = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(8)").find("input:eq(0)").is(":checked") ? 1 : 0;
+                //     fields.push(obj);
+                // }
+                // params["fields"] = fields;
                 params["htmlPath"] = $("#htmlPath").val();
                 params["javaPath"] = $("#javaPath").val();
                 console.log(JSON.stringify(params));
@@ -332,6 +332,22 @@ $(function() {
                 validators: {
                     notEmpty: {
                         message: '请填写实体名'
+                    },
+                    "checkname":{
+                        validate: function(validator, $field, options) {
+                            // 表单输入的值
+                              var value = $field.val();
+                              if(value.indexOf('entity') < 1 && value.indexOf('model') < 1){
+                                return { valid :  false, message: '实体类，必须在 entity或者model文件夹内'}
+                              }
+
+                            //options为<validatorOptions>对象，直接.获取需要的值
+
+                            // 返回true/false
+                            //也可返回{ valid : true/false, message: 'XXXX'}
+                            //return reg.test( $field.val() );
+
+                        }
                     }
                 }
             },
@@ -428,32 +444,9 @@ $(function() {
 
 function MakeSetting() {
     var queryId = $("#queryId").val();
-    if (!queryId) {
-        modals.info("请填写queryId");
-        return false;
-    }
-    //已经配置了xml则配置属性列表，否则弹出窗口配置xml
-    ajaxPost(basePath + "/generator/getQuerySetting", {
-        "queryId": queryId,
-        "className": $("#className").val()
-    }, function(data, status) {
-        if (data.isExistQuery == "2") {
-            modals.info("该功能请在开发环境下使用,并使用内嵌式web容器测试\r\n（如jetty-maven-plugin, tomcat7-maven-plugin）");
-            return false;
-        } else if (data.isExistQuery == "1") {
-            codeform.initFormData(data);
-
-            $("#code-form").data('bootstrapValidator').resetForm();
-
-            FillxmlTable(data); 
-            dbclickEdit();
-
-        } else {
-            //xml不存在，填写className弹出窗口
-            XMLmake(queryId);
-
-        }
-    });
+     
+    XMLmake(queryId);
+ 
 }
 function QuerySetting() {
     var queryId = $("#queryId").val();
@@ -463,8 +456,7 @@ function QuerySetting() {
     }
     //已经配置了xml则配置属性列表，否则弹出窗口配置xml
     ajaxPost(basePath + "/generator/getQuerySetting", {
-        "queryId": queryId,
-        "className": $("#className").val()
+        "queryId": queryId, 
     }, function(data, status) {
         if (data.isExistQuery == "2") {
             modals.info("该功能请在开发环境下使用,并使用内嵌式web容器测试\r\n（如jetty-maven-plugin, tomcat7-maven-plugin）");

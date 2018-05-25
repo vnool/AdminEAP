@@ -45,15 +45,14 @@ public class CodeGeneratorController {
 
 	@RequestMapping(value = "/setting", method = RequestMethod.GET)
 	public String setting(HttpServletRequest request) {
-		request.setAttribute("rootPath", request.getRealPath("/") );
-		//request.setAttribute("rootPath", "xxxxx");
+		request.setAttribute("rootPath", request.getRealPath("/"));
+		// request.setAttribute("rootPath", "xxxxx");
 		return "tool/generator/generator_setting";
 	}
 
 	@RequestMapping(value = "/getQuerySetting", method = RequestMethod.POST)
 	@ResponseBody
-	public GenerateSetting getQuerySetting(String queryId, String className, HttpServletRequest request)
-			throws ClassNotFoundException {
+	public GenerateSetting getQuerySetting(String queryId, HttpServletRequest request) throws ClassNotFoundException {
 		GenerateSetting setting = new GenerateSetting();
 		String realPath = request.getRealPath("/");
 		if (StrUtil.isEmpty(realPath)) {
@@ -66,16 +65,25 @@ public class CodeGeneratorController {
 		if (query == null) {
 			setting.setIsExistQuery("0");
 			return setting;
-		} else {
-			setting.setIsExistQuery("1");
 		}
-
+		
+		String className = query.getClassName();
+		// 从className 获取
+		setting = settingFromModel(className, request);
 		setting.setQueryId(queryId);
+		setting.setIsExistQuery("1");
+		return setting;
+
+	}
+
+	public  GenerateSetting settingFromModel(String className, HttpServletRequest request) throws ClassNotFoundException {
+		GenerateSetting setting = new GenerateSetting();
+		// setting.setQueryId(queryId);
 		setting.setColsNum(1);
-		setting.setClassName(StrUtil.isEmpty(query.getClassName()) ? className : query.getClassName());
-		setting.setAllowPaging(query.getAllowPaging());
-		setting.setTableName(query.getTableName());
-		setting.setModelName(query.getTableName().replaceAll("列表", ""));
+		setting.setClassName(className);
+		setting.setAllowPaging(true);
+		// setting.setTableName(query.getTableName());
+		setting.setModelName("测试");
 		// 计算htmlPrefix javaPrefix nameSpace
 		String nameSpace = null;
 		if (!StrUtil.isEmpty(setting.getClassName())) {
@@ -106,7 +114,8 @@ public class CodeGeneratorController {
 			htmlDir += (i < level.length - 1) ? level[i] + File.separator : level[i];
 		}
 		setting.setBusinessPackage(htmlDir.replace(File.separator, "/"));
-		// request.getSession().getServletContext().getRealPath("/");
+
+		String realPath = request.getRealPath("/");
 		String htmlPath = realPath + File.separator + "WEB-INF" + File.separator + "views" + File.separator + htmlDir;
 		String javaPath = realPath.replaceAll("webapp", "java") + File.separator
 				+ setting.getNameSpace().replace(".", File.separator);
@@ -114,7 +123,7 @@ public class CodeGeneratorController {
 		setting.setJavaPath(javaPath);
 
 		// 要编辑的属性列表
-		Class<?> clazz = Class.forName(setting.getClassName());
+		Class<?> clazz = Class.forName(className);
 		Field[] fields = clazz.getDeclaredFields();
 		List<FieldSetting> fslist = new ArrayList<>();
 		int i = 0;
@@ -126,11 +135,13 @@ public class CodeGeneratorController {
 			FieldSetting fs = new FieldSetting();
 			fs.setRowIndex(++i);
 			fs.setFieldParam(field);
-			String name = field.getAnnotation(Header.class) != null ? field.getAnnotation(Header.class).name() : null;
-			name = name != null ? name
-					: (query.getColumn(fs.getColumnName()) != null ? query.getColumn(fs.getColumnName()).getHeader()
-							: null);
-			name = name != null ? name : fs.getColumnName();
+			String name = "";
+			if (field.getAnnotation(Header.class) != null) {
+				name = field.getAnnotation(Header.class).name();
+			}
+			if (name == null) {
+				name = fs.getColumnName();
+			}
 			fs.setLabelName(name);
 			fs.setIsSelected("1");
 			fs.setIsCondition("0");
@@ -278,36 +289,46 @@ public class CodeGeneratorController {
 	// 代码生成 快速版
 	@RequestMapping(value = "startGenerateQuick", method = RequestMethod.POST)
 	@ResponseBody
-	public Result startGenerateQuick(String object, HttpServletRequest request,  HttpServletResponse response) throws IOException, TemplateException {
-//		GenerateSetting setting = JSON.parseObject(object, GenerateSetting.class);
-//		String queryId = setting.getQueryId();
-//		String nameSpace = setting.getNameSpace();
-//		String rootPath = request.getRealPath("/");
-//		
-//		response.getWriter().print(rootPath);
-//		
-//		String htmlPath= 
-//		setting.setHtmlPrefix(queryId);
-//		setting.setHtmlPath(htmlPath);
-//		setting.setColsNum(1);
- 
-		//setting.setHtmlTypes(htmlTypes);
-		//return GenerateCodeDo(setting);
-		return new Result();
+	public Result startGenerateQuick(String queryId, String className, HttpServletRequest request,
+			HttpServletResponse response) throws IOException, TemplateException, ClassNotFoundException {
+		// GenerateSetting setting = JSON.parseObject(object,
+		// GenerateSetting.class);
+		// String queryId = setting.getQueryId();
+		// String nameSpace = setting.getNameSpace();
+		// String rootPath = request.getRealPath("/");
+		//
+		// response.getWriter().print(rootPath);
+		//
+		// String htmlPath=
+		// setting.setHtmlPrefix(queryId);
+		// setting.setHtmlPath(htmlPath);
+		// setting.setColsNum(1);
+
+		// setting.setHtmlTypes(htmlTypes);
+		//
+
+		GenerateSetting setting = settingFromModel(className,  request);
+		return GenerateCodeDo(setting);
+		// return new Result();
 	}
 
 	// 代码生成
 	@RequestMapping(value = "startGenerate", method = RequestMethod.POST)
 	@ResponseBody
-	public Result startGenerate(String object) throws IOException, TemplateException {
+	public Result startGenerate(String object, HttpServletRequest request)
+			throws IOException, TemplateException, ClassNotFoundException {
 		GenerateSetting setting = JSON.parseObject(object, GenerateSetting.class);
-		//setting.setHtmlPrefix();
+		// setting.setHtmlPrefix();
+
+		GenerateSetting s = settingFromModel(setting.getClassName(), request);
+
+		setting.setAllFields(s.getFields());
+
 		return GenerateCodeDo(setting);
 	}
 
-	public Result GenerateCodeDo(GenerateSetting setting) throws IOException, TemplateException{
+	public Result GenerateCodeDo(GenerateSetting setting) throws IOException, TemplateException {
 		setting.setCurTime(new Date());
-		setting.setAllFields(setting.getFields());
 
 		// 创建功能菜单
 		if ("1".equals(setting.getIsCreateFunction()) && !StrUtil.isEmpty(setting.getParFuncCode())) {
@@ -346,21 +367,20 @@ public class CodeGeneratorController {
 		return new Result();
 	}
 
-	void makeHTMLCode(GenerateSetting setting) throws IOException, TemplateException{
+	void makeHTMLCode(GenerateSetting setting) throws IOException, TemplateException {
 		// html文件生成
 		String[] htmlArr;
 		String fileName;
 		List<FieldSetting> selectFields = new ArrayList<>();
 		List<FieldSetting> leftFields = new ArrayList<>();
-		for (FieldSetting fs : setting.getFields()) {
+		for (FieldSetting fs : setting.getAllFields()) {
 			if ("1".equals(fs.getIsSelected())) {
 				selectFields.add(fs);
 			} else {
 				leftFields.add(fs);
 			}
 		}
-		
-		
+
 		if (!StrUtil.isEmpty(setting.getHtmlTypes())) {
 			htmlArr = setting.getHtmlTypes().split(",");
 			setting.setFields(selectFields);
@@ -403,21 +423,20 @@ public class CodeGeneratorController {
 
 	}
 
-	void makeJavaCode(GenerateSetting setting) throws IOException, TemplateException{
+	void makeJavaCode(GenerateSetting setting) throws IOException, TemplateException {
 		// 生成java后台文件
 		String fileName;
 		String[] javaArr;
 		List<FieldSetting> selectFields = new ArrayList<>();
 		List<FieldSetting> leftFields = new ArrayList<>();
-		for (FieldSetting fs : setting.getFields()) {
+		for (FieldSetting fs : setting.getAllFields()) {
 			if ("1".equals(fs.getIsSelected())) {
 				selectFields.add(fs);
 			} else {
 				leftFields.add(fs);
 			}
 		}
-		
-		
+
 		if (!StrUtil.isEmpty(setting.getJavaTypes())) {
 			javaArr = setting.getJavaTypes().split(",");
 			for (String javaType : javaArr) {

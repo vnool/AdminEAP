@@ -4,6 +4,11 @@ import com.cnpc.framework.constant.ErrorConstant;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,20 +22,28 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
     @Override
     public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception ex) {
         ModelAndView model = new ModelAndView();
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        ex.printStackTrace(pw);
+        ex.printStackTrace();
+        //dingchengliang
+        
         if(ex instanceof QueryException) {
             model.addObject("errorName","查询异常");
-            model.addObject("message", ex.getMessage());
+             
+            model.addObject("message", ex.getMessage() + "<br>"+sw.toString());
             model.addObject("detail", ErrorConstant.ERROR_DETAIL);
         }else if(ex instanceof ClassCastException) {
             model.addObject("errorName","404");
             model.addObject("message", "访问地址不存在，请确认URL地址是否正确");
-            model.addObject("detail", ex.getMessage());
+            model.addObject("detail", ex.getMessage()+ "<br>"+sw.toString());
         }else{
             model.addObject("errorName", ex.getClass().getSimpleName());
-            model.addObject("message", ex.getMessage());
+            model.addObject("message", ex.getMessage()+ "<br>"+sw.toString());
             model.addObject("detail", ErrorConstant.ERROR_DETAIL);
         }
         model.setViewName("base/error/error");
+        
         return model;
     }
 }
