@@ -16,7 +16,8 @@
             <#list fields as field>
                 <#if field_index%colsNum=index>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">${field.labelName}<#if field.validateType??&&field.validateType?contains("notEmpty")><span style="color:red">*</span></#if></label>
+                    <label class="col-sm-3 control-label">${field.labelName}<#if field.validateType??&&field.validateType?contains("notEmpty")><span style="color:red">*</span></#if></label> 
+
                     <div class="<#if field.tagType="datepicker">input-group </#if>col-sm-8">
                         <#if field.tagType="hidden">
                         <input type="hidden" id="${field.columnName}" name="${field.columnName}" >

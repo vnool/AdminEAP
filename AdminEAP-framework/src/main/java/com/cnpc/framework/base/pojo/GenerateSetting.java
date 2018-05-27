@@ -4,39 +4,39 @@ import java.util.Date;
 import java.util.List;
 
 public class GenerateSetting {
-    private String queryId;
-    private String className;
-    private String htmlTypes;
-    private List<FieldSetting> fields;
-    private Integer colsNum;
-    private String htmlPrefix;
-    private String htmlPath;
-    private String title;
-    
-    private String javaTypes;
-    private String javaPrefix; 
-    private String nameSpace;
-    private String javaPath;
-    private String  businessPackage;
-    
-    private String modelName;
-    
-    private Boolean allowPaging;
-    private String tableName;
-    private Date curTime;
-    private List<FieldSetting> allFields;
-    private List<String> dateFields;
-    private List<String> leftDates;
-    private List<String> leftFields;
-    
-    //生成时候创建菜单
-    private String isCreateFunction;//是否在生成代码的时候创建菜单 1创建菜单
-    private String parFuncCode;//父亲功能编码
-    
-    private String isExistQuery;//是否存在query
+	private String queryId;
+	private String className;
+	private String htmlTypes;
+	private List<FieldSetting> fields;
+	private Integer colsNum;
+	private String htmlPrefix;
+	private String htmlPath;
+	private String title;
 
-	private String curdType;//curd类型 dialog page tab
-	private String parFuncName;//父级目录名称
+	private String javaTypes;
+	private String javaPrefix;
+	private String nameSpace;
+	private String javaPath;
+	private String businessPackage;
+
+	private String modelName;
+
+	private Boolean allowPaging;
+	private String tableName;
+	private Date curTime;
+	private List<FieldSetting> allFields;
+	private List<String> dateFields;
+	private List<String> leftDates;
+	private List<String> leftFields;
+
+	// 生成时候创建菜单
+	private String isCreateFunction;// 是否在生成代码的时候创建菜单 1创建菜单
+	private String parFuncCode;// 父亲功能编码
+
+	private String isExistQuery;// 是否存在query
+
+	private String curdType;// curd类型 dialog page tab
+	private String parFuncName;// 父级目录名称
 
 	public String getParFuncName() {
 		return parFuncName;
@@ -95,13 +95,10 @@ public class GenerateSetting {
 	}
 
 	public String getHtmlPrefix() {
-		return htmlPrefix;
+		return getJavaPrefix().toLowerCase();
 	}
 
-	public void setHtmlPrefix(String htmlPrefix) {
-		this.htmlPrefix = htmlPrefix;
-	}
-
+	 
 	public String getHtmlPath() {
 		return htmlPath;
 	}
@@ -127,16 +124,11 @@ public class GenerateSetting {
 	}
 
 	public String getJavaPrefix() {
-		return javaPrefix;
+		int p = this.className.lastIndexOf(".");
+		return this.className.substring(p + 1);
 	}
 
-	public void setJavaPrefix(String javaPrefix) {
-		this.javaPrefix = javaPrefix;
-	}
-
-	public String getNameSpace() {
-		return nameSpace;
-	}
+	 
 
 	public void setNameSpace(String nameSpace) {
 		this.nameSpace = nameSpace;
@@ -161,6 +153,15 @@ public class GenerateSetting {
 	public String getModelName() {
 		return modelName;
 	}
+
+	public String getNameSpace() {
+		int p = this.className.lastIndexOf(".");
+		String entity = this.className.substring(0, p);
+		p = entity.lastIndexOf(".");
+		return this.className.substring(0, p);
+	}
+	
+	
 
 	public void setModelName(String modelName) {
 		this.modelName = modelName;

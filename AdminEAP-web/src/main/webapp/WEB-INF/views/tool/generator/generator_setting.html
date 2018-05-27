@@ -57,15 +57,15 @@
                             <div class="form-group">
                                 <label for="modelName" class="col-sm-2 control-label">业务名:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="modelName" name="modelName" placeholder="请填写表名/业务名（中文）">
+                                    <input type="text" class="form-control" id="modelName" name="modelName" value="" placeholder="请填写表名/业务名（中文）">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="modelName" class="col-sm-2 control-label"> </label>
+                                <label   class="col-sm-2 control-label"> </label>
                                 <div class="col-sm-9">
-                                    <button type="button" class="btn btn-primary col-sm-12" data-btn-type="makesetting">生成XML配置</button>
+                                    <button type="button" class="btn btn-primary col-sm-12 disabled" data-btn-type="makesetting" disabled="disabled">生成XML配置</button>
                                 </div>
                             </div>
                         </div>
@@ -300,15 +300,15 @@ $(function() {
             modals.confirm('确认生成代码？', function() {
                 var params = codeform.getFormSimpleData();
                 //收集编辑字段数据
-                //var len = fieldTable.data().length;
-                // var fields = [];
-                // for (var i = 0; i < len; i++) {
-                //     var obj = fieldTable.row(i).data();
-                //     obj.isCondition = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(7)").find("input:eq(0)").is(":checked") ? 1 : 0;
-                //     obj.isSelected = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(8)").find("input:eq(0)").is(":checked") ? 1 : 0;
-                //     fields.push(obj);
-                // }
-                // params["fields"] = fields;
+                var len = fieldTable.data().length;
+                 var fields = [];
+                 for (var i = 0; i < len; i++) {
+                     var obj = fieldTable.row(i).data();
+                     obj.isCondition = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(7)").find("input:eq(0)").is(":checked") ? 1 : 0;
+                     obj.isSelected = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(8)").find("input:eq(0)").is(":checked") ? 1 : 0;
+                     fields.push(obj);
+                 }
+                params["fields"] = fields;
                 params["htmlPath"] = $("#htmlPath").val();
                 params["javaPath"] = $("#javaPath").val();
                 console.log(JSON.stringify(params));
@@ -351,13 +351,13 @@ $(function() {
                     }
                 }
             },
-            modelName: {
-                validators: {
-                    notEmpty: {
-                        message: '请填写业务名'
-                    }
-                }
-            },
+            // modelName: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: '请填写业务名'
+            //         }
+            //     }
+            // },
             htmlTypes: {
                 validators: {
                     notEmpty: {
@@ -490,7 +490,7 @@ function XMLmake(queryId) {
     if (!className || !modelName) {
         modals.info("查询xml配置不存在，为第一次生成，请配置实体名和业务名");
         $("#code-form").bootstrapValidator('validateField', 'className');
-        $("#code-form").bootstrapValidator('validateField', 'modelName');
+        //$("#code-form").bootstrapValidator('validateField', 'modelName');
         return false;
     }
     //弹出配置xml的窗口

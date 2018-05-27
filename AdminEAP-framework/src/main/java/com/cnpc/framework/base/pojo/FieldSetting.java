@@ -37,6 +37,10 @@ public class FieldSetting {
             this.setDictCode(PingYinUtil.getFirstSpell(field.getName()).toUpperCase());
             this.setTagType("dictSelector");
         }
+        if (StrUtil.isEmpty(this.getTagType()) && !StrUtil.isEmpty(field.getAnnotation(Header.class).tagType())) { //自定义控件类型
+            this.setTagType(field.getAnnotation(Header.class).tagType());
+        }
+        
         if (field.getType() == String.class) {
             if (StrUtil.isEmpty(this.getTagType())) {
                 if (field.getAnnotation(Column.class).length() > 255) {

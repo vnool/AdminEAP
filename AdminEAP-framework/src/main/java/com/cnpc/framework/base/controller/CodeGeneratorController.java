@@ -31,6 +31,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import com.cnpc.framework.query.pojo.QueryXMLmaker;
+import com.cnpc.framework.base.pojo.EntityInfo;
 
 /**
  * Created by billJiang on 2017/2/6. e-mail:jrn1012@petrochina.com.cn
@@ -66,94 +68,15 @@ public class CodeGeneratorController {
 			setting.setIsExistQuery("0");
 			return setting;
 		}
-		
+
 		String className = query.getClassName();
 		// 从className 获取
-		setting = settingFromModel(className, request);
-		setting.setQueryId(queryId);
+		setting = EntityInfo.entityInfo(className, request);
 		setting.setIsExistQuery("1");
 		return setting;
 
 	}
 
-	public  GenerateSetting settingFromModel(String className, HttpServletRequest request) throws ClassNotFoundException {
-		GenerateSetting setting = new GenerateSetting();
-		// setting.setQueryId(queryId);
-		setting.setColsNum(1);
-		setting.setClassName(className);
-		setting.setAllowPaging(true);
-		// setting.setTableName(query.getTableName());
-		setting.setModelName("测试");
-		// 计算htmlPrefix javaPrefix nameSpace
-		String nameSpace = null;
-		if (!StrUtil.isEmpty(setting.getClassName())) {
-			String javaPrefix = setting.getClassName();
-			nameSpace = javaPrefix;
-			int dot = setting.getClassName().lastIndexOf('.');
-			if (dot > -1) {
-				javaPrefix = setting.getClassName().substring(dot + 1);
-				nameSpace = setting.getClassName().substring(0, dot);
-				dot = nameSpace.lastIndexOf(".");
-				if (dot > -1) {
-					nameSpace = nameSpace.substring(0, dot);
-				}
-			}
-			setting.setJavaPrefix(javaPrefix);
-			setting.setHtmlPrefix(javaPrefix.toLowerCase());
-			setting.setNameSpace(nameSpace);
-		}
-
-		// 文件路径
-		String htmlDir = "";
-		String[] level = new String[] {};
-		if (!StrUtil.isEmpty(nameSpace)) {
-			level = nameSpace.split("[.]");
-		}
-		// 过滤掉com.cnpc
-		for (int i = 2; i < level.length; i++) {
-			htmlDir += (i < level.length - 1) ? level[i] + File.separator : level[i];
-		}
-		setting.setBusinessPackage(htmlDir.replace(File.separator, "/"));
-
-		String realPath = request.getRealPath("/");
-		String htmlPath = realPath + File.separator + "WEB-INF" + File.separator + "views" + File.separator + htmlDir;
-		String javaPath = realPath.replaceAll("webapp", "java") + File.separator
-				+ setting.getNameSpace().replace(".", File.separator);
-		setting.setHtmlPath(htmlPath);
-		setting.setJavaPath(javaPath);
-
-		// 要编辑的属性列表
-		Class<?> clazz = Class.forName(className);
-		Field[] fields = clazz.getDeclaredFields();
-		List<FieldSetting> fslist = new ArrayList<>();
-		int i = 0;
-		for (Field field : fields) {
-			if (field.getAnnotation(Column.class) == null && field.getAnnotation(JoinColumn.class) == null)
-				continue;
-			if (field.getAnnotation(Id.class) != null)
-				continue;
-			FieldSetting fs = new FieldSetting();
-			fs.setRowIndex(++i);
-			fs.setFieldParam(field);
-			String name = "";
-			if (field.getAnnotation(Header.class) != null) {
-				name = field.getAnnotation(Header.class).name();
-			}
-			if (name == null) {
-				name = fs.getColumnName();
-			}
-			fs.setLabelName(name);
-			fs.setIsSelected("1");
-			fs.setIsCondition("0");
-			fslist.add(fs);
-		}
-		setting.setFields(fslist);
-		setting.setHtmlTypes("list,addUpdate");
-		setting.setJavaTypes("controller");
-		setting.setIsCreateFunction("1");
-		setting.setCurdType("dialog");
-		return setting;
-	}
 
 	@RequestMapping(value = "/xml", method = RequestMethod.GET)
 	public String configXML(String queryId, String className, String modelName, HttpServletRequest request) {
@@ -169,147 +92,28 @@ public class CodeGeneratorController {
 	public Result generateXMLFile(String xmlContent, String xmlFile, HttpServletRequest request) {
 		String xmlPath = request.getRealPath("/").replaceAll("webapp", "resources") + File.separator + "query"
 				+ File.separator + xmlFile;
-		String rn = "\r\n";
-		try {
-			File file = new File(xmlPath);
-			BufferedWriter output;
-			String s;
-			String s1 = new String();
-			if (!file.exists()) {
-				file.createNewFile();
-				OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
-				output = new BufferedWriter(write);
-				output.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-				output.write(rn);
-				output.write(
-						"<queryContext xmlns=\"http://www.example.org/query\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.example.org/query query.xsd\">");
-				output.write(rn);
-				output.write("<!--本xml片段为代码生成器生成，时间：" + DateUtil.format(new Date(), DateUtil.formatStr_yyyyMMddHHmmss)
-						+ "-->");
-				output.write(rn);
-				output.write(xmlContent);
-				output.write(rn);
-				output.write("</queryContext>");
-				output.close();
-				return new Result(true, "请刷新query下的" + xmlFile + "文件，查看首次生成xml配置");
-			} else {
-				InputStreamReader read = new InputStreamReader(new FileInputStream(file), "UTF-8");
-				BufferedReader input = new BufferedReader(read);
-				while ((s = input.readLine()) != null) {
-					s1 += s + rn;
-				}
-				s1 = s1.replaceAll("</queryContext>", "");
-				OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
-				output = new BufferedWriter(write);
-				output.write(s1);
-				output.write(rn);
-				output.write("<!--本xml片段为代码生成器生成，时间：" + DateUtil.format(new Date(), DateUtil.formatStr_yyyyMMddHHmmss)
-						+ "-->");
-				output.write(rn);
-				output.write(xmlContent);
-				output.write(rn);
-				output.write("</queryContext>");
-				output.close();
-			}
-			return new Result(true, "请刷新query下的" + xmlFile + "文件，查看追加的xml配置");
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			return new Result(false);
-		}
+		return QueryXMLmaker.generateXMLFile(xmlContent, xmlPath );
 	}
 
 	// 生成xml配置内容
 	@RequestMapping(value = "/getXMLContent", method = RequestMethod.POST)
 	@ResponseBody
-	public Result getXMLContent(String queryId, String className, String modelName) throws ClassNotFoundException {
-		Class<?> clazz = Class.forName(className);
-		String rn = "\r\n";
-		// 生成query
-		StringBuilder sb = new StringBuilder();
-		sb.append("<query id=\"" + queryId + "\"");
-		sb.append(" key=\"id\"");
-		sb.append(" tableName=\"" + modelName + "列表\"");
-		sb.append(" className=\"" + className + "\"");
-		sb.append(" widthType=\"px\">");
-		sb.append(rn);
-		// 序号
-		sb.append("        <column key=\"rowIndex\"");
-		sb.append(" header=\"序号\"");
-		sb.append(" width=\"80\"/>");
-		sb.append(rn);
-
-		Field[] fields = clazz.getDeclaredFields();
-		String prefix = className.substring(className.lastIndexOf(".") + 1).toLowerCase();
-		int i = 0;
-		for (Field field : fields) {
-			if (field.getAnnotation(Column.class) == null && field.getAnnotation(JoinColumn.class) == null)
-				continue;
-			if (field.getAnnotation(Id.class) != null)
-				continue;
-			FieldSetting fs = new FieldSetting();
-			fs.setFieldParam(field);
-			String name = field.getAnnotation(Header.class) != null ? field.getAnnotation(Header.class).name() : null;
-			name = name != null ? name : fs.getColumnName();
-			fs.setLabelName(name);
-			fs.setIsSelected("1");
-			fs.setIsCondition("0");
-			sb.append("        <column key=\"" + fs.getColumnName().replace(".id", ".name") + "\"");
-			sb.append(" header=\"" + fs.getLabelName() + "\"");
-			String classType = field.getType().getName().startsWith("com.cnpc") ? String.class.getSimpleName()
-					: field.getType().getSimpleName();
-			sb.append(" classType=\"" + classType + "\"");
-			if ("textarea".equals(fs.getTagType())) {
-				sb.append(" align=\"left\"");
-				sb.append(" allowSort=\"false\"");
-			} else if ("datepicker".equals(fs.getTagType())) {
-				sb.append(" allowSort=\"true\"");
-				sb.append(" dateFormat=\"yyyy-mm-dd\"");
-				sb.append(" operator=\"between\"");
-			} else {
-				sb.append(" allowSort=\"true\"");
-			}
-			// 查看详情链接
-			/*
-			 * if (i == 0) { sb.append(" render=\"type=window,url=/" + prefix +
-			 * "/show,param=id,winId=" + prefix +
-			 * "Win,winHeader=value,width=650,height=450,isMax=true\""); }
-			 */
-			sb.append(" width=\"150\"/>");
-			i++;
-			sb.append(rn);
-		}
-
-		sb.append("</query>");
-		Result result = new Result();
-		result.setMessage(sb.toString());
-		return result;
+	public Result XMLContent( String className) throws ClassNotFoundException {
+		return QueryXMLmaker.XMLContentfromCls( className );
 	}
 
 	// 代码生成 快速版
 	@RequestMapping(value = "startGenerateQuick", method = RequestMethod.POST)
 	@ResponseBody
-	public Result startGenerateQuick(String queryId, String className, HttpServletRequest request,
-			HttpServletResponse response) throws IOException, TemplateException, ClassNotFoundException {
-		// GenerateSetting setting = JSON.parseObject(object,
-		// GenerateSetting.class);
-		// String queryId = setting.getQueryId();
-		// String nameSpace = setting.getNameSpace();
-		// String rootPath = request.getRealPath("/");
-		//
-		// response.getWriter().print(rootPath);
-		//
-		// String htmlPath=
-		// setting.setHtmlPrefix(queryId);
-		// setting.setHtmlPath(htmlPath);
-		// setting.setColsNum(1);
+	public Result startGenerateQuick(  String className, HttpServletRequest request ) throws IOException, TemplateException, ClassNotFoundException {
+	 
 
-		// setting.setHtmlTypes(htmlTypes);
-		//
-
-		GenerateSetting setting = settingFromModel(className,  request);
-		return GenerateCodeDo(setting);
-		// return new Result();
+		GenerateSetting s = EntityInfo.entityInfo(className,   request);
+ 		makeXMLappend(s, request);
+     	s.setAllFields(s.getFields());
+       
+		
+		return GenerateCodeDo(s);
 	}
 
 	// 代码生成
@@ -320,11 +124,10 @@ public class CodeGeneratorController {
 		GenerateSetting setting = JSON.parseObject(object, GenerateSetting.class);
 		// setting.setHtmlPrefix();
 
-		GenerateSetting s = settingFromModel(setting.getClassName(), request);
-
-		setting.setAllFields(s.getFields());
-
-		return GenerateCodeDo(setting);
+		String className = setting.getClassName();
+		
+		return startGenerateQuick(className, request);
+ 	
 	}
 
 	public Result GenerateCodeDo(GenerateSetting setting) throws IOException, TemplateException {
@@ -365,6 +168,21 @@ public class CodeGeneratorController {
 		makeJavaCode(setting);
 
 		return new Result();
+	}
+
+	void makeXMLappend(GenerateSetting setting,  HttpServletRequest request)
+			throws ClassNotFoundException {
+		//String queryId = setting.getQueryId();
+		String className = setting.getClassName();
+			Result result = XMLContent( className);
+		String XMLContent = result.getMessage();
+		
+		//String modelName = setting.getModelName();
+		String nameSpace = setting.getNameSpace();
+		String xmlFile = nameSpace+".xml";
+	
+
+		generateXMLFile(XMLContent, xmlFile, request);
 	}
 
 	void makeHTMLCode(GenerateSetting setting) throws IOException, TemplateException {

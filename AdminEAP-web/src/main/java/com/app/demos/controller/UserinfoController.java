@@ -19,7 +19,7 @@ import com.cnpc.framework.base.service.BaseService;
 import com.cnpc.framework.annotation.RefreshCSRFToken;
 import com.cnpc.framework.annotation.VerifyCSRFToken;
 import com.cnpc.framework.base.pojo.Result;
-import com.app.demos.model.UserInfo;
+import com.app.demos.entity.UserInfo;
 
 /**
 * 测试2管理控制器
