@@ -156,6 +156,7 @@ public class CodeGeneratorController {
 					function.setUpdateDateTime(new Date());
 					function.setName(setting.getModelName() + "管理");
 					function.setIcon("fa fa-edit");
+					function.setDeleted(0); //显示
 					function.setRemark(
 							"本功能菜单为代码生成器生成，时间：" + DateUtil.format(new Date(), DateUtil.formatStr_yyyyMMddHHmmss));
 				}

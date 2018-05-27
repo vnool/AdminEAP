@@ -3,6 +3,10 @@ package com.cnpc.framework.base.pojo;
 import java.util.Date;
 import java.util.List;
 
+import org.hsqldb.lib.StringUtil;
+
+import com.cnpc.framework.annotation.Model;
+
 public class GenerateSetting {
 	private String queryId;
 	private String className;
@@ -95,6 +99,9 @@ public class GenerateSetting {
 	}
 
 	public String getHtmlPrefix() {
+		String javaPrefix = getJavaPrefix();
+		if (StringUtil.isEmpty(javaPrefix))
+			return "";
 		return getJavaPrefix().toLowerCase();
 	}
 
@@ -123,7 +130,11 @@ public class GenerateSetting {
 	}
 
 	public String getJavaPrefix() {
+		if (StringUtil.isEmpty(this.className))
+			return "";
 		int p = this.className.lastIndexOf(".");
+		if (p < 1)
+			return "";
 		return this.className.substring(p + 1);
 	}
 
@@ -152,9 +163,16 @@ public class GenerateSetting {
 	}
 
 	public String getNameSpace() {
+		if (StringUtil.isEmpty(this.className))
+			return "";
+
 		int p = this.className.lastIndexOf(".");
+		if (p < 1)
+			return "";
 		String entity = this.className.substring(0, p);
 		p = entity.lastIndexOf(".");
+		if (p < 1)
+			return "";
 		return this.className.substring(0, p);
 	}
 
@@ -227,11 +245,23 @@ public class GenerateSetting {
 	}
 
 	public String getParFuncCode() {
-		return parFuncCode;
+		if (StringUtil.isEmpty(this.className))
+			return "";
+
+		try {
+			Class<?> cls = Class.forName(this.className);
+			return cls.getAnnotation(Model.class).parentMenu();
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+
 	}
 
-	public void setParFuncCode(String parFuncCode) {
-		this.parFuncCode = parFuncCode;
+	public void setParFuncCode(String pf) {
+
 	}
 
 	public String getIsExistQuery() {

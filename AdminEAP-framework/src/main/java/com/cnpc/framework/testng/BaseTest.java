@@ -7,7 +7,7 @@ import com.cnpc.framework.utils.CsvUtil;
 import com.cnpc.framework.utils.DateUtil;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionConfiguration;
+ 
 import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * Created by cnpc on 2016/10/22.
  */
 @ContextConfiguration(locations = {"classpath*:spring.xml" })
-@TransactionConfiguration(defaultRollback = true)
+
 public class BaseTest extends AbstractTestNGSpringContextTests {
 
     @DataProvider

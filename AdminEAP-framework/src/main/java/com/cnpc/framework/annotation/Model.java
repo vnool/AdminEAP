@@ -26,6 +26,10 @@ public @interface Model {
      */
     String id() default "";
 
+     /*父菜单的id
+      * */
+	String parentMenu() default "";
+
   
 
 
