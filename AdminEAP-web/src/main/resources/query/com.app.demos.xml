@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queryContext xmlns="http://www.example.org/query" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/query query.xsd">
+<!--本xml片段为代码生成器生成，时间：2018-05-27 23:30:02-->
+<query id="articles" key="id" tableName="文章列表" className="com.app.demos.entity.Articles" widthType="px">
+        <column key="rowIndex" header="序号" width="80"/>
+        <column key="title" header="标题" classType="String" allowSort="true" width="150"/>
+        <column key="digest" header="摘要" classType="String" allowSort="true" width="150"/>
+        <column key="content" header="内容" classType="String" allowSort="true" width="150"/>
+        <column key="imgsrc" header="缩略图" classType="String" allowSort="true" width="150"/>
+        <column key="lmodify" header="更新时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
+        <column key="source" header="来源" classType="String" allowSort="true" width="150"/>
+        <column key="boardid" header="分类" classType="String" allowSort="true" width="150"/>
+        <column key="votecount" header="赞" classType="Integer" allowSort="true" width="150"/>
+        <column key="replyCount" header="评论数" classType="Integer" allowSort="true" width="150"/>
+</query>
+
+
+<!--本xml片段为代码生成器生成，时间：2018-05-27 23:32:48-->
+<query id="articles" key="id" tableName="文章列表" className="com.app.demos.entity.Articles" widthType="px">
+        <column key="rowIndex" header="序号" width="80"/>
+        <column key="title" header="标题" classType="String" allowSort="true" width="150"/>
+        <column key="digest" header="摘要" classType="String" allowSort="true" width="150"/>
+        <column key="content" header="内容" classType="String" allowSort="true" width="150"/>
+        <column key="imgsrc" header="缩略图" classType="String" allowSort="true" width="150"/>
+        <column key="lmodify" header="更新时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
+        <column key="source" header="来源" classType="String" allowSort="true" width="150"/>
+        <column key="boardid" header="分类" classType="String" allowSort="true" width="150"/>
+        <column key="votecount" header="赞" classType="Integer" allowSort="true" width="150"/>
+        <column key="replyCount" header="评论数" classType="Integer" allowSort="true" width="150"/>
+</query>
+
+
+<!--本xml片段为代码生成器生成，时间：2018-05-27 23:34:48-->
+<query id="articles" key="id" tableName="文章列表" className="com.app.demos.entity.Articles" widthType="px">
+        <column key="rowIndex" header="序号" width="80"/>
+        <column key="title" header="标题" classType="String" allowSort="true" width="150"/>
+        <column key="digest" header="摘要" classType="String" allowSort="true" width="150"/>
+        <column key="content" header="内容" classType="String" allowSort="true" width="150"/>
+        <column key="imgsrc" header="缩略图" classType="String" allowSort="true" width="150"/>
+        <column key="lmodify" header="更新时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
+        <column key="source" header="来源" classType="String" allowSort="true" width="150"/>
+        <column key="boardid" header="分类" classType="String" allowSort="true" width="150"/>
+        <column key="votecount" header="赞" classType="Integer" allowSort="true" width="150"/>
+        <column key="replyCount" header="评论数" classType="Integer" allowSort="true" width="150"/>
+</query>
+
+
+<!--本xml片段为代码生成器生成，时间：2018-05-27 23:54:44-->
+<query id="articles" key="id" tableName="百问百答列表" className="com.app.demos.entity.Articles" widthType="px">
+        <column key="rowIndex" header="序号" width="80"/>
+        <column key="title" header="标题" classType="String" allowSort="true" width="150"/>
+        <column key="digest" header="摘要" classType="String" allowSort="true" width="150"/>
+        <column key="content" header="内容" classType="String" allowSort="true" width="150"/>
+        <column key="imgsrc" header="缩略图" classType="String" allowSort="true" width="150"/>
+        <column key="lmodify" header="更新时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
+        <column key="source" header="来源" classType="String" allowSort="true" width="150"/>
+        <column key="boardid" header="分类" classType="String" allowSort="true" width="150"/>
+        <column key="votecount" header="赞" classType="Integer" allowSort="true" width="150"/>
+        <column key="replyCount" header="评论数" classType="Integer" allowSort="true" width="150"/>
+</query>
+</queryContext>

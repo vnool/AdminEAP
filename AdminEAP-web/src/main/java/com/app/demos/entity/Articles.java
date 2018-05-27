@@ -6,6 +6,8 @@ import com.cnpc.framework.base.entity.BaseEntity;
 import com.cnpc.framework.base.entity.Dict;
 import com.cnpc.framework.base.entity.Org;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,8 +15,8 @@ import java.util.Date;
  * Created by dingchengliang
  */
 @Entity
-@Access(AccessType.FIELD)
-@Model(id = "articles", name = "文章")
+@Data
+@Model(id = "articles", name = "百问百答", parentMenu="tool")
 @Table(name = "edu_articles")
 public class Articles extends BaseEntity {
 
@@ -38,16 +40,16 @@ public class Articles extends BaseEntity {
 
 	@Header(name = "缩略图", tagType = "image")
 	@Column(name = "imgsrc")
-	private String imgsrc;
+	public String imgsrc;
 
 	@Header(name = "更新时间")
 	@Column(name = "lmodify")
 	@org.hibernate.annotations.CreationTimestamp
-	private Date lmodify;
+	public Date lmodify;
 
 	@Header(name = "来源") // 作者
 	@Column(name = "source")
-	private String source;
+	public String source;
 
 	@Header(name = "分类")
 	@Column(name = "boardid") // 分类？
