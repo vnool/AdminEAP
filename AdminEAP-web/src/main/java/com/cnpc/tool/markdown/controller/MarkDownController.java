@@ -39,7 +39,7 @@ public class MarkDownController {
     }
 
     //保存
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/save")
     @ResponseBody
     public Result save(MarkDown obj) {
         obj.setUserId(SecurityUtil.getUserId());

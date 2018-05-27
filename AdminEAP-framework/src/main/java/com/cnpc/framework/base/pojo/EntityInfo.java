@@ -27,8 +27,8 @@ public class EntityInfo{
 		setting.setClassName(className);
 		setting.setAllowPaging(true);
 		//String tableName =   clazz.getSimpleName();
-		String modelName = clazz.getAnnotation(Model.class).label();
-		String queryId = clazz.getAnnotation(Model.class).name();
+		String modelName = clazz.getAnnotation(Model.class).name();
+		String queryId = clazz.getAnnotation(Model.class).id();
 		
 		setting.setQueryId(queryId);
 		setting.setTableName(modelName + "列表");
@@ -61,6 +61,7 @@ public class EntityInfo{
 		Field[] fields = clazz.getDeclaredFields();
 		List<FieldSetting> fslist = new ArrayList<>();
 		int i = 0;
+		boolean hasfile=false;
 		for (Field field : fields) {
 
 			if (field.getAnnotation(Column.class) == null && field.getAnnotation(JoinColumn.class) == null)
@@ -73,6 +74,7 @@ public class EntityInfo{
 			FieldSetting fs = new FieldSetting();
 			fs.setRowIndex(++i);
 			fs.setFieldParam(field);
+			
 			String name = "";  
 			if (field.getAnnotation(Header.class) != null) {
 				name = field.getAnnotation(Header.class).name();
@@ -83,8 +85,12 @@ public class EntityInfo{
 			fs.setLabelName(name);
 			fs.setIsSelected("1");
 			fs.setIsCondition("0");
+			if(fs.getHasFile()){
+				hasfile =true;
+			}
 			fslist.add(fs);
 		}
+		setting.setHasFile(hasfile);
 		setting.setFields(fslist);
 		setting.setHtmlTypes("list,addUpdate");
 		setting.setJavaTypes("controller");

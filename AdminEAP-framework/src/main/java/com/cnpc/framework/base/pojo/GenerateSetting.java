@@ -98,7 +98,6 @@ public class GenerateSetting {
 		return getJavaPrefix().toLowerCase();
 	}
 
-	 
 	public String getHtmlPath() {
 		return htmlPath;
 	}
@@ -127,8 +126,6 @@ public class GenerateSetting {
 		int p = this.className.lastIndexOf(".");
 		return this.className.substring(p + 1);
 	}
-
-	 
 
 	public void setNameSpace(String nameSpace) {
 		this.nameSpace = nameSpace;
@@ -160,8 +157,6 @@ public class GenerateSetting {
 		p = entity.lastIndexOf(".");
 		return this.className.substring(0, p);
 	}
-	
-	
 
 	public void setModelName(String modelName) {
 		this.modelName = modelName;
@@ -245,5 +240,15 @@ public class GenerateSetting {
 
 	public void setIsExistQuery(String isExistQuery) {
 		this.isExistQuery = isExistQuery;
+	}
+
+	boolean hasfile = false;
+
+	public void setHasFile(boolean hasfile) {
+		this.hasfile = hasfile;
+	}
+
+	public boolean getHasFile() {
+		return this.hasfile;
 	}
 }

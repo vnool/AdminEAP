@@ -40,6 +40,7 @@ public @interface Header {
       'text', 'hidden', 'number', 'textarea', 'datepicker', 'icheck-radio', 'radio', 'checkbox',
       'icheck-checkbox', 'dictSelector', 'urlSelector', 'normalSelector', 'orgSelector'
       image, doc
+      video
     ;*/
 	String tagType() default "";
 

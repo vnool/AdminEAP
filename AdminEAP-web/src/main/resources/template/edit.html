@@ -4,7 +4,8 @@
 </div>
 
 <div class="modal-body">
-    <form id="${htmlPrefix}_form" name="${htmlPrefix}_form" class="form-horizontal">
+    <form id="${htmlPrefix}_form" name="${htmlPrefix}_form" class="form-horizontal" 
+        <#if hasFile > enctype="multipart/form-data" </#if>   >
         <input type="hidden" name="id">
         <input type="hidden" name="version">
         <input type="hidden" name="createDateTime" data-flag="date" data-format="yyyy-mm-dd hh:ii:ss">
@@ -72,6 +73,9 @@
                              <#else>
                         <input type="icheck-checkbox" name="${field.columnName}" data-flag="dictSelector" data-code="${field.dictCode}">
                               </#if>
+                        <#elseif field.hasFile >
+                         <input type="file" name="file"  id="file_${field.columnName}">
+                         <input type="hidden" name="${field.columnName}"  id="${field.columnName}">
                         <#else>
                         <input type="text" class="form-control" id="${field.columnName}" name="${field.columnName}" placeholder="请填写${field.labelName}">
                         </#if>
@@ -145,5 +149,30 @@
             })
         }
     });
-
+  
 </script>
+
+<#if hasFile >  
+<link rel="stylesheet" href="./resources/common/libs/fileinput/css/fileinput.min.css">
+<script src="./resources/common/libs/fileinput/js/fileinput.js"></script>
+<script src="./resources/common/libs/fileinput/js/locales/zh.js"></script>
+<!--BaseFile组件-->
+<script src="./resources/common/js/base-file.js"></script>
+<script>
+$(function(){
+    <#list fields as field>
+        <#if field.hasFile>
+        $("#file_${field.columnName}").file({
+              fileinput: {
+                  maxFileSize: 10240,
+                  maxFileCount:3
+              },
+              fileIdContainer:"[name='${field.columnName}']",
+              window:false
+          });
+        </#if>
+    </#list>
+});
+ 
+</script>
+</#if>

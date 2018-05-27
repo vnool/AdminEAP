@@ -84,8 +84,8 @@ public class QueryXMLmaker {
 
 	public static Result XMLContentfromCls(  String className ) throws ClassNotFoundException {
 		Class<?> clazz = Class.forName(className);
-		String modelName = clazz.getAnnotation(Model.class).label();
-		String queryId = clazz.getAnnotation(Model.class).name();
+		String modelName = clazz.getAnnotation(Model.class).name();
+		String queryId = clazz.getAnnotation(Model.class).id();
 		String rn = "\r\n";
 		// 生成query
 		StringBuilder sb = new StringBuilder();

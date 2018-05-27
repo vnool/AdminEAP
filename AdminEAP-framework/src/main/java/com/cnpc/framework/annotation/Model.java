@@ -19,12 +19,12 @@ public @interface Model {
      * 
      * @return
      */
-    String label() default "";
+    String name() default "";
 
     /**
      * 业务ID
      */
-    String name() default "";
+    String id() default "";
 
   
 
