@@ -49,7 +49,7 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 	
 	<!-- 配置hibernate session工厂 -->
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties">
 			<props>
@@ -61,7 +61,7 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 				<prop key="hibernate.generate_statistics">true</prop> 
 				<prop key="hibernate.connection.release_mode">auto</prop> 
 				<prop key="hibernate.autoReconnect">true</prop>
-				<!-- <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext
+				<!-- <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext
 				</prop> -->
 			</props>
 		</property>
@@ -83,7 +83,7 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager" name="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
