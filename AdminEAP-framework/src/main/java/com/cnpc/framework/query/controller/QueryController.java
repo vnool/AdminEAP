@@ -39,165 +39,178 @@ import java.util.*;
 @RequestMapping("/query")
 public class QueryController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(QueryController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(QueryController.class);
 
-    @Resource
-    private QueryService queryService;
+	@Resource
+	private QueryService queryService;
 
-    /**
-     * 第一次加载页面初始化
-     *
-     * @param reqObj 前台参数
-     * @return
-     */
-    @RequestMapping("/loadData")
-    @ResponseBody
-    public Map<String, Object> loadData(String reqObj) throws Exception {
+//	public void setQservice(QueryService queryService) {
+//		this.queryService = queryService;
+//	}
+//
+//	public static Map<String, Object> getData(String reqObj, QueryService queryService) throws Exception {
+//
+//		QueryController qc = new QueryController();
+//		qc.setQservice(queryService);
+//
+//		return qc.loadData(reqObj);
+//	}
 
-        return queryService.loadData(reqObj);
-    }
+	/**
+	 * 第一次加载页面初始化
+	 *
+	 * @param reqObj
+	 *            前台参数
+	 * @return
+	 */
+	@RequestMapping("/loadData")
+	@ResponseBody
+	public Map<String, Object> loadData(String reqObj) throws Exception {
 
-    /**
-     * 导出数据
-     *
-     * @param reqObjs   前台参数
-     * @param tableName 表名
-     * @param response
-     * @throws Exception
-     */
-    @RequestMapping(value = "/exportData")
-    public void exportData(String reqObjs, String tableName, HttpServletResponse response)
-            throws Exception {
-        String tempFile = queryService.exportData(reqObjs, tableName);
-        response.getWriter().print(tempFile);
-    }
+		return queryService.loadData(reqObj);
+	}
 
-    @RequestMapping("/downExport")
-    public void downExport(HttpServletRequest request, HttpServletResponse response) {
+	/**
+	 * 导出数据
+	 *
+	 * @param reqObjs
+	 *            前台参数
+	 * @param tableName
+	 *            表名
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/exportData")
+	public void exportData(String reqObjs, String tableName, HttpServletResponse response) throws Exception {
+		String tempFile = queryService.exportData(reqObjs, tableName);
+		response.getWriter().print(tempFile);
+	}
 
-        OutputStream out = null;
-        try {
-            String templateName = request.getParameter("tempfile");
-            String fileName = request.getParameter("tableName");
-            out = response.getOutputStream();
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-            response.setHeader("content-disposition", "attachment;filename=" + new String(fileName.getBytes("GBK"), "ISO-8859-1") + ".xls");
-            File file = new File(request.getRealPath("/") + File.separator + "templates" + File.separator + "temp" + File.separator
-                    + templateName + ".xls");
-            FileInputStream inputStream = new FileInputStream(file);
-            // 开始读取下载
-            byte[] b = new byte[1024];
-            int i = 0;
-            while ((i = inputStream.read(b)) > 0) {
-                out.write(b, 0, i);
-            }
-            inputStream.close();
-            file.delete();
-            out.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.setContentType("text/html; charset=utf-8");
-            try {
-                out.write("数据表导出异常，请重试！".getBytes("utf-8"));
-            } catch (IOException e1) {
-            }
-        } finally {
-            try {
-                out.close();
-            } catch (IOException e) {
-            }
-        }
-    }
+	@RequestMapping("/downExport")
+	public void downExport(HttpServletRequest request, HttpServletResponse response) {
 
-    /**
-     * 跳转到自定义表格配置界面
-     */
-    @RequestMapping(value = "tableConfig")
-    public String tableConfig(String queryId, String pageName, Model model) {
-        model.addAttribute("queryId", queryId);
-        model.addAttribute("pageName", pageName);
-        return "base/query/table_config";
-    }
+		OutputStream out = null;
+		try {
+			String templateName = request.getParameter("tempfile");
+			String fileName = request.getParameter("tableName");
+			out = response.getOutputStream();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+			response.setHeader("content-disposition",
+					"attachment;filename=" + new String(fileName.getBytes("GBK"), "ISO-8859-1") + ".xls");
+			File file = new File(request.getRealPath("/") + File.separator + "templates" + File.separator + "temp"
+					+ File.separator + templateName + ".xls");
+			FileInputStream inputStream = new FileInputStream(file);
+			// 开始读取下载
+			byte[] b = new byte[1024];
+			int i = 0;
+			while ((i = inputStream.read(b)) > 0) {
+				out.write(b, 0, i);
+			}
+			inputStream.close();
+			file.delete();
+			out.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setContentType("text/html; charset=utf-8");
+			try {
+				out.write("数据表导出异常，请重试！".getBytes("utf-8"));
+			} catch (IOException e1) {
+			}
+		} finally {
+			try {
+				out.close();
+			} catch (IOException e) {
+			}
+		}
+	}
 
+	/**
+	 * 跳转到自定义表格配置界面
+	 */
+	@RequestMapping(value = "tableConfig")
+	public String tableConfig(String queryId, String pageName, Model model) {
+		model.addAttribute("queryId", queryId);
+		model.addAttribute("pageName", pageName);
+		return "base/query/table_config";
+	}
 
-    /**
-     * 获取query的所有列配置
-     *
-     * @param queryId
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "getColumns")
-    @ResponseBody
-    public List<TreeNode> getColumns(String queryId, HttpSession session) {
-        Query query = QueryDefinition.getQueryById(queryId);
-        Map<String, TreeNode> nodelist = new LinkedHashMap<String, TreeNode>();
-        for (Column column : query.getColumnList()) {
-            if (column.getHidden()) {
-                continue;
-            }
-            TreeNode node = new TreeNode();
-            node.setText(column.getHeader());
-            node.setId(column.getKey());
-            nodelist.put(node.getId(), node);
-        }
-        // 构造树形结构
-        return TreeUtil.getNodeList(nodelist);
-    }
+	/**
+	 * 获取query的所有列配置
+	 *
+	 * @param queryId
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "getColumns")
+	@ResponseBody
+	public List<TreeNode> getColumns(String queryId, HttpSession session) {
+		Query query = QueryDefinition.getQueryById(queryId);
+		Map<String, TreeNode> nodelist = new LinkedHashMap<String, TreeNode>();
+		for (Column column : query.getColumnList()) {
+			if (column.getHidden()) {
+				continue;
+			}
+			TreeNode node = new TreeNode();
+			node.setText(column.getHeader());
+			node.setId(column.getKey());
+			nodelist.put(node.getId(), node);
+		}
+		// 构造树形结构
+		return TreeUtil.getNodeList(nodelist);
+	}
 
-    /**
-     * 获取用户隐藏的列配置
-     *
-     * @param queryId
-     * @param pageName
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "getSelectedColumns")
-    @ResponseBody
-    public List<String> getSelectedColumns(String queryId, String pageName, HttpSession session) {
-        String userid = session.getAttribute("userId").toString();
-        return queryService.getSelectedColumns(queryId, pageName, userid);
-    }
+	/**
+	 * 获取用户隐藏的列配置
+	 *
+	 * @param queryId
+	 * @param pageName
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "getSelectedColumns")
+	@ResponseBody
+	public List<String> getSelectedColumns(String queryId, String pageName, HttpSession session) {
+		String userid = session.getAttribute("userId").toString();
+		return queryService.getSelectedColumns(queryId, pageName, userid);
+	}
 
-    /**
-     * @param configObj
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "saveQueryConfig")
-    @ResponseBody
-    public Result saveQueryConfig(String configObj, HttpSession session) {
+	/**
+	 * @param configObj
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "saveQueryConfig")
+	@ResponseBody
+	public Result saveQueryConfig(String configObj, HttpSession session) {
 
-        QueryConfig config = JSON.parseObject(configObj, QueryConfig.class);
-        String userid = session.getAttribute("userId").toString();
-        config.setUserid(userid);
-        if (StrUtil.isEmpty(config.getColumnsName())) {
-            queryService.delete(config);
-        } else {
-            queryService.deleteAndSave(config);
-        }
-        return new Result();
-    }
+		QueryConfig config = JSON.parseObject(configObj, QueryConfig.class);
+		String userid = session.getAttribute("userId").toString();
+		config.setUserid(userid);
+		if (StrUtil.isEmpty(config.getColumnsName())) {
+			queryService.delete(config);
+		} else {
+			queryService.deleteAndSave(config);
+		}
+		return new Result();
+	}
 
-    /**
-     * 恢复默认设置
-     *
-     * @param configObj
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "setDefault")
-    @ResponseBody
-    public Result setDefault(String configObj, HttpSession session) {
+	/**
+	 * 恢复默认设置
+	 *
+	 * @param configObj
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "setDefault")
+	@ResponseBody
+	public Result setDefault(String configObj, HttpSession session) {
 
-        QueryConfig config = JSON.parseObject(configObj, QueryConfig.class);
-        String userid = session.getAttribute("userId").toString();
-        config.setUserid(userid);
-        queryService.delete(config);
-        return new Result();
-    }
-
+		QueryConfig config = JSON.parseObject(configObj, QueryConfig.class);
+		String userid = session.getAttribute("userId").toString();
+		config.setUserid(userid);
+		queryService.delete(config);
+		return new Result();
+	}
 
 }
