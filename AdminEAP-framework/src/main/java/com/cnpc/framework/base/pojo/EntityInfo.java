@@ -26,9 +26,15 @@ public class EntityInfo{
 		setting.setColsNum(1);
 		setting.setClassName(className);
 		setting.setAllowPaging(true);
+        String modelName = "";
+		String queryId = ""; 
 		//String tableName =   clazz.getSimpleName();
-		String modelName = clazz.getAnnotation(Model.class).name();
-		String queryId = clazz.getAnnotation(Model.class).id();
+		Model model = clazz.getAnnotation(Model.class);
+		if(model!=null){
+			modelName = model.name();
+			queryId=model.id();
+		}
+		
 		
 		setting.setQueryId(queryId);
 		setting.setTableName(modelName + "列表");

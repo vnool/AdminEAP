@@ -44,6 +44,11 @@ public @interface Header {
     ;*/
 	String tagType() default "";
 
+	/*是否在列表中显示*/
+	boolean hidden() default false;
+
+	int width() default 0;
+
 
 
 }
