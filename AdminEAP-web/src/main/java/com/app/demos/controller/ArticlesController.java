@@ -95,7 +95,7 @@ public class ArticlesController {
 
 		try {
 			Map<String, Object> data = QueryCtrl.loadData(reqObj);
-			data.get("");
+			return data ;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
