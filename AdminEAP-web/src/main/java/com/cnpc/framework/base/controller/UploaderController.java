@@ -293,7 +293,14 @@ public class UploaderController {
         uploaderService.delete(sysFile);
         return new Result();
     }
-
+    
+    public static String getFileURL(String id, HttpServletRequest request){
+            String baseurl = "http://" + request.getServerName() // 服务器地址
+                + ":" + request.getServerPort() // 端口号
+                + request.getContextPath(); // 项目名称
+           
+           return baseurl + "/file/download/" + id;
+    }
     @RequestMapping(value="/download/{id}",method = RequestMethod.GET)
     public void downloadFile(@PathVariable("id") String id,HttpServletRequest request,HttpServletResponse response) throws IOException {
         SysFile sysfile = uploaderService.get(SysFile.class, id);

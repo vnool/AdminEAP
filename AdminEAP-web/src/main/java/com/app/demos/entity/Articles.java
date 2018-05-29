@@ -46,6 +46,10 @@ public class Articles extends BaseEntity {
 	@Header(name = "缩略图", tagType = "image")
 	@Column(name = "imgsrc")
 	public String imgsrc;
+	
+	@Header(name = "更多图片", tagType = "image")
+	public String imgextra;
+	
 
 	@Header(name = "更新时间")
 	@Column(name = "lmodify")
@@ -69,8 +73,15 @@ public class Articles extends BaseEntity {
 	@Column(name = "replyCount", columnDefinition = "BIGINT default 0")
 	private Integer replyCount;
  
-	
-	
+//	@Transient
+//	public Date ptime=new Date();
+//	@Transient
+//	public Date mtime=new Date();
+//	
+//	Articles(){
+//		ptime=new Date();
+//		mtime=new Date();
+//	}
 	/**
 	 * @return the digest
 	 */

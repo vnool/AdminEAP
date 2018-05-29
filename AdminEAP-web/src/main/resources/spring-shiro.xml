@@ -80,6 +80,7 @@
         <property name="filterChainDefinitions">
             <value>
                 <!--/=anon-->
+                /file/download/**=anon
                 /login=anon
                 /logout=logout
                 /register=anon
