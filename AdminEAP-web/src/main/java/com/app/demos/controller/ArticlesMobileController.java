@@ -41,7 +41,7 @@ import com.alibaba.fastjson.JSON;
  */
 @Controller
 @RequestMapping("/nc")
-public class ApiMobileController {
+public class ArticlesMobileController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list() {
@@ -62,7 +62,6 @@ public class ApiMobileController {
 		Map<String, Object> data;
 		try {
 			data = QueryCtrl.loadData(reqObj);
-
 			data.put(id, PureData((ArrayList<Articles>) data.get("rows"), request));
 			// data.put(id, data.get("rows"));
 			data.remove("rows");
@@ -94,7 +93,7 @@ public class ApiMobileController {
 			String imgextra = (String) m.get("imgextra");
 			if (!StringUtil.isEmpty(imgextra)) {
 				JSONArray imgextraList = new JSONArray();
-				String[] imglist = imgextra.split(",");
+				String[] imglist = imgextra.trim().split(",");
 				for (String img : imglist) {
 					String imgurl = UploaderController.getFileURL(img, request);
 					JSONObject o = new JSONObject();
@@ -103,16 +102,7 @@ public class ApiMobileController {
 				}
 				imgsrc = UploaderController.getFileURL(imgsrc, request);
 				m.put("imgextra", imgextraList);
-			}
-
-			//
-			// = JSON.parseArray(" [ { \"imgsrc\":
-			// \"http://cms-bucket.nosdn.127.net/45cdbef70b354e54bd539d52fd27f01b20180528171047.png\"
-			// },"
-			// + "{ \"imgsrc\":
-			// \"http://cms-bucket.nosdn.127.net/2018/05/28/bfe3667ab3944982b45bc3b5d7a59b0f.png\"
-			// } ]");
-			// m.put("imgextra", imgextra);
+			} 
 
 			list.add(m);
 		}
@@ -127,20 +117,6 @@ public class ApiMobileController {
 
 	@Resource
 	QueryController QueryCtrl;
-
-	@RequestMapping(value = "/datalist")
-	@ResponseBody
-	public Map<String, Object> getDataList(String reqObj) {
-
-		try {
-			Map<String, Object> data = QueryCtrl.loadData(reqObj);
-			return data;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return new HashMap<String, Object>();
-	}
+ 
 
 }

@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 hidden">
                             <div class="form-group">
                                 <label for="modelName" class="col-sm-2 control-label">业务名:</label>
                                 <div class="col-sm-9">
@@ -63,16 +63,25 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
+                                <label class="col-sm-2 control-label">创建菜单&nbsp;</label>
+                                <div class="col-sm-9">
+                                    <label class="control-label">
+                                        <input type="checkbox" class="square-green" name="isCreateFunction" id="isCreateFunction" checked="checked" value="1">
+                                    </label>
+                                    <input type="text" name="parFuncCode" class="form-control" style="width: 90%;float:right" id="parFuncCode" placeholder="父功能编码">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 hidden">
+                            <div class="form-group">
                                 <label   class="col-sm-2 control-label"> </label>
                                 <div class="col-sm-9">
                                     <button type="button" class="btn btn-primary col-sm-12 disabled" data-btn-type="makesetting" disabled="disabled">生成XML配置</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="box box-primary">
-                    <div class="box-body">
+
+                        
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">html文件</label>
@@ -111,10 +120,29 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        
+
+
+
+                  <div class="box-footer text-center">
+                        <button type="submit" class="btn btn-primary col-sm-12" data-btn-type="save">开始生成代码</button>
+                        (本功能没有检查原代码是否存在，请自行处理)
+                  </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="box box-primary">
+                    <div class="box-body">
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="colsNum" class="col-sm-2 control-label">每行列数</label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-10">
                                     <input type="text" class="form-control" id="colsNum" name="colsNum" placeholder="每行form控件数量" value="1">
                                 </div>
                             </div>
@@ -122,7 +150,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="htmlPrefix" class="col-sm-2 control-label">文件前缀</label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-10">
                                     <input type="text" class="form-control" id="htmlPrefix" name="htmlPrefix" placeholder="html文件名前缀">
                                 </div>
                             </div>
@@ -130,7 +158,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="businessPackage" class="col-sm-2 control-label">文件夹</label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-10">
                                     <input type="text" class="form-control" id="businessPackage" name="businessPackage" placeholder="html文件夹名/业务包名">
                                 </div>
                             </div>
@@ -138,7 +166,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="htmlPath" class="col-sm-2 control-label">文件路径</label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-10">
                                     <input type="text" class="form-control" id="htmlPath" name="htmlPath" placeholder="导出html文件路径">
                                 </div>
                             </div>
@@ -150,7 +178,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Java文件</label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-10">
                                     <label class="control-label">
                                         <input type="checkbox" name="javaTypes" checked="checked" value="controller"> Controller
                                     </label> &nbsp;
@@ -163,7 +191,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="javaPrefix" class="col-sm-2 control-label">文件前缀</label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-10">
                                     <input type="text" class="form-control" id="javaPrefix" name="javaPrefix" placeholder="java文件名前缀">
                                 </div>
                             </div>
@@ -171,7 +199,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="nameSpace" class="col-sm-2 control-label">命名空间</label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-10">
                                     <input type="text" class="form-control" id="nameSpace" name="nameSpace" placeholder="Java文件命名空间">
                                 </div>
                             </div>
@@ -179,31 +207,18 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="javaPath" class="col-sm-2 control-label">文件路径</label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-10">
                                     <input type="text" class="form-control" id="javaPath" name="javaPath" placeholder="导出Java文件路径">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">创建菜单&nbsp;</label>
-                                <div class="col-sm-9">
-                                    <label class="control-label">
-                                        <input type="checkbox" class="square-green" name="isCreateFunction" id="isCreateFunction" checked="checked" value="1">
-                                    </label>
-                                    <input type="text" name="parFuncCode" class="form-control" style="width: 90%;float:right" id="parFuncCode" placeholder="父功能编码">
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <!-- /.box-body -->
                   
                 </div>
 
-                  <div class="box-footer text-center">
-                        <button type="submit" class="btn btn-primary col-sm-12" data-btn-type="save">开始生成代码</button>
-                        (本功能没有检查原代码是否存在，请自行处理)
-                  </div>
+                  
             </form>
         </div>
         <div class="col-md-7">
@@ -300,15 +315,15 @@ $(function() {
             modals.confirm('确认生成代码？', function() {
                 var params = codeform.getFormSimpleData();
                 //收集编辑字段数据
-                var len = fieldTable.data().length;
-                 var fields = [];
-                 for (var i = 0; i < len; i++) {
-                     var obj = fieldTable.row(i).data();
-                     obj.isCondition = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(7)").find("input:eq(0)").is(":checked") ? 1 : 0;
-                     obj.isSelected = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(8)").find("input:eq(0)").is(":checked") ? 1 : 0;
-                     fields.push(obj);
-                 }
-                params["fields"] = fields;
+                //var len = fieldTable.data().length;
+                 // var fields = [];
+                 // for (var i = 0; i < len; i++) {
+                 //     var obj = fieldTable.row(i).data();
+                 //     obj.isCondition = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(7)").find("input:eq(0)").is(":checked") ? 1 : 0;
+                 //     obj.isSelected = $("#code-table tbody tr:eq(" + i + ")").find("td:eq(8)").find("input:eq(0)").is(":checked") ? 1 : 0;
+                 //     fields.push(obj);
+                 // }
+                //params["fields"] = fields;
                 params["htmlPath"] = $("#htmlPath").val();
                 params["javaPath"] = $("#javaPath").val();
                 console.log(JSON.stringify(params));
