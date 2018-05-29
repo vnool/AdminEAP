@@ -1,0 +1,87 @@
+<!-- 以下代码为代码生成器生成，生成时间: 2018-05-29 23:08:51，作者：billjiang/475572229@qq.com-->
+<section class="content-header">
+    <h1>
+        视频教程管理
+        <small>列表</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="${basePath}"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">系统工具</a></li>
+        <li class="active">视频教程管理</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <!-- /.box-header -->
+                <div class="dataTables_filter" id="searchDiv" style="display: none">
+                    <!--查询条件-->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" data-btn-type="search">查询</button>
+                        <button type="button" class="btn btn-default" data-btn-type="reset">重置</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success" data-btn-type="add"><i class="fa fa-pencil"> </i>新增视频教程</button>
+                        <button type="button" class="btn btn-info" data-btn-type="edit">编辑</button>
+                        <button type="button" class="btn btn-danger" data-btn-type="delete">删除</button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="videos_table" class="table table-bordered table-striped table-hover">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var videosTable, winId = "videosWin";
+    $(function (){
+        videosTable = new CommonTable("videos_table", "videos", "searchDiv", null);
+        //绑定按钮事件
+        $("button[data-btn-type]").click(function () {
+            var action = $(this).data("btn-type");
+            var rowId = videosTable.getSelectedRowId();
+            switch (action) {
+                case "add":
+                    modals.openWin({
+                        winId: winId,
+                        title: '新增视频教程',
+                        width: "900px",
+                        url: basePath + "/videos/edit"
+                    })
+                    break;
+                case "edit":
+                    if (!rowId) {
+                        modals.info('请选择要编辑的行');
+                        return false;
+                    }
+                    modals.openWin({
+                        winId: winId,
+                        title: '编辑视频教程【' + videosTable.getSelectedRowData().name + '】',
+                        width: '900px',
+                        url: basePath + "/videos/edit?id=" + rowId
+                    });
+                    break;
+                case 'delete':
+                    if (!rowId) {
+                        modals.info('请选择要删除的行');
+                        return false;
+                    }
+                    modals.confirm("是否要删除该行数据？", function () {
+                        ajaxPost(basePath + "/videos/delete/" + rowId, null, function (data) {
+                            if (data.success) {
+                                videosTable.reloadRowData();
+                            } else {
+                                modals.info("视频教程数据被引用，不可删除！");
+                            }
+                        });
+                    })
+                    break;
+            }
+        })
+    })
+</script>
