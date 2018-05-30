@@ -14,6 +14,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +31,8 @@ public class QueryXMLmaker {
 
 	// 生成xml配置文件
 
-	public static Result generateXMLFile(String xmlContent, String xmlPath   ) {
-	 
+	public static Result generateXMLFile(String xmlContent, String xmlPath) {
+
 		String rn = "\r\n";
 		try {
 			File file = new File(xmlPath);
@@ -82,10 +83,13 @@ public class QueryXMLmaker {
 		}
 	}
 
-	public static Result XMLContentfromCls(  String className ) throws ClassNotFoundException {
+	public static Result XMLContentfromCls(String className) throws ClassNotFoundException {
 		Class<?> clazz = Class.forName(className);
-		String modelName = clazz.getAnnotation(Model.class).name();
-		String queryId = clazz.getAnnotation(Model.class).id();
+		Model model = clazz.getAnnotation(Model.class);
+		
+		String modelName = model!=null ? model.name() : clazz.getSimpleName();
+		String queryId = model!=null ? model.id() : clazz.getSimpleName();
+		
 		String rn = "\r\n";
 		// 生成query
 		StringBuilder sb = new StringBuilder();
@@ -105,14 +109,19 @@ public class QueryXMLmaker {
 		String prefix = className.substring(className.lastIndexOf(".") + 1).toLowerCase();
 		int i = 0;
 		for (Field field : fields) {
-			if (field.getAnnotation(Column.class) == null && field.getAnnotation(JoinColumn.class) == null)
+			if (field.getAnnotation(Transient.class) != null) {
 				continue;
-			if (field.getAnnotation(Id.class) != null)
+			}
+			if (field.getAnnotation(Id.class) != null) {
 				continue;
+			}
+
+			Header header = field.getAnnotation(Header.class);
 			FieldSetting fs = new FieldSetting();
 			fs.setFieldParam(field);
-			String name = field.getAnnotation(Header.class) != null ? field.getAnnotation(Header.class).name() : null;
+			String name = header != null ? header.name() : null;
 			name = name != null ? name : fs.getColumnName();
+
 			fs.setLabelName(name);
 			fs.setIsSelected("1");
 			fs.setIsCondition("0");

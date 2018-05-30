@@ -251,13 +251,16 @@ public class GenerateSetting {
 		try {
 			Class<?> cls = Class.forName(this.className);
 			Model model = cls.getAnnotation(Model.class);
-			if(model!=null) return model.parentMenu();
+			if(model!=null) {return model.parentMenu();}
+			else{
+				
+			}
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "";
+		return "tools";
 
 	}
 

@@ -24,25 +24,34 @@ public class FieldSetting {
 
 	// 为FieldSetting赋值
 	public void setFieldParam(Field field) {
-		String remark = field.getAnnotation(Header.class).name();
+		Header  header = field.getAnnotation(Header.class);
+		Column column = field.getAnnotation(Column.class);
+		
+		String remark = field.getName();
+		if(header!=null) remark=header.name();
+		
 		this.setColumnName(field.getName());
-		String dataSource = field.getAnnotation(Header.class).dataSource();
+		String dataSource = "";
+		if(header!=null) dataSource = header.dataSource();
+		
 		if (!StrUtil.isEmpty(dataSource)) {
 			this.setDictCode(dataSource);
-			if (field.getAnnotation(Header.class).joinClass().equals(Dict.class)) {
+			if (header.joinClass().equals(Dict.class)) {
 				this.setTagType("dictSelector");
 			}
-		} else if (field.getAnnotation(Header.class).joinClass().equals(Dict.class)) {
+		} else if (header!=null && header.joinClass().equals(Dict.class)) {
 			this.setDictCode(PingYinUtil.getFirstSpell(field.getName()).toUpperCase());
 			this.setTagType("dictSelector");
 		}
-		if (StrUtil.isEmpty(this.getTagType()) && !StrUtil.isEmpty(field.getAnnotation(Header.class).tagType())) { // 自定义控件类型
-			this.setTagType(field.getAnnotation(Header.class).tagType());
+		String headerTag = header!=null ?header.tagType():"";
+		
+		if (StrUtil.isEmpty(this.getTagType()) && !StrUtil.isEmpty(headerTag)) { // 自定义控件类型
+			this.setTagType(header.tagType());
 		}
 
 		if (field.getType() == String.class) {
 			if (StrUtil.isEmpty(this.getTagType())) {
-				if (field.getAnnotation(Column.class).length() > 255) {
+				if (column!=null && column.length() > 255) {
 					this.setTagType("textarea");
 				} else {
 					this.setTagType(field.getName().equals("id") ? "hidden" : "text");
