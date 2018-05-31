@@ -120,8 +120,9 @@ public class BaseDaoImpl implements BaseDao {
 
 	@SuppressWarnings("unchecked")
 	public <T> T get(String hql) {
-
-		Query query = this.getCurrentSession().createQuery(hql);
+		Session  s= this.getCurrentSession();
+	    
+		Query query = s.createQuery(hql);
 		List<T> ls = query.list();
 		if (ls != null && ls.size() > 0) {
 			return ls.get(0);
@@ -131,8 +132,8 @@ public class BaseDaoImpl implements BaseDao {
 
 	@SuppressWarnings("unchecked")
 	public <T> T get(String hql, Map<String, Object> params) {
-
-		Query query = this.getCurrentSession().createQuery(hql);
+		Session s = this.getCurrentSession() ;
+		Query query = s.createQuery(hql);
 		if (params != null && !params.isEmpty()) {
 			for (String key : params.keySet()) {
 				query.setParameter(key, params.get(key));
@@ -208,8 +209,8 @@ public class BaseDaoImpl implements BaseDao {
 	}
 
 	public int executeHql(String hql) {
-
-		Query query = this.getCurrentSession().createQuery(hql);
+		Session s =this.getCurrentSession();
+		Query query = s.createQuery(hql);
 		return query.executeUpdate();
 	}
 

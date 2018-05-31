@@ -24,7 +24,7 @@ import com.app.demos.entity.Videos;
 /**
 * 视频教程管理控制器
 * @author jrn
-* 2018-05-29 23:08:51由代码生成器自动生成
+* 2018-05-31 11:08:43由代码生成器自动生成
 */
 @Controller
 @RequestMapping("/videos")

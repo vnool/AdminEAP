@@ -19,9 +19,8 @@ import java.util.Date;
 /**
  * Created by dingchengliang
  */
-@Entity
-@Data
-@Model(id = "articles", name = "百问百答", parentMenu="tool")
+@Entity 
+@Model(id = "articles", name = "百问百答", parentMenu="TOOL")
 @Table(name = "edu_articles")
 public class Articles extends BaseEntity {
 

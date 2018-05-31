@@ -19,9 +19,8 @@ import java.util.Date;
 /**
  * Created by dingchengliang
  */
-@Entity
-@Data
-@Model(id = "videos", name = "视频教程", parentMenu="tool")
+@Entity 
+@Model(id = "videos", name = "视频教程", parentMenu="T")
 @Table(name = "edu_videos")
 public class Videos extends BaseEntity {
 
@@ -60,6 +59,8 @@ public class Videos extends BaseEntity {
 	@Header(name = "主题") 
 	private String topicName;
 	//topicDesc
+	@Header(name = "头像") 
+	private String topicImg;
 
 
 	@Header(name = "赞")
