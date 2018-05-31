@@ -32,7 +32,7 @@ public class Videos extends BaseEntity {
 	private String vid;
 	
 	@Header(name = "标题")
-	private String title;
+	public String title;
 	
 	
 	@Header(name = "摘要") 
@@ -57,12 +57,16 @@ public class Videos extends BaseEntity {
 	public String videosource;
 
 	@Header(name = "主题") 
-	private String topicName;
+	@Column(name = "topicName")
+	public String topicName;
+	
 	//topicDesc
 	@Header(name = "头像") 
-	private String topicImg;
+	public String topicImg;
 
-
+   //播放次数
+	public Integer playCount;
+	
 	@Header(name = "赞")
 	@Column(name = "votecount", columnDefinition = "BIGINT default 0")
 	private Integer votecount;

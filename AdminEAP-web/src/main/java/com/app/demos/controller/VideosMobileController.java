@@ -46,9 +46,9 @@ public class VideosMobileController {
 
 	 
 
-	@RequestMapping(value = "/video/{type}/{id}/n/{startPage}-{pageSize}-html", method = RequestMethod.GET)
+	@RequestMapping(value = "/video/{type}/{scope}/n/{startPage}-{pageSize}-html", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> getlist(@PathVariable String type, @PathVariable String id,
+	public Map<String, Object> getlist(@PathVariable String type, @PathVariable String scope,
 			@PathVariable String startPage, @PathVariable String pageSize, HttpServletRequest request) {
 		String baseurl = "http://" + request.getServerName() // 服务器地址
 				+ ":" + request.getServerPort() // 端口号
@@ -56,11 +56,12 @@ public class VideosMobileController {
 		// + request.getServletPath() //请求页面或其他地址
 		// + "?" + (request.getQueryString()); //参数
 
+		System.out.println("\n Query for: "+scope+"\n");
 		String reqObj = "{\"queryId\":\"videos\",\"pageInfo\":null,\"query\":null,\"conditions\":[]}";
 		Map<String, Object> data;
 		try {
 			data = QueryCtrl.loadData(reqObj);
-			data.put(id, PureData((ArrayList<Object>) data.get("rows"), request));
+			data.put(scope, PureData((ArrayList<Object>) data.get("rows"), request));
 			// data.put(id, data.get("rows"));
 			data.remove("rows");
 			data.remove("query");
