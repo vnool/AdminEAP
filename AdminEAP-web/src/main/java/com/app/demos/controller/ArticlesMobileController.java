@@ -42,26 +42,35 @@ import com.alibaba.fastjson.JSON;
 @Controller
 @RequestMapping("/nc")
 public class ArticlesMobileController {
+  
+	@Resource
+	private QueryService queryService;
+	
+	@RequestMapping(value = "/article/{postId}/full-html", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getdetail(@PathVariable String postId , HttpServletRequest request) {
+		String baseurl = UploaderController.getBaseURL(request);
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list() {
-		return "demos/articles_list";
+		Articles art = queryService.get(Articles.class, postId);
+		JSONObject m = (JSONObject) JSON.toJSON(art);
+		m.put("shareLink", baseurl+"xxxx");	
+		m.remove("imgextra");
+		
+		JSONObject mo = new JSONObject();
+		mo.put(postId, m); //加入深一层
+		return mo;
 	}
 
 	@RequestMapping(value = "/article/{type}/{id}/{startPage}-{pageSize}-html", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getlist(@PathVariable String type, @PathVariable String id,
 			@PathVariable String startPage, @PathVariable String pageSize, HttpServletRequest request) {
-		String baseurl = "http://" + request.getServerName() // 服务器地址
-				+ ":" + request.getServerPort() // 端口号
-				+ request.getContextPath(); // 项目名称
-		// + request.getServletPath() //请求页面或其他地址
-		// + "?" + (request.getQueryString()); //参数
+	 
 
 		String reqObj = "{\"queryId\":\"articles\",\"pageInfo\":null,\"query\":null,\"conditions\":[]}";
 		Map<String, Object> data;
 		try {
-			data = QueryCtrl.loadData(reqObj);
+			data = queryService.loadData(reqObj);
 			data.put(id, PureData((ArrayList<Articles>) data.get("rows"), request));
 			// data.put(id, data.get("rows"));
 			data.remove("rows");
@@ -83,9 +92,10 @@ public class ArticlesMobileController {
 			m.put("lmodify", mtime);
 			m.put("mtime", mtime);
 			m.put("ptime", mtime);
+			m.put("postid", m.get("id"));
 
 			String imgsrc = (String) m.get("imgsrc");
-			if (!StringUtil.isEmpty(imgsrc)) {
+			if (!StringUtil.isEmpty(imgsrc) && !imgsrc.toLowerCase().contains("http")) {
 				imgsrc = UploaderController.getFileURL(imgsrc, request);
 			}
 			m.put("imgsrc", imgsrc);
@@ -115,8 +125,7 @@ public class ArticlesMobileController {
 		return dateString;
 	}
 
-	@Resource
-	QueryController QueryCtrl;
+
  
 
 }

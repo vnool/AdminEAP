@@ -7,7 +7,7 @@
         <column key="rowIndex" header="序号" width="80"/>
         <column key="title" header="标题" classType="String" allowSort="true" width="150"/>
         <column key="digest" header="摘要" classType="String" allowSort="true" width="150"/>
-        <column key="content" header="内容" classType="String" allowSort="true" width="150"/>
+        <column key="body" header="内容" classType="String" allowSort="true" width="150"/>
         <column key="imgsrc" header="缩略图" classType="String" hidden="true" allowSort="true" width="150"/>
         <column key="lmodify" header="更新时间" classType="Date" hidden="true" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
         <column key="source" header="来源" classType="String" allowSort="true" width="150"/>

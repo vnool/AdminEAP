@@ -39,8 +39,8 @@ public class Articles extends BaseEntity {
 	public String digest;
 
 	@Header(name = "内容", tagType = "doc" , width=150)
-	@Column(name = "content", length = 1024)
-	public String content;
+	@Column(name = "body", length = 1024)
+	public String body;
 
 	@Header(name = "缩略图", tagType = "image")
 	@Column(name = "imgsrc")
@@ -95,18 +95,14 @@ public class Articles extends BaseEntity {
 		this.digest = digest;
 	}
 
-	/**
-	 * @return the content
-	 */
-	public String getContent() {
-		return content;
+ 
+
+	public String getBody() {
+		return body;
 	}
 
-	/**
-	 * @param content the content to set
-	 */
-	public void setContent(String content) {
-		this.content = content;
+	public void setBody(String body) {
+		this.body = body;
 	}
 
 	/**

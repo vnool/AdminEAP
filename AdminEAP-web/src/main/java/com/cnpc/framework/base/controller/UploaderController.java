@@ -294,12 +294,16 @@ public class UploaderController {
         return new Result();
     }
     
-    public static String getFileURL(String id, HttpServletRequest request){
+    public static String getBaseURL( HttpServletRequest request){
             String baseurl = "http://" + request.getServerName() // 服务器地址
                 + ":" + request.getServerPort() // 端口号
                 + request.getContextPath(); // 项目名称
-           
-           return baseurl + "/file/download/" + id;
+           // + request.getServletPath() //请求页面或其他地址
+            // + "?" + (request.getQueryString()); //参数
+           return baseurl  ;
+    }
+    public static String getFileURL(String id, HttpServletRequest request){
+            return getBaseURL(request) + "/file/download/" + id;
     }
     @RequestMapping(value="/download/{id}",method = RequestMethod.GET)
     public void downloadFile(@PathVariable("id") String id,HttpServletRequest request,HttpServletResponse response) throws IOException {
