@@ -302,8 +302,11 @@ public class UploaderController {
             // + "?" + (request.getQueryString()); //参数
            return baseurl  ;
     }
-    public static String getFileURL(String id, HttpServletRequest request){
-            return getBaseURL(request) + "/file/download/" + id;
+    public static String getFileURL(String imgid, HttpServletRequest request){
+    	if(!imgid.toLowerCase().contains("http")){
+            return getBaseURL(request) + "/file/download/" + imgid;
+         }
+    	return imgid;
     }
     @RequestMapping(value="/download/{id}",method = RequestMethod.GET)
     public void downloadFile(@PathVariable("id") String id,HttpServletRequest request,HttpServletResponse response) throws IOException {

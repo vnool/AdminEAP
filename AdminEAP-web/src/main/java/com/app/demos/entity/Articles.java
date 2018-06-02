@@ -59,10 +59,22 @@ public class Articles extends BaseEntity {
 	@Column(name = "source")
 	public String source;
 
-	@Header(name = "分类")
+	@Header(name = "内容分类")
 	@Column(name = "boardid") // 分类？
 	private String boardid;
 
+	
+	@Header(name = "产品")
+	@Column(name = "product") // 分类？
+	private String product;
+
+	public String getProduct() {
+		return product;
+	}
+
+	public void setProduct(String product) {
+		this.product = product;
+	}
 
 	@Header(name = "赞")
 	@Column(name = "votecount", columnDefinition = "BIGINT default 0")

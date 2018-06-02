@@ -42,22 +42,52 @@ import com.alibaba.fastjson.JSON;
 @Controller
 @RequestMapping("/nc")
 public class ArticlesMobileController {
-  
+
 	@Resource
 	private QueryService queryService;
-	
+
 	@RequestMapping(value = "/article/{postId}/full-html", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> getdetail(@PathVariable String postId , HttpServletRequest request) {
+	public Map<String, Object> getdetail(@PathVariable String postId, HttpServletRequest request) {
 		String baseurl = UploaderController.getBaseURL(request);
 
 		Articles art = queryService.get(Articles.class, postId);
 		JSONObject m = (JSONObject) JSON.toJSON(art);
-		m.put("shareLink", baseurl+"xxxx");	
+		m.put("shareLink", baseurl + "xxxx");
+		m.put("body", m.get("body").toString().replaceAll("\n", "<br>"));
+		String mtime = dateString((Date) m.get("lmodify"));
+		m.put("ptime", mtime);
+
+		String imgextra = (String) m.get("imgextra");
+		String imgsrc = (String) m.get("imgsrc");
+		JSONArray imgextraList = new JSONArray();
+		if (StringUtil.isEmpty(imgextra)) {
+			imgextra = imgsrc;
+		}else if(!StringUtil.isEmpty(imgsrc)){
+			imgextra = imgsrc.concat(",").concat(imgextra);
+		}
+		if (!StringUtil.isEmpty(imgextra)  ) {
+			
+			String[] imglist = imgextra.trim().split(",");
+			int i = 0;
+			for (String img : imglist) {
+				img = img.trim();
+				if (StringUtil.isEmpty(img))
+					continue;
+				String imgurl = UploaderController.getFileURL(img, request);
+				JSONObject o = new JSONObject();
+				o.put("ref", "<!--IMG#" + i + "-->");
+				i++;
+				o.put("src", imgurl);
+				imgextraList.add(o);
+			}
+
+		}
+		m.put("img", imgextraList);
 		m.remove("imgextra");
-		
+
 		JSONObject mo = new JSONObject();
-		mo.put(postId, m); //加入深一层
+		mo.put(postId, m); // 加入深一层
 		return mo;
 	}
 
@@ -65,7 +95,6 @@ public class ArticlesMobileController {
 	@ResponseBody
 	public Map<String, Object> getlist(@PathVariable String type, @PathVariable String id,
 			@PathVariable String startPage, @PathVariable String pageSize, HttpServletRequest request) {
-	 
 
 		String reqObj = "{\"queryId\":\"articles\",\"pageInfo\":null,\"query\":null,\"conditions\":[]}";
 		Map<String, Object> data;
@@ -95,7 +124,7 @@ public class ArticlesMobileController {
 			m.put("postid", m.get("id"));
 
 			String imgsrc = (String) m.get("imgsrc");
-			if (!StringUtil.isEmpty(imgsrc) && !imgsrc.toLowerCase().contains("http")) {
+			if (!StringUtil.isEmpty(imgsrc)) {
 				imgsrc = UploaderController.getFileURL(imgsrc, request);
 			}
 			m.put("imgsrc", imgsrc);
@@ -110,9 +139,9 @@ public class ArticlesMobileController {
 					o.put("imgsrc", imgurl);
 					imgextraList.add(o);
 				}
-				imgsrc = UploaderController.getFileURL(imgsrc, request);
+
 				m.put("imgextra", imgextraList);
-			} 
+			}
 
 			list.add(m);
 		}
@@ -124,8 +153,5 @@ public class ArticlesMobileController {
 		String dateString = formatter.format(object);
 		return dateString;
 	}
-
-
- 
 
 }
