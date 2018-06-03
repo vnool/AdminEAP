@@ -21,6 +21,18 @@ public class FieldSetting {
 	private String dictCode;
 	private String isSelected;
 	private String isCondition;
+	
+	private String  condition;
+
+	public String getCondition() {
+		return condition;
+	}
+
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
 
 	// 为FieldSetting赋值
 	public void setFieldParam(Field field) {
@@ -43,11 +55,7 @@ public class FieldSetting {
 			this.setDictCode(PingYinUtil.getFirstSpell(field.getName()).toUpperCase());
 			this.setTagType("dictSelector");
 		}
-		String headerTag = header!=null ?header.tagType():"";
-		
-		if (StrUtil.isEmpty(this.getTagType()) && !StrUtil.isEmpty(headerTag)) { // 自定义控件类型
-			this.setTagType(header.tagType());
-		}
+	
 
 		if (field.getType() == String.class) {
 			if (StrUtil.isEmpty(this.getTagType())) {
@@ -101,6 +109,12 @@ public class FieldSetting {
 				this.setTagType("hidden");
 			this.setType(field.getType().getSimpleName());
 			this.setValidateType("notEmpty:{message:'" + remark + "不能为空'}");
+		}
+		
+	   String headerTag = header!=null ?header.tagType():"";
+		
+		if (  !StrUtil.isEmpty(headerTag)) { // 自定义控件类型
+			this.setTagType(headerTag);
 		}
 	}
  

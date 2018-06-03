@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -17,11 +18,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 
+import org.hsqldb.lib.StringUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cnpc.framework.base.pojo.FieldSetting;
+import com.cnpc.framework.base.pojo.GenerateSetting;
 import com.cnpc.framework.base.pojo.Result;
 import com.cnpc.framework.utils.DateUtil;
 import com.cnpc.framework.annotation.Header;
@@ -83,20 +86,15 @@ public class QueryXMLmaker {
 		}
 	}
 
-	public static Result XMLContentfromCls(String className) throws ClassNotFoundException {
-		Class<?> clazz = Class.forName(className);
-		Model model = clazz.getAnnotation(Model.class);
-		
-		String modelName = model!=null ? model.name() : clazz.getSimpleName();
-		String queryId = model!=null ? model.id() : clazz.getSimpleName();
-		
+	public static Result XMLContentfromCls(GenerateSetting gs) throws ClassNotFoundException {
+
 		String rn = "\r\n";
 		// 生成query
 		StringBuilder sb = new StringBuilder();
-		sb.append("<query id=\"" + queryId + "\"");
+		sb.append("<query id=\"" + gs.getQueryId() + "\"");
 		sb.append(" key=\"id\"");
-		sb.append(" tableName=\"" + modelName + "列表\"");
-		sb.append(" className=\"" + className + "\"");
+		sb.append(" tableName=\"" + gs.getModelName() + "列表\"");
+		sb.append(" className=\"" + gs.getClassName() + "\"");
 		sb.append(" widthType=\"px\">");
 		sb.append(rn);
 		// 序号
@@ -105,31 +103,15 @@ public class QueryXMLmaker {
 		sb.append(" width=\"80\"/>");
 		sb.append(rn);
 
-		Field[] fields = clazz.getDeclaredFields();
-		String prefix = className.substring(className.lastIndexOf(".") + 1).toLowerCase();
+		List<FieldSetting> fields = gs.getFields();
+
 		int i = 0;
-		for (Field field : fields) {
-			if (field.getAnnotation(Transient.class) != null) {
-				continue;
-			}
-			if (field.getAnnotation(Id.class) != null) {
-				continue;
-			}
+		for (FieldSetting fs : fields) {
 
-			Header header = field.getAnnotation(Header.class);
-			FieldSetting fs = new FieldSetting();
-			fs.setFieldParam(field);
-			String name = header != null ? header.name() : null;
-			name = name != null ? name : fs.getColumnName();
-
-			fs.setLabelName(name);
-			fs.setIsSelected("1");
-			fs.setIsCondition("0");
 			sb.append("        <column key=\"" + fs.getColumnName().replace(".id", ".name") + "\"");
 			sb.append(" header=\"" + fs.getLabelName() + "\"");
-			String classType = field.getType().getName().startsWith("com.cnpc") ? String.class.getSimpleName()
-					: field.getType().getSimpleName();
-			sb.append(" classType=\"" + classType + "\"");
+
+			sb.append(" classType=\"" + fs.getType() + "\"");
 
 			String TagType = fs.getTagType();
 
@@ -142,6 +124,10 @@ public class QueryXMLmaker {
 				sb.append(" operator=\"between\"");
 			} else {
 				sb.append(" allowSort=\"true\"");
+			}
+
+			if (StringUtil.isEmpty(fs.getCondition())) {
+				sb.append(" operator=\"" + fs.getCondition() + "\"");
 			}
 			// 查看详情链接
 			/*

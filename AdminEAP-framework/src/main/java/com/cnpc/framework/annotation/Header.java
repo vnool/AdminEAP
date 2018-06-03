@@ -49,6 +49,9 @@ public @interface Header {
 
 	int width() default 0;
 
+	/** 查询条件操作 */
+	String condition() default "";
+
 
 
 }

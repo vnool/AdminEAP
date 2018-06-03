@@ -47,14 +47,14 @@ public class DictController {
      *
      * @return
      */
-    @RequestMapping(value = "/treeData", method = RequestMethod.POST)
+    @RequestMapping(value = "/treeData" )
     @ResponseBody
     public List<TreeNode> getTreeData() {
 
         return dictService.getTreeData();
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/get/{id}" )
     @ResponseBody
     public Dict get(@PathVariable("id") String id) {
         Dict dict = dictService.get(Dict.class, id);
@@ -66,7 +66,7 @@ public class DictController {
         return dict;
     }
 
-    @RequestMapping(value = "/getDictsByCode", method = RequestMethod.POST)
+    @RequestMapping(value = "/getDictsByCode" )
     @ResponseBody
     public List<Dict> getDictsByCode(String code) {
         return dictService.getDictsByCode(code);

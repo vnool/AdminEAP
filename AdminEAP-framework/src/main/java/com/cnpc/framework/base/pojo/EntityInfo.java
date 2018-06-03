@@ -8,9 +8,11 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hsqldb.lib.StringUtil;
 
 import com.cnpc.framework.annotation.Header;
 import com.cnpc.framework.annotation.Model;
@@ -81,29 +83,44 @@ public class EntityInfo {
 				continue;
 			if (field.getAnnotation(Id.class) != null)
 				continue;
+			if (field.getAnnotation(Transient.class) != null) {
+				continue;
+			}
+			
 
-			String key = field.getAnnotation(Column.class).name();
+			Header header = field.getAnnotation(Header.class);
+			// String key = field.getAnnotation(Column.class).name();
 
 			FieldSetting fs = new FieldSetting();
 			fs.setRowIndex(++i);
 			fs.setFieldParam(field);
+			fs.setIsCondition("0");
 
 			String name = "";
-			if (field.getAnnotation(Header.class) != null) {
-				name = field.getAnnotation(Header.class).name();
+			if (header != null) {
+				name = header.name();
+				String cond = header.condition();
+				if (!StringUtil.isEmpty(cond)) {
+					fs.setIsCondition("1");
+					fs.setCondition(cond);
+				}
 			}
 			if (name == null) {
 				name = fs.getColumnName();
 			}
+			
+			String classType = fs.getType().startsWith("com.cnpc") ? String.class.getSimpleName()
+					: field.getType().getSimpleName();
+			
 			fs.setLabelName(name);
 			fs.setIsSelected("1");
-			fs.setIsCondition("0");
+
 			if (fs.getHasFile()) {
 				hasfile = true;
 			}
 			fslist.add(fs);
 		}
-		
+
 		setting.setHtmlTypes("list,addUpdate");
 		if (model != null) {
 			setting.setHtmlTypes(model.pages());
@@ -111,7 +128,7 @@ public class EntityInfo {
 		setting.setHasFile(hasfile);
 		setting.setFields(fslist);
 		setting.setJavaTypes("controller");
-		setting.setIsCreateFunction("1"); 
+		setting.setIsCreateFunction("1");
 		return setting;
 	}
 }

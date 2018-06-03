@@ -98,8 +98,9 @@ public class CodeGeneratorController {
 	// 生成xml配置内容
 	@RequestMapping(value = "/getXMLContent", method = RequestMethod.POST)
 	@ResponseBody
-	public Result XMLContent( String className) throws ClassNotFoundException {
-		return QueryXMLmaker.XMLContentfromCls( className );
+	public Result XMLContent( String className, HttpServletRequest request) throws ClassNotFoundException {
+		GenerateSetting gs = EntityInfo.entityInfo(className,   request);
+		return QueryXMLmaker.XMLContentfromCls( gs );
 	}
 
 	// 代码生成 快速版
@@ -175,7 +176,7 @@ public class CodeGeneratorController {
 			throws ClassNotFoundException {
 		//String queryId = setting.getQueryId();
 		String className = setting.getClassName();
-			Result result = XMLContent( className);
+			Result result = XMLContent( className, request);
 		String XMLContent = result.getMessage();
 		
 		//String modelName = setting.getModelName();
