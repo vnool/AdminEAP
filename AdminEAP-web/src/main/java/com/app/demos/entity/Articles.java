@@ -6,9 +6,6 @@ import com.cnpc.framework.base.entity.BaseEntity;
 import com.cnpc.framework.base.entity.Dict;
 import com.cnpc.framework.base.entity.Org;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
@@ -19,8 +16,8 @@ import java.util.Date;
 /**
  * Created by dingchengliang
  */
-@Entity 
-@Model(id = "articles", name = "百问百答", parentMenu="TOOL")
+@Entity
+@Model(id = "articles", name = "百问百答", parentMenu = "TOOL", curdShowType = "page", pages = "list,addUpdate")
 @Table(name = "edu_articles")
 public class Articles extends BaseEntity {
 
@@ -32,42 +29,78 @@ public class Articles extends BaseEntity {
 	@Header(name = "标题")
 	@Column(name = "title")
 	private String title;
-	
-	
-	@Header(name = "摘要")
+
+	@Header(name = "摘要", condition="like")
 	@Column(name = "digest")
 	public String digest;
 
-	@Header(name = "内容", tagType = "doc" , width=150)
+	@Header(name = "内容", tagType = "doc", width = 150)
 	@Column(name = "body", length = 1024)
 	public String body;
 
 	@Header(name = "缩略图", tagType = "image")
 	@Column(name = "imgsrc")
 	public String imgsrc;
-	
+
 	@Header(name = "更多图片", tagType = "image")
 	public String imgextra;
-	
 
 	@Header(name = "更新时间")
 	@Column(name = "lmodify")
 	@CreationTimestamp
 	public Date lmodify;
 
-	@Header(name = "来源", hidden=true) // 作者
+	@Header(name = "来源", hidden = true) // 作者
 	@Column(name = "source")
 	public String source;
 
+ //代码改成这样，多选  <input type=checkbox data-flag="dictSelector" data-code="scope" data-value="code" .... >
 	@Header(name = "内容分类")
-	@Column(name = "boardid") // 分类？
-	private String boardid;
-
+	@Column(name = "scope") // 分类？
+	private String scope;
 	
+	//代码改成这样，多选  <input type=checkbox data-flag="dictSelector" data-code="product" data-value="code"  ... >
 	@Header(name = "产品")
-	@Column(name = "product") // 分类？
+	@Column(name = "product")
 	private String product;
+	
+	//
+	// @Header(name = "产品", tagType = "radio")
+	// @ManyToOne(fetch = FetchType.LAZY)
+	// @JoinColumn(name = "product")
+	// private Dict product;
+	//
+	// public Dict getProduct() {
+	// return product;
+	// }
+	//
+	// public void setProduct(Dict product) {
+	// this.product = product;
+	// }
 
+
+
+	@Header(name = "赞")
+	@Column(name = "votecount", columnDefinition = "BIGINT default 0")
+	private Integer votecount;
+
+	@Header(name = "评论")
+	@Column(name = "replyCount", columnDefinition = "BIGINT default 0")
+	private Integer replyCount;
+
+	// @Transient
+	// public Date ptime=new Date();
+	// @Transient
+	// public Date mtime=new Date();
+	//
+	// Articles(){
+	// ptime=new Date();
+	// mtime=new Date();
+	// }
+	/**
+	 * @return the digest
+	 */
+	
 	public String getProduct() {
 		return product;
 	}
@@ -75,39 +108,21 @@ public class Articles extends BaseEntity {
 	public void setProduct(String product) {
 		this.product = product;
 	}
-
-	@Header(name = "赞")
-	@Column(name = "votecount", columnDefinition = "BIGINT default 0")
-	private Integer votecount;
-
-	@Header(name = "评论数")
-	@Column(name = "replyCount", columnDefinition = "BIGINT default 0")
-	private Integer replyCount;
- 
-//	@Transient
-//	public Date ptime=new Date();
-//	@Transient
-//	public Date mtime=new Date();
-//	
-//	Articles(){
-//		ptime=new Date();
-//		mtime=new Date();
-//	}
-	/**
-	 * @return the digest
-	 */
+	
+	
 	public String getDigest() {
 		return digest;
 	}
 
+
+
 	/**
-	 * @param digest the digest to set
+	 * @param digest
+	 *            the digest to set
 	 */
 	public void setDigest(String digest) {
 		this.digest = digest;
 	}
-
- 
 
 	public String getBody() {
 		return body;
@@ -125,26 +140,28 @@ public class Articles extends BaseEntity {
 	}
 
 	/**
-	 * @param imgsrc the imgsrc to set
+	 * @param imgsrc
+	 *            the imgsrc to set
 	 */
 	public void setImgsrc(String imgsrc) {
 		this.imgsrc = imgsrc;
 	}
-//
-//	/**
-//	 * @return the lmodify
-//	 */
-//	public Date getLmodify() {
-//		return lmodify;
-//	}
-//
-//	/**
-//	 * @param lmodify the lmodify to set
-//	 */
-//	public void setLmodify(Date lmodify) {
-//		this.lmodify = lmodify;
-//	}
-//
+
+	//
+	// /**
+	// * @return the lmodify
+	// */
+	// public Date getLmodify() {
+	// return lmodify;
+	// }
+	//
+	// /**
+	// * @param lmodify the lmodify to set
+	// */
+	// public void setLmodify(Date lmodify) {
+	// this.lmodify = lmodify;
+	// }
+	//
 	/**
 	 * @return the source
 	 */
@@ -153,24 +170,26 @@ public class Articles extends BaseEntity {
 	}
 
 	/**
-	 * @param source the source to set
+	 * @param source
+	 *            the source to set
 	 */
 	public void setSource(String source) {
 		this.source = source;
 	}
 
 	/**
-	 * @return the boardid
+	 * @return the scope
 	 */
-	public String getBoardid() {
-		return boardid;
+	public String getScope() {
+		return scope;
 	}
 
 	/**
-	 * @param boardid the boardid to set
+	 * @param boardid
+	 *            the scope to set
 	 */
-	public void setBoardid(String boardid) {
-		this.boardid = boardid;
+	public void setScope(String scope) {
+		this.scope = scope;
 	}
 
 	/**
@@ -181,7 +200,8 @@ public class Articles extends BaseEntity {
 	}
 
 	/**
-	 * @param votecount the votecount to set
+	 * @param votecount
+	 *            the votecount to set
 	 */
 	public void setVotecount(Integer votecount) {
 		this.votecount = votecount;
@@ -195,13 +215,13 @@ public class Articles extends BaseEntity {
 	}
 
 	/**
-	 * @param replyCount the replyCount to set
+	 * @param replyCount
+	 *            the replyCount to set
 	 */
 	public void setReplyCount(Integer replyCount) {
 		this.replyCount = replyCount;
 	}
 
-	
 	public String getTitle() {
 		return title;
 	}
