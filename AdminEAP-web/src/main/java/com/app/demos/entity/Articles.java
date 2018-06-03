@@ -26,7 +26,7 @@ public class Articles extends BaseEntity {
 	// @GeneratedValue(strategy = GenerationType.AUTO)
 	// private Integer id;
 
-	@Header(name = "标题")
+	@Header(name = "标题", condition="like")
 	@Column(name = "title")
 	private String title;
 
@@ -54,29 +54,34 @@ public class Articles extends BaseEntity {
 	@Column(name = "source")
 	public String source;
 
- //代码改成这样，多选  <input type=checkbox data-flag="dictSelector" data-code="scope" data-value="code" .... >
-	@Header(name = "内容分类")
-	@Column(name = "scope") // 分类？
-	private String scope;
+// //代码改成这样，多选  <input type=checkbox data-flag="dictSelector" data-code="scope" data-value="code" .... >
+//	@Header(name = "内容分类")
+//	@Column(name = "scope") // 分类？
+//	private String scope;
+//	
+//	//代码改成这样，多选  <input type=checkbox data-flag="dictSelector" data-code="product" data-value="code"  ... >
+//	@Header(name = "产品")
+//	@Column(name = "product")
+//	private String product;
 	
-	//代码改成这样，多选  <input type=checkbox data-flag="dictSelector" data-code="product" data-value="code"  ... >
-	@Header(name = "产品")
-	@Column(name = "product")
-	private String product;
 	
-	//
-	// @Header(name = "产品", tagType = "radio")
-	// @ManyToOne(fetch = FetchType.LAZY)
-	// @JoinColumn(name = "product")
-	// private Dict product;
-	//
-	// public Dict getProduct() {
-	// return product;
-	// }
-	//
-	// public void setProduct(Dict product) {
-	// this.product = product;
-	// }
+	 @Header(name = "分类", tagType = "radio")
+	 @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name = "scope",referencedColumnName="code")
+	 private Dict scope;
+	 
+	 @Header(name = "产品", tagType = "radio")
+	 @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name = "product", referencedColumnName="code")
+	 private Dict product;
+	
+	 public Dict getProduct() {
+	 return product;
+	 }
+	
+	 public void setProduct(Dict product) {
+	 this.product = product;
+	 }
 
 
 
@@ -101,13 +106,7 @@ public class Articles extends BaseEntity {
 	 * @return the digest
 	 */
 	
-	public String getProduct() {
-		return product;
-	}
-
-	public void setProduct(String product) {
-		this.product = product;
-	}
+	 
 	
 	
 	public String getDigest() {
@@ -180,7 +179,7 @@ public class Articles extends BaseEntity {
 	/**
 	 * @return the scope
 	 */
-	public String getScope() {
+	public Dict getScope() {
 		return scope;
 	}
 
@@ -188,7 +187,7 @@ public class Articles extends BaseEntity {
 	 * @param boardid
 	 *            the scope to set
 	 */
-	public void setScope(String scope) {
+	public void setScope(Dict scope) {
 		this.scope = scope;
 	}
 
