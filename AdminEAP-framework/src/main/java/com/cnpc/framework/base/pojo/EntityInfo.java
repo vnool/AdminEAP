@@ -31,12 +31,11 @@ public class EntityInfo {
 		String modelName = "";
 		String queryId = "";
 
-		// String tableName = clazz.getSimpleName();
 		Model model = clazz.getAnnotation(Model.class);
 		if (model != null) {
 			modelName = model.name();
 			queryId = model.id();
-			setting.setCurdType(model.curdType());
+			setting.setCurdType(model.curdShowType());
 		}
 		if (StringUtils.isEmpty(queryId)) {
 			queryId = clazz.getSimpleName();
@@ -104,12 +103,15 @@ public class EntityInfo {
 			}
 			fslist.add(fs);
 		}
+		
+		setting.setHtmlTypes("list,addUpdate");
+		if (model != null) {
+			setting.setHtmlTypes(model.pages());
+		}
 		setting.setHasFile(hasfile);
 		setting.setFields(fslist);
-		setting.setHtmlTypes("list,addUpdate");
 		setting.setJavaTypes("controller");
-		setting.setIsCreateFunction("1");
-		setting.setCurdType("dialog");
+		setting.setIsCreateFunction("1"); 
 		return setting;
 	}
 }

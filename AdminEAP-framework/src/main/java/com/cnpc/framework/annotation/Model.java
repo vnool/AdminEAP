@@ -32,7 +32,10 @@ public @interface Model {
     
 	
 	/** 页面类型  tab, dialog,  page */
-	String curdType() default "";
+	String curdShowType() default "";
+
+	/*list,addUpdate,add, update, show */
+	String pages() default "list,addUpdate";
   
 
 
