@@ -61,25 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">创建菜单&nbsp;</label>
-                                <div class="col-sm-9">
-                                    <label class="control-label">
-                                        <input type="checkbox" class="square-green" name="isCreateFunction" id="isCreateFunction" checked="checked" value="1">
-                                    </label>
-                                    <input type="text" name="parFuncCode" class="form-control" style="width: 90%;float:right" id="parFuncCode" placeholder="父功能编码">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 hidden">
-                            <div class="form-group">
-                                <label   class="col-sm-2 control-label"> </label>
-                                <div class="col-sm-9">
-                                    <button type="button" class="btn btn-primary col-sm-12 disabled" data-btn-type="makesetting" disabled="disabled">生成XML配置</button>
-                                </div>
-                            </div>
-                        </div>
+                  
 
                         
                         <div class="col-md-12">
@@ -134,10 +116,30 @@
                     </div>
                 </div>
 
-
+<h3>输出信息:</h3>
 
                 <div class="box box-primary">
                     <div class="box-body">
+                         <div class="col-md-12">
+                            <div class="form-group disabled">
+                                <label class="col-sm-2 control-label">创建菜单&nbsp;</label>
+                                <div class="col-sm-9">
+                                    <label class="control-label">
+                                        <input type="checkbox" class="square-green" name="isCreateFunction" id="isCreateFunction" checked="checked" value="1">
+                                    </label>
+                                    <input type="text" name="parFuncCode" class="form-control" style="width: 90%;float:right" id="parFuncCode" placeholder="父功能编码">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 hidden">
+                            <div class="form-group">
+                                <label   class="col-sm-2 control-label"> </label>
+                                <div class="col-sm-9">
+                                    <button type="button" class="btn btn-primary col-sm-12 disabled" data-btn-type="makesetting" disabled="disabled">生成XML配置</button>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <div class="col-md-12">
                             <div class="form-group">
@@ -309,8 +311,8 @@ $(function() {
         },
         submitHandler: function(validator) {
             if ($("#isCreateFunction").is(":checked") && !$("#parFuncCode").val()) {
-                modals.warn("请填写父功能编码");
-                return false;
+               // modals.warn("请填写父功能编码");
+               // return false;
             }
             modals.confirm('确认生成代码？', function() {
                 var params = codeform.getFormSimpleData();

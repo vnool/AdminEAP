@@ -10,13 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.cnpc.framework.annotation.Header;
 import com.cnpc.framework.annotation.Model;
 import com.cnpc.framework.base.pojo.FieldSetting;
 import com.cnpc.framework.base.pojo.GenerateSetting;
 import com.cnpc.framework.utils.StrUtil;
 
-public class EntityInfo{
+public class EntityInfo {
 
 	public static GenerateSetting entityInfo(String className, HttpServletRequest request)
 			throws ClassNotFoundException {
@@ -26,22 +28,29 @@ public class EntityInfo{
 		setting.setColsNum(1);
 		setting.setClassName(className);
 		setting.setAllowPaging(true);
-        String modelName = "";
-		String queryId = ""; 
-		//String tableName =   clazz.getSimpleName();
+		String modelName = "";
+		String queryId = "";
+
+		// String tableName = clazz.getSimpleName();
 		Model model = clazz.getAnnotation(Model.class);
-		if(model!=null){
+		if (model != null) {
 			modelName = model.name();
-			queryId=model.id();
+			queryId = model.id();
+			setting.setCurdType(model.curdType());
 		}
-		
-		
+		if (StringUtils.isEmpty(queryId)) {
+			queryId = clazz.getSimpleName();
+		}
+		if (StringUtils.isEmpty(modelName)) {
+			modelName = queryId;
+		}
+
 		setting.setQueryId(queryId);
 		setting.setTableName(modelName + "列表");
 		setting.setModelName(modelName);
-		
+
 		String nameSpace = setting.getNameSpace();
-		
+
 		// 文件路径
 		String htmlDir = "";
 		String[] level = new String[] {};
@@ -53,8 +62,7 @@ public class EntityInfo{
 			htmlDir += (i < level.length - 1) ? level[i] + File.separator : level[i];
 		}
 		setting.setBusinessPackage(htmlDir.replace(File.separator, "/"));
-        
-		
+
 		String realPath = request.getRealPath("/");
 		String htmlPath = realPath + File.separator + "WEB-INF" + File.separator + "views" + File.separator + htmlDir;
 		String javaPath = realPath.replaceAll("webapp", "java") + File.separator
@@ -67,7 +75,7 @@ public class EntityInfo{
 		Field[] fields = clazz.getDeclaredFields();
 		List<FieldSetting> fslist = new ArrayList<>();
 		int i = 0;
-		boolean hasfile=false;
+		boolean hasfile = false;
 		for (Field field : fields) {
 
 			if (field.getAnnotation(Column.class) == null && field.getAnnotation(JoinColumn.class) == null)
@@ -80,8 +88,8 @@ public class EntityInfo{
 			FieldSetting fs = new FieldSetting();
 			fs.setRowIndex(++i);
 			fs.setFieldParam(field);
-			
-			String name = "";  
+
+			String name = "";
 			if (field.getAnnotation(Header.class) != null) {
 				name = field.getAnnotation(Header.class).name();
 			}
@@ -91,8 +99,8 @@ public class EntityInfo{
 			fs.setLabelName(name);
 			fs.setIsSelected("1");
 			fs.setIsCondition("0");
-			if(fs.getHasFile()){
-				hasfile =true;
+			if (fs.getHasFile()) {
+				hasfile = true;
 			}
 			fslist.add(fs);
 		}

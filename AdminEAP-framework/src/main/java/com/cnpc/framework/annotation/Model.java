@@ -29,7 +29,10 @@ public @interface Model {
      /*父菜单的id
       * */
 	String parentMenu() default "";
-
+    
+	
+	/** 页面类型  tab, dialog,  page */
+	String curdType() default "";
   
 
 
