@@ -126,7 +126,7 @@ public class QueryXMLmaker {
 				sb.append(" allowSort=\"true\"");
 			}
 
-			if (StringUtil.isEmpty(fs.getCondition())) {
+			if (!StringUtil.isEmpty(fs.getCondition())) {
 				sb.append(" operator=\"" + fs.getCondition() + "\"");
 			}
 			// 查看详情链接

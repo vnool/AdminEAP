@@ -473,7 +473,14 @@
                 retData.rows[i]["rowIndex"] = start + i + 1;
                 //获取关联对象的值如message.sendSubject
                 var value_str = "retData.rows[i]." + column.key;
-                var value = eval(value_str);
+                var value = "";
+                try{
+                    value = eval(value_str);
+                }catch(e){
+                    var line = "row:"+ i +", column:" +j;
+                    console.error("fail to get value: " + value_str +", " + line);
+                    continue;
+                }
                 // 格式化日期
                 if (column.dateFormat) {
                     //retData.rows[i][column.key] = formatDate(retData.rows[i][column.key], column.dateFormat);
