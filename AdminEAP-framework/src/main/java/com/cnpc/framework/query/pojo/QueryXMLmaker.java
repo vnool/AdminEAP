@@ -129,6 +129,13 @@ public class QueryXMLmaker {
 			if (!StringUtil.isEmpty(fs.getCondition())) {
 				sb.append(" operator=\"" + fs.getCondition() + "\"");
 			}
+			if ("image".equals(TagType) ||  "imageurl".equals(TagType) ) {
+				sb.append(" fnRender=\"fnRenderImage\"");
+			}
+			if ("video".equals(TagType) ||  "videourl".equals(TagType) ) {
+				sb.append(" fnRender=\"fnRenderVideoPlayButton\"");
+			}
+			
 			// 查看详情链接
 			/*
 			 * if (i == 0) { sb.append(" render=\"type=window,url=/" + prefix +

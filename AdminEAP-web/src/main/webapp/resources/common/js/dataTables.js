@@ -486,7 +486,7 @@
                     //retData.rows[i][column.key] = formatDate(retData.rows[i][column.key], column.dateFormat);
                     eval(value_str + "=formatDate(value, column.dateFormat)");
                     value = eval(value_str);
-                }
+                } 
                 // 格式化数字
                 if (column.numberFormat) {
                     // TODO format the number,like 0,000,000.00;
@@ -669,6 +669,13 @@
         var r = JSON.stringify(value);
         Array.prototype.toJSON = _array_tojson;
         return r;
+    }
+
+    window.fnRenderImage = function(value){
+        return "<div style='background:url("+value+") center center;  background-size: cover; width:80px;height:80px' >";
+    }
+    window.fnRenderVideoPlayButton = function(url){
+        return "<a href='"+url+"' target='_blank' class='btn btn-success'>播放</a>";
     }
 
 })(jQuery, window, document);
