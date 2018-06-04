@@ -26,7 +26,7 @@ public class Articles extends BaseEntity {
 	// @GeneratedValue(strategy = GenerationType.AUTO)
 	// private Integer id;
 
-	@Header(name = "标题", condition="like")
+	@Header(name = "标题", condition="like" )
 	@Column(name = "title")
 	private String title;
 
@@ -38,7 +38,7 @@ public class Articles extends BaseEntity {
 	@Column(name = "body", length = 1024)
 	public String body;
 
-	@Header(name = "缩略图", tagType = "image")
+	@Header(name = "缩略图", tagType = "image",hidden = true )
 	@Column(name = "imgsrc")
 	public String imgsrc;
 
@@ -50,7 +50,7 @@ public class Articles extends BaseEntity {
 	@CreationTimestamp
 	public Date lmodify;
 
-	@Header(name = "来源", hidden = true) // 作者
+	@Header(name = "来源", hidden = true ) // 作者
 	@Column(name = "source")
 	public String source;
 
@@ -65,12 +65,12 @@ public class Articles extends BaseEntity {
 //	private String product;
 	
 	
-	 @Header(name = "分类", tagType = "radio")
+	 @Header(name = "分类", tagType = "radio",condition="eq")
 	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name = "scope",referencedColumnName="code")
 	 private Dict scope;
 	 
-	 @Header(name = "产品", tagType = "radio")
+	 @Header(name = "产品", tagType = "radio",condition="eq")
 	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name = "product", referencedColumnName="code")
 	 private Dict product;

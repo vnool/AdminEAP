@@ -24,7 +24,7 @@ import com.app.demos.entity.Articles;
 /**
 * 百问百答管理控制器
 * @author jrn
-* 2018-06-04 00:08:17由代码生成器自动生成
+* 2018-06-04 10:30:32由代码生成器自动生成
 */
 @Controller
 @RequestMapping("/articles")
