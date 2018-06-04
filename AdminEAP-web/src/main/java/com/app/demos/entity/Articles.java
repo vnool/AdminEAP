@@ -108,12 +108,14 @@ public class Articles extends BaseEntity {
 	
 	 
 	
+	 public String getImage() {
+		 return "file/download/"+imgsrc;
+	 }
 	
 	public String getDigest() {
 		return digest;
 	}
-
-
+ 
 
 	/**
 	 * @param digest

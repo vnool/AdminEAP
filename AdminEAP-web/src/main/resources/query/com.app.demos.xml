@@ -4,55 +4,39 @@
 
   
 
-<!--本xml片段为代码生成器生成，时间：2018-05-31 11:08:43-->
-<query id="videos" key="id" tableName="视频教程列表" className="com.app.demos.entity.Videos" widthType="px">
-        <column key="rowIndex" header="序号" width="80"/>
-        <column key="vid" header="vid" classType="String" allowSort="true" width="150"/>
-        <column key="title" header="标题" classType="String" allowSort="true" width="150"/>
-        <column key="description" header="摘要" classType="String" allowSort="true" width="150"/>
-        <column key="content" header="内容" classType="String" allowSort="true" width="150"/>
-        <column key="cover" header="缩略图" classType="String" allowSort="true" width="150"/>
-        <column key="mp4_url" header="视频地址" classType="String" allowSort="true" width="150"/>
-        <column key="ptime" header="更新时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
-        <column key="videosource" header="来源" classType="String" allowSort="true" width="150"/>
-        <column key="topicName" header="主题" classType="String" allowSort="true" width="150"/>
-        <column key="votecount" header="赞" classType="Integer" allowSort="true" width="150"/>
-        <column key="replyCount" header="评论" classType="Integer" allowSort="true" width="150"/>
-        <column key="replyid" header="replyid" classType="String" allowSort="true" width="150"/>
-</query>
-
- 
- 
  
 
-<!--本xml片段为代码生成器生成，时间：2018-06-04 00:08:17-->
-<query id="articles" key="id" tableName="百问百答列表" className="com.app.demos.entity.Articles" widthType="px">
-        <column key="rowIndex" header="序号" width="80"/>
-        <column key="title" header="标题"  align="left"  classType="String" allowSort="true" operator="like" width="150"/>
-        <column key="digest" header="摘要" align="left" classType="String" allowSort="true" operator="like" width="150"/>
-        <column key="body" header="内容" hidden="true" classType="String" allowSort="true" width="150"/>
-        <column key="imgsrc" header="缩略图" classType="String" allowSort="true" width="150"/>
-        <column key="lmodify" header="更新" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
-        <column key="source" header="来源" classType="String" allowSort="true" width="150"/>
-        <column key="scope.name" header="分类" classType="Dict" allowSort="true" width="150"/>
-        <column key="product.name" header="产品" classType="Dict" allowSort="true" width="150"/>
-        <column key="votecount" header="赞" classType="Integer" allowSort="true" width="150"/>
-        <column key="replyCount" header="评论" classType="Integer" allowSort="true" width="150"/>
-</query>
+ 
+ 
+  
  
 
 <!--本xml片段为代码生成器生成，时间：2018-06-04 10:30:32-->
-<query id="articles" key="id" tableName="百问百答列表" className="com.app.demos.entity.Articles" widthType="px">
+<query id="articles" key="id" tableName="知识列表" className="com.app.demos.entity.Articles" widthType="px">
         <column key="rowIndex" header="序号" width="80"/>
         <column key="title" header="标题" align="left"  classType="String" allowSort="true" operator="like" width="150"/>
         <column key="digest" header="摘要" align="left"  classType="String" allowSort="true" operator="like" width="150"/>
         <column key="body" header="内容" hidden="true" classType="String" allowSort="true" width="150"/>
-        <column key="imgsrc" header="缩略图" hidden="true" classType="String" allowSort="true" width="150"/>
+        <column key="image" header="缩略图"  classType="String" allowSort="true" width="150" fnRender="fnRenderImage" />
         <column key="lmodify" header="时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
         <column key="source" header="来源" classType="String" allowSort="true" width="150"/>
         <column key="scope.name" header="分类" classType="Dict" allowSort="true" operator="eq" width="150"/>
         <column key="product.name" header="产品" classType="Dict" allowSort="true" operator="eq" width="150"/>
         <column key="votecount" header="赞" classType="Integer" allowSort="true" width="150"/>
         <column key="replyCount" header="评论" classType="Integer" allowSort="true" width="150"/>
+</query>
+ 
+
+
+<!--本xml片段为代码生成器生成，时间：2018-06-04 15:38:29-->
+<query id="videos" key="id" tableName="培训视频列表" className="com.app.demos.entity.Videos" widthType="px">
+        <column key="rowIndex" header="序号" width="80"/>
+        <column key="title" header="标题" classType="String" allowSort="true" width="150"/>
+        <column key="content" header="内容" hidden="true" classType="String" allowSort="true" width="150"/>
+        <column key="cover" header="缩略图地址" classType="String" allowSort="true" fnRender="fnRenderImage" width="150"/>
+        <column key="mp4_url" header="视频地址" classType="String" allowSort="true" fnRender="fnRenderVideoPlayButton" width="150"/>
+        <column key="topicName" header="主题" classType="String" allowSort="true" width="150"/>
+        <column key="votecount" header="赞" classType="Integer" allowSort="true" width="150"/>
+        <column key="replyCount" header="评论数" classType="Integer" allowSort="true" width="150"/>
 </query>
 </queryContext>

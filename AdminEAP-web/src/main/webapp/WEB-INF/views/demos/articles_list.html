@@ -1,7 +1,7 @@
 <!-- 以下代码为代码生成器生成，生成时间: 2018-06-04 10:30:32，作者：billjiang/475572229@qq.com-->
 <section class="content-header">
     <h1>
-        百问百答管理
+        知识管理
         <small>列表</small>
     </h1>
     <ol class="breadcrumb">
@@ -22,11 +22,12 @@
                                            class="form-control" id="title" operator="like" likeOption="true">
                     <input type="search" placeholder="请输入摘要" title="摘要" name="digest"
                                            class="form-control" id="digest" operator="like" likeOption="true">
-                     <select  placeholder="选择内容" class="form-control select2"   name="scope.id" data-flag="dictSelector" data-code="SCOPE" data-value="code" style="width: 120px;"  data-placeholder="选择内容"   data-blank="true"></select>
+                  
+                   <select  placeholder="选择内容" class="form-control select2"  id="scope_code"   name="scope.code" data-flag="dictSelector" data-code="SCOPE" data-value="code" style="width: 120px;"  data-placeholder="选择内容"   data-blank="true"></select>
                  
-  <select name="product.id" id="product.id" title="选择产品" 
-  data-flag="dictSelector" data-code="PRODUCT"  data-value="code"
-  data-placeholder="选择产品" class="form-control select2" style="width: 120px;" data-blank="true"></select>
+                  <select name="product.code" id="product_code" title="选择产品" 
+                  data-flag="dictSelector" data-code="PRODUCT"  data-value="code"
+                  data-placeholder="选择产品" class="form-control select2" style="width: 120px;" data-blank="true"></select>
 
 
                     <div class="btn-group">
@@ -34,7 +35,7 @@
                         <button type="button" class="btn btn-default" data-btn-type="reset">重置</button>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-success" data-btn-type="add"><i class="fa fa-pencil"> </i>新增百问百答</button>
+                        <button type="button" class="btn btn-success" data-btn-type="add"><i class="fa fa-pencil"> </i>新增知识</button>
                         <button type="button" class="btn btn-info" data-btn-type="edit">编辑</button>
                         <button type="button" class="btn btn-danger" data-btn-type="delete">删除</button>
                     </div>

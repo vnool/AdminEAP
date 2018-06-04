@@ -14,10 +14,38 @@
         <div class="box-body">
             <div class="col-md-12">
                 <div class="form-group">
+                    <label class="col-sm-3 control-label">标题<span style="color:red">*</span></label> 
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="请填写标题">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-3 control-label">内容<span style="color:red">*</span></label> 
 
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="content" name="content" placeholder="请填写内容">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">缩略图<span style="color:red">*</span></label> 
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cover" name="cover" placeholder="请填写缩略图">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">视频地址<span style="color:red">*</span></label> 
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="mp4_url" name="mp4_url" placeholder="请填写视频地址">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">主题<span style="color:red">*</span></label> 
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="topicName" name="topicName" placeholder="请填写主题">
                     </div>
                 </div>
                 <div class="form-group">
@@ -73,9 +101,29 @@
                 });
             },
             fields : {
+                "title":{
+                    validators:{
+                        notEmpty:{message:'标题不能为空'}
+                    }
+                },
                 "content":{
                     validators:{
                         notEmpty:{message:'内容不能为空'}
+                    }
+                },
+                "cover":{
+                    validators:{
+                        notEmpty:{message:'缩略图不能为空'}
+                    }
+                },
+                "mp4_url":{
+                    validators:{
+                        notEmpty:{message:'视频地址不能为空'}
+                    }
+                },
+                "topicName":{
+                    validators:{
+                        notEmpty:{message:'主题不能为空'}
                     }
                 },
                 "votecount":{

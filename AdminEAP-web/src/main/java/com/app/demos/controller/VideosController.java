@@ -22,9 +22,9 @@ import com.cnpc.framework.base.pojo.Result;
 import com.app.demos.entity.Videos;
 
 /**
-* 视频教程管理控制器
+* 培训视频管理控制器
 * @author jrn
-* 2018-05-31 11:08:43由代码生成器自动生成
+* 2018-06-04 15:38:29由代码生成器自动生成
 */
 @Controller
 @RequestMapping("/videos")

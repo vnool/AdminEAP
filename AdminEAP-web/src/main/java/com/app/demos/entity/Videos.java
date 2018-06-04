@@ -20,7 +20,7 @@ import java.util.Date;
  * Created by dingchengliang
  */
 @Entity 
-@Model(id = "videos", name = "视频教程", parentMenu="T")
+@Model(id = "videos", name = "培训视频", parentMenu="TOOL")
 @Table(name = "edu_videos")
 public class Videos extends BaseEntity {
 
@@ -32,6 +32,7 @@ public class Videos extends BaseEntity {
 	private String vid;
 	
 	@Header(name = "标题")
+	@Column(name = "title")
 	public String title;
 	
 	
@@ -42,10 +43,12 @@ public class Videos extends BaseEntity {
 	@Column(name = "content", length = 1024)
 	public String content;
 
-	@Header(name = "缩略图", tagType = "image")
+	@Header(name = "缩略图", tagType = "imageurl")
+	@Column(name = "cover")
 	public String cover;
 	
-	@Header(name = "视频地址", tagType = "video")
+	@Header(name = "视频地址", tagType = "videourl")
+	@Column(name = "mp4_url")
 	public String mp4_url;
 	
 
