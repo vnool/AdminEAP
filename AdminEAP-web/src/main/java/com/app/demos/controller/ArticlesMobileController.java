@@ -122,12 +122,14 @@ public class ArticlesMobileController {
 			m.put("mtime", mtime);
 			m.put("ptime", mtime);
 			m.put("postid", m.get("id"));
+			m.remove("body");
 
 			String imgsrc = (String) m.get("imgsrc");
 			if (!StringUtil.isEmpty(imgsrc)) {
 				imgsrc = UploaderController.getFileURL(imgsrc, request);
 			}
 			m.put("imgsrc", imgsrc);
+			
 
 			String imgextra = (String) m.get("imgextra");
 			if (!StringUtil.isEmpty(imgextra)) {

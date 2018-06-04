@@ -31,7 +31,7 @@
 <!--本xml片段为代码生成器生成，时间：2018-06-04 15:38:29-->
 <query id="videos" key="id" tableName="培训视频列表" className="com.app.demos.entity.Videos" widthType="px">
         <column key="rowIndex" header="序号" width="80"/>
-        <column key="title" header="标题" classType="String" allowSort="true" width="150"/>
+        <column key="title" header="标题" classType="String" allowSort="true" />
         <column key="content" header="内容" hidden="true" classType="String" allowSort="true" width="150"/>
         <column key="cover" header="缩略图地址" classType="String" allowSort="true" fnRender="fnRenderImage" width="150"/>
         <column key="mp4_url" header="视频地址" classType="String" allowSort="true" fnRender="fnRenderVideoPlayButton" width="150"/>
