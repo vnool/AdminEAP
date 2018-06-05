@@ -63,11 +63,11 @@ public class ArticlesMobileController {
 		JSONArray imgextraList = new JSONArray();
 		if (StringUtil.isEmpty(imgextra)) {
 			imgextra = imgsrc;
-		}else if(!StringUtil.isEmpty(imgsrc)){
+		} else if (!StringUtil.isEmpty(imgsrc)) {
 			imgextra = imgsrc.concat(",").concat(imgextra);
 		}
-		if (!StringUtil.isEmpty(imgextra)  ) {
-			
+		if (!StringUtil.isEmpty(imgextra)) {
+
 			String[] imglist = imgextra.trim().split(",");
 			int i = 0;
 			for (String img : imglist) {
@@ -91,16 +91,17 @@ public class ArticlesMobileController {
 		return mo;
 	}
 
-	@RequestMapping(value = "/article/{type}/{id}/{startPage}-{pageSize}-html", method = RequestMethod.GET)
+	@RequestMapping(value = "/article/{products}/{scope}/{startPage}-{pageSize}-html", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> getlist(@PathVariable String type, @PathVariable String id,
-			@PathVariable String startPage, @PathVariable String pageSize, HttpServletRequest request) {
+	public Map<String, Object> getlist(@PathVariable String products, @PathVariable String scope,
+			@PathVariable int startPage, @PathVariable int pageSize, HttpServletRequest request) {
 
-		String reqObj = "{\"queryId\":\"articles\",\"pageInfo\":null,\"query\":null,\"conditions\":[]}";
+		String reqObj = QueryString(products, scope, startPage, pageSize);
+
 		Map<String, Object> data;
 		try {
 			data = queryService.loadData(reqObj);
-			data.put(id, PureData((ArrayList<Articles>) data.get("rows"), request));
+			data.put(scope, PureData((ArrayList<Articles>) data.get("rows"), request));
 			// data.put(id, data.get("rows"));
 			data.remove("rows");
 			data.remove("query");
@@ -122,6 +123,10 @@ public class ArticlesMobileController {
 			m.put("mtime", mtime);
 			m.put("ptime", mtime);
 			m.put("postid", m.get("id"));
+			String body = m.getString("body");
+			if (m.getString("digest").length() < 3 && !StringUtil.isEmpty(body)) {
+				m.put("digest", body.substring(0, 20));
+			}
 			m.remove("body");
 
 			String imgsrc = (String) m.get("imgsrc");
@@ -129,7 +134,6 @@ public class ArticlesMobileController {
 				imgsrc = UploaderController.getFileURL(imgsrc, request);
 			}
 			m.put("imgsrc", imgsrc);
-			
 
 			String imgextra = (String) m.get("imgextra");
 			if (!StringUtil.isEmpty(imgextra)) {
@@ -148,6 +152,38 @@ public class ArticlesMobileController {
 			list.add(m);
 		}
 		return list;
+	}
+
+	String QueryString(String products, String scope, int startPage, int pageSize) {
+		// String reqObj =
+		// "{\"queryId\":\"articles\",\"pageInfo\":null,\"query\":null,\"conditions\":[]}";
+		JSONObject reqJs = new JSONObject();
+		reqJs.put("queryId", "articles");
+		JSONArray conditions = new JSONArray();
+		JSONObject sp = new JSONObject();
+		sp.put("key", "scope.code");
+		sp.put("value", scope);
+		sp.put("isCondition", true);
+		conditions.add(sp);
+
+		if (!products.equals("ALL")) { // 非all
+			JSONObject pdjs = new JSONObject();
+			pdjs.put("key", "product.code");
+			pdjs.put("value", products);
+			pdjs.put("isCondition", true);
+			pdjs.put("operator", "in");
+			conditions.add(pdjs);
+		}
+
+		reqJs.put("conditions", conditions);
+
+		JSONObject page = new JSONObject();
+		page.put("pageNum", startPage / pageSize + 1);
+		page.put("pageSize", pageSize);
+		reqJs.put("pageInfo", page);
+
+		return reqJs.toJSONString();
+
 	}
 
 	String dateString(Date object) {
