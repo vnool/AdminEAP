@@ -43,6 +43,15 @@
     </div>
 </section>
 
+<style type="text/css">
+tbody td{ /*  display:block; */
+    width:31em;
+    word-break:keep-all; 
+    white-space:nowrap; 
+    overflow:hidden; 
+    text-overflow:ellipsis;
+    }
+</style>
 <script>
 
 
@@ -96,11 +105,14 @@
     })
 
 
-    function fnRenderPaperOperator(v, a){
-       console.log(v);
+    function fnRenderPaperOperator(id, a){
+       //console.log(v);
        console.log(a);
-       return  "<button class='btn btn-info' onclick='editPaperQuestions(\""+ v +"\");return false;'> 考题</button>"
-       +  "<a class='btn btn-success'  href=''> 浏览</a>";
+       var editUrl = "resources/surveyeditor/example/index.html#" + id;
+       var showUrl = "";
+       var html =  "<a class='btn btn-info' href='"+editUrl+"' target=_blank>编辑考题</a>"
+       +  "<a class='btn btn-success' href='"+showUrl+"' target=_blank>预览</a>";
+       return html;
     }
 
     function editPaperQuestions(id){

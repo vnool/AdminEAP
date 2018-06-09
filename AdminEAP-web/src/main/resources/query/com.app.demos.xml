@@ -45,16 +45,17 @@
         <column key="rowIndex" header="序号" width="80"/>
         <column key="title" header="标题" align="left" classType="String" allowSort="true" operator="like" width="150"/>
         <column key="digest" header="描述" align="left" classType="String" allowSort="true" operator="like" width="150"/>
-        <column key="pages" header="题目数" classType="String" align="left" allowSort="false" width="150"  />
+        <column key="pagecount" header="题数" classType="String" align="left" allowSort="false" width="150"  />
          
         <column key="starttime" header="开始时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
         <column key="deadline" header="结束时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
-        <column key="modify" header="出题时间" hidden="true" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
+       
         <column key="source" header="出题人" classType="String" allowSort="true" width="150"/>
         <column key="product.name" header="产品" classType="Dict" allowSort="true" operator="eq" width="150"/>
-        <column key="answercount" header="答题人数" classType="Integer" allowSort="true" width="150"/>
-        <column key="allowcount" header="允许重复次数" classType="Integer" allowSort="true" width="150"/>
+        <column key="studentcount" header="答题人数" classType="Integer" allowSort="true" width="150"/>
+        <column key="allowcount" header="重考上限" classType="Integer" allowSort="true" width="150"/>
         <column key="randomindex" header="随机题序" classType="Boolean" allowSort="true" width="150"/>
+        <column key="modify" header="出题时间"  classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
         <column key="id" header="操作" width="150" fnRender="fnRenderPaperOperator"/>
 </query>
 

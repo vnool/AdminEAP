@@ -37,6 +37,20 @@ public class Papers extends BaseEntity {
 	@Column(name = "pages", length = 10240)
 	public String pages;
 	
+	@Header(name = "题目数",  width = 100)
+	@Column(name = "pagecount")
+	public Integer pagecount;
+	
+	public Integer getPagecount() {
+		return pagecount;
+	}
+
+
+	public void setPagecount(Integer pagecount) {
+		this.pagecount = pagecount;
+	}
+
+
 	@Header(name = "答案",   width = 150)
 	@Column(name = "correct", length = 10240)
 	public String correct;
@@ -82,8 +96,8 @@ public class Papers extends BaseEntity {
 	
 
 	@Header(name = "答题人数")
-	@Column(name = "answercount", columnDefinition = "BIGINT default 0")
-	private Integer answercount;
+	@Column(name = "studentcount", columnDefinition = "BIGINT default 0")
+	private Integer studentcount;
  
     @Header(name = "允许答题次数")
 	@Column(name = "allowcount", columnDefinition = "BIGINT default 0")
@@ -185,13 +199,13 @@ public class Papers extends BaseEntity {
 	}
 
 
-	public Integer getAnswercount() {
-		return answercount;
+	public Integer getStudentcount() {
+		return studentcount;
 	}
 
 
-	public void setAnswercount(Integer answercount) {
-		this.answercount = answercount;
+	public void setStudentcount(Integer answercount) {
+		this.studentcount = answercount;
 	}
 
 

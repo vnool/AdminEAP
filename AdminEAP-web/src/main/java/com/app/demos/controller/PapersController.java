@@ -49,7 +49,7 @@ public class PapersController {
     @RequestMapping(value="/editpaper",method = RequestMethod.GET)
     public String editpaper(String id,HttpServletRequest request){
         request.setAttribute("id", id);
-        return "demos/papers_edit";
+        return "../../resources/surveyeditor/example/index";
     }
 
     @RequestMapping(value="/detail",method = RequestMethod.GET)
@@ -58,7 +58,7 @@ public class PapersController {
         return "demos/papers_detail";
     }
 
-    @RequestMapping(value="/get/{id}",method = RequestMethod.POST)
+    @RequestMapping(value="/get/{id}")
     @ResponseBody
     public Papers get(@PathVariable("id") String id){
         return baseService.get(Papers.class, id);
