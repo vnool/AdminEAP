@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>神锤大学--试卷生成器 </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/worker-json.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/mode-json.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="../node_modules/surveyjs-editor/node_modules/knockout/build/output/knockout-latest.debug.js"></script>
+
+    <script type="text/javascript" src="../../adminlte/plugins/jQuery/jQuery-2.2.0.js"></script>
+    <!-- <script src="https://unpkg.com/jquery"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> -->
+
+  <!--   <script src="https://unpkg.com/survey-knockout"></script> -->
+  <!--   <link rel="stylesheet" href="https://unpkg.com/survey-knockout/survey.css" /> -->
+
+    <script src="../node_modules/surveyjs-editor/node_modules/survey-knockout/survey.ko.js"></script>
+    <link rel="stylesheet" href="../node_modules/surveyjs-editor/node_modules/survey-knockout/survey.css" />
+
+
+
+    <script src="../node_modules/surveyjs-editor/surveyeditor.js"></script>
+    <link rel="stylesheet" href="../node_modules/surveyjs-editor/surveyeditor.css" />
+</head>
+
+<body>
+    <div id="manage" data-bind="template: 'surveys-manage'"></div>
+    <div id="editorElement"></div>
+</body>
+<script src="index.js"></script>
+
+<style type="text/css">
+  span.svda-title-editor-content input {
+    width: 300px !important;
+  }
+  button.svd_save_btn{
+    background-color: #f0ad4e !important;
+    border-color: #eea236 !important;}
+</style>
+</html>

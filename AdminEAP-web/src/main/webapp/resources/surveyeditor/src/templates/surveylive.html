@@ -1,0 +1,11 @@
+<script type="text/html" id="surveylive">
+    <div data-bind="visible: koIsRunning() && koPages().length > 1">
+        <label for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
+        <span id="testSurveyPageChanged">
+            <select class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
+        </span>
+    </div>
+    <survey-widget params="survey: koSurvey"></survey-widget>
+    <div data-bind="text: koResultText, visible: koIsRunning() == false"></div>
+    <button data-bind="visible: koIsRunning() == false, click:selectTestClick, text: testSurveyAgainText">Test Again</button>
+</script>

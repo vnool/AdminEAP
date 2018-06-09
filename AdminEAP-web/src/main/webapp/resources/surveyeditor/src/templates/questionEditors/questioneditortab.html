@@ -1,0 +1,13 @@
+﻿<script type="text/html" id="questioneditortab">
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- ko foreach: properties.rows -->
+            <div class="form-group">
+                <!-- ko foreach: properties -->
+                    <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } --><!-- /ko -->
+                <!-- /ko  -->
+            </div>
+            <!-- /ko  -->
+        </div>
+    </div>
+</script>

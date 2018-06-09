@@ -1,0 +1,43 @@
+.svda-question-actions {
+  position: absolute;
+  right: 15px;
+  top: -30px;
+  left: 15px;
+  text-align: right;
+  line-height: 30px;
+
+  .svda_current_type {
+    font-weight: 700;
+    cursor: auto;
+  }
+
+  select.svda_current_type {
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    &:focus {
+      border: none;
+      outline: none;
+    }
+  }
+}
+
+question-actions {
+  display: none;
+  .svda_question_action {
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 1em;
+  }
+}
+.svd_q_selected > .svda-question-actions {
+  question-actions {
+    display: block;
+  }
+
+  .svda_action_separator {
+    margin-left: 15px;
+    margin-top: -5px;
+  }
+}
