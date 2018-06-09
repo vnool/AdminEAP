@@ -96,10 +96,11 @@
     })
 
 
-    function fnRenderPaperEditButton(v, a){
+    function fnRenderPaperOperator(v, a){
        console.log(v);
        console.log(a);
-       return "已有20题"+"<button class='btn btn-success' onclick='editPaperQuestions(\""+ v +"\");return false;'> 编辑</button>";
+       return  "<button class='btn btn-info' onclick='editPaperQuestions(\""+ v +"\");return false;'> 考题</button>"
+       +  "<a class='btn btn-success'  href=''> 浏览</a>";
     }
 
     function editPaperQuestions(id){

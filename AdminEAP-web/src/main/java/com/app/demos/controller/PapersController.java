@@ -47,9 +47,9 @@ public class PapersController {
 
     @RefreshCSRFToken
     @RequestMapping(value="/editpaper",method = RequestMethod.GET)
-    public String edit(String id,HttpServletRequest request){
+    public String editpaper(String id,HttpServletRequest request){
         request.setAttribute("id", id);
-        return "demos/papers_editpaper";
+        return "demos/papers_edit";
     }
 
     @RequestMapping(value="/detail",method = RequestMethod.GET)
