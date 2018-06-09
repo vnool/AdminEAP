@@ -21,3 +21,4 @@ AdminEAP-web/target/*
 
 .DS_Store
 .DS_Store
+AdminEAP-web/src/main/resources/jdbc.properties

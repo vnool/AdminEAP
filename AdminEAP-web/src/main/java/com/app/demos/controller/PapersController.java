@@ -19,57 +19,63 @@ import com.cnpc.framework.base.service.BaseService;
 import com.cnpc.framework.annotation.RefreshCSRFToken;
 import com.cnpc.framework.annotation.VerifyCSRFToken;
 import com.cnpc.framework.base.pojo.Result;
-import com.app.demos.entity.Videos;
+import com.app.demos.entity.Papers;
 
 /**
-* 培训视频管理控制器
+* 试卷管理控制器
 * @author jrn
-* 2018-06-06 16:22:42由代码生成器自动生成
+* 2018-06-09 15:14:56由代码生成器自动生成
 */
 @Controller
-@RequestMapping("/videos")
-public class VideosController {
+@RequestMapping("/papers")
+public class PapersController {
 
     @Resource
     private BaseService baseService;
 
     @RequestMapping(value="/list",method = RequestMethod.GET)
     public String list(){
-        return "demos/videos_list";
+        return "demos/papers_list";
     }
 
     @RefreshCSRFToken
     @RequestMapping(value="/edit",method = RequestMethod.GET)
     public String edit(String id,HttpServletRequest request){
         request.setAttribute("id", id);
-        return "demos/videos_edit";
+        return "demos/papers_edit";
+    }
+
+    @RefreshCSRFToken
+    @RequestMapping(value="/editpaper",method = RequestMethod.GET)
+    public String edit(String id,HttpServletRequest request){
+        request.setAttribute("id", id);
+        return "demos/papers_editpaper";
     }
 
     @RequestMapping(value="/detail",method = RequestMethod.GET)
     public String detail(String id,HttpServletRequest request){
         request.setAttribute("id", id);
-        return "demos/videos_detail";
+        return "demos/papers_detail";
     }
 
     @RequestMapping(value="/get/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public Videos get(@PathVariable("id") String id){
-        return baseService.get(Videos.class, id);
+    public Papers get(@PathVariable("id") String id){
+        return baseService.get(Papers.class, id);
     }
 
     @VerifyCSRFToken
     @RequestMapping(value="/save")
     @ResponseBody
     public Result save(String obj){
-        Videos videos= JSON.parseObject(obj,Videos.class);
-        videos.setScope(baseService.get(Dict.class,videos.getScope().getId()));
-        videos.setProduct(baseService.get(Dict.class,videos.getProduct().getId()));
-        if(StrUtil.isEmpty(videos.getId())){
-            baseService.save(videos);
+        Papers papers= JSON.parseObject(obj,Papers.class);
+        papers.setProduct(baseService.get(Dict.class,papers.getProduct().getId()));
+        if(StrUtil.isEmpty(papers.getId())){
+            baseService.save(papers);
         }
         else{
-            videos.setUpdateDateTime(new Date());
-            baseService.update(videos);
+            papers.setUpdateDateTime(new Date());
+            baseService.update(papers);
         }
         return new Result(true);
     }
@@ -79,9 +85,9 @@ public class VideosController {
     @RequestMapping(value="/delete/{id}",method = RequestMethod.POST)
     @ResponseBody
     public Result delete(@PathVariable("id") String id){
-        Videos videos=this.get(id);
+        Papers papers=this.get(id);
         try{
-            baseService.delete(videos);
+            baseService.delete(papers);
             return new Result();
         }
         catch(Exception e){

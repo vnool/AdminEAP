@@ -1,0 +1,201 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><li class="fa fa-remove"></li></button>
+    <h5 class="modal-title"></h5>
+</div>
+
+<div class="modal-body">
+    <form id="papers_form" name="papers_form" class="form-horizontal" 
+           >
+        <input type="hidden" name="id">
+        <input type="hidden" name="version">
+        <input type="hidden" name="createDateTime" data-flag="date" data-format="yyyy-mm-dd hh:ii:ss">
+        <input type="hidden" name="deleted" value="0">
+        <input type='hidden' value="${CSRFToken}" id='csrftoken'>
+        <div class="box-body">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">标题<span style="color:red">*</span></label> 
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="请填写标题">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">描述<span style="color:red">*</span></label> 
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="digest" name="digest" placeholder="请填写描述">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">题目<span style="color:red">*</span></label> 
+
+                    <div class="col-sm-8">
+                       另外的页面编辑
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">开考时间<span style="color:red">*</span></label> 
+
+                    <div class="input-group col-sm-8">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="text" placeholder="请填写开始时间" name="starttime" id="starttime" data-flag="datepicker" class="form-control" data-format="yyyy-mm-dd">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">结束时间<span style="color:red">*</span></label> 
+
+                    <div class="input-group col-sm-8">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="text" placeholder="请填写结束时间" name="deadline" id="deadline" data-flag="datepicker" class="form-control" data-format="yyyy-mm-dd">
+                    </div>
+                </div>
+             
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">出题人<span style="color:red">*</span></label> 
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="source" name="source" placeholder="请填写来源">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">产品<span style="color:red">*</span></label> 
+
+                    <div class="col-sm-8">
+                        <input type="radio" name="product.id" data-flag="dictSelector" data-code="PRODUCT">
+                    </div>
+                </div>
+             
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">允许重复答题次数<span style="color:red">*</span></label> 
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="allowcount" name="allowcount" placeholder="请填写允许答题次数">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">随机题序<span style="color:red">*</span></label> 
+
+                    <div class="col-sm-8">
+                        <label class="control-label"> <input type="radio" name="randomindex" data-flag="icheck" class="square-blue" value="1"> 是</label> &nbsp;
+                        <label class="control-label"> <input type="radio" name="randomindex" data-flag="icheck" class="square-blue" value="0"> 否</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer text-right">
+            <button type="button" class="btn btn-default" data-btn-type="cancel" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary" data-btn-type="save">提交</button>
+        </div>
+    </form>
+</div>
+<script>
+    var form;
+    var id="${id?default(0)}";
+    $(function(){
+        //初始化表单
+        form=$("#papers_form").form();
+        //数据校验
+        $("#papers_form").bootstrapValidator({
+            message : '请输入有效值',
+            feedbackIcons : {
+                valid : 'glyphicon glyphicon-ok',
+                invalid : 'glyphicon glyphicon-remove',
+                validating : 'glyphicon glyphicon-refresh'
+            },
+            submitHandler : function() {
+                modals.confirm('确认保存？', function() {
+                    var papers = form.getFormSimpleData();
+                    ajaxPost(basePath+'/papers/save',{"obj":JSON.stringify(papers)}, function(data) {
+                        if(data.success){
+                            if(id!="0"){
+                                modals.hideWin(winId);
+                                papersTable.reloadRowData(id);
+                            }else{
+                                modals.hideWin(winId);
+                                papersTable.reloadData();
+                            }
+                        }
+                    });
+                });
+            },
+            fields : {
+                "title":{
+                    validators:{
+                        notEmpty:{message:'标题不能为空'}
+                    }
+                },
+                "digest":{
+                    validators:{
+                        notEmpty:{message:'描述不能为空'}
+                    }
+                },
+                "pages":{
+                    validators:{
+                        notEmpty:{message:'题目不能为空'}
+                    }
+                },
+                "correct":{
+                    validators:{
+                        notEmpty:{message:'答案不能为空'}
+                    }
+                },
+                "starttime":{
+                    validators:{
+                        notEmpty:{message:'开始时间不能为空'},
+date:{format:$(this).data('format'),message:'请输入有效开始时间'}
+                    }
+                },
+                "deadline":{
+                    validators:{
+                        notEmpty:{message:'结束时间不能为空'},
+date:{format:$(this).data('format'),message:'请输入有效结束时间'}
+                    }
+                },
+                "modify":{
+                    validators:{
+                        notEmpty:{message:'更新时间不能为空'},
+date:{format:$(this).data('format'),message:'请输入有效更新时间'}
+                    }
+                },
+                "source":{
+                    validators:{
+                        notEmpty:{message:'来源不能为空'}
+                    }
+                },
+                "product.id":{
+                    validators:{
+                        notEmpty:{message:'产品不能为空'}
+                    }
+                },
+                "answercount":{
+                    validators:{
+                        notEmpty:{message:'答题人数不能为空'},
+integer:{message:'请填写整数'}
+                    }
+                },
+                "allowcount":{
+                    validators:{
+                        notEmpty:{message:'允许答题次数不能为空'},
+integer:{message:'请填写整数'}
+                    }
+                },
+                "randomindex":{
+                    validators:{
+                        notEmpty:{message:'随机题序不能为空'}
+                    }
+                }
+            }
+        });
+        //初始化控件
+        form.initComponent();
+        //编辑回填
+        if(id!=0){
+            ajaxPost(basePath+"/papers/get/"+id,null,function(data){
+                form.initFormData(data);
+            })
+        }
+    });
+  
+</script>
+

@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <queryContext xmlns="http://www.example.org/query" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/query query.xsd">
   
-
   
-
- 
-
- 
- 
-  
- 
-
 <!--本xml片段为代码生成器生成，时间：2018-06-04 10:30:32-->
 <query id="articles" key="id" tableName="知识列表" className="com.app.demos.entity.Articles" widthType="px">
         <column key="rowIndex" header="序号" width="80"/>
@@ -27,16 +18,55 @@
 </query>
  
 
+ 
 
-<!--本xml片段为代码生成器生成，时间：2018-06-04 15:38:29-->
+
+ 
+
+<!--本xml片段为代码生成器生成，时间：2018-06-06 16:22:42-->
 <query id="videos" key="id" tableName="培训视频列表" className="com.app.demos.entity.Videos" widthType="px">
         <column key="rowIndex" header="序号" width="80"/>
-        <column key="title" header="标题" classType="String" allowSort="true" />
+        <column key="title" header="标题" classType="String" allowSort="true" width="150"/>
+        <column key="description" header="摘要" classType="String" allowSort="true" width="150"/>
         <column key="content" header="内容" hidden="true" classType="String" allowSort="true" width="150"/>
-        <column key="cover" header="缩略图地址" classType="String" allowSort="true" fnRender="fnRenderImage" width="150"/>
+        <column key="cover" header="缩略图" classType="String" allowSort="true" fnRender="fnRenderImage" width="150"/>
         <column key="mp4_url" header="视频地址" classType="String" allowSort="true" fnRender="fnRenderVideoPlayButton" width="150"/>
         <column key="topicName" header="主题" classType="String" allowSort="true" width="150"/>
+        <column key="topicImg" header="头像" classType="String" allowSort="true" width="150" fnRender="fnRenderImage" />
         <column key="votecount" header="赞" classType="Integer" allowSort="true" width="150"/>
         <column key="replyCount" header="评论数" classType="Integer" allowSort="true" width="150"/>
+        <column key="scope.name" header="分类" classType="Dict" allowSort="true" operator="eq" width="150"/>
+        <column key="product.name" header="产品" classType="Dict" allowSort="true" operator="eq" width="150"/>
+</query>
+
+
+<!--本xml片段为代码生成器生成，时间：2018-06-09 15:14:56-->
+<query id="papers" key="id" tableName="试卷列表" className="com.app.demos.entity.Papers" widthType="px">
+        <column key="rowIndex" header="序号" width="80"/>
+        <column key="title" header="标题" align="left" classType="String" allowSort="true" operator="like" width="150"/>
+        <column key="digest" header="描述" align="left" classType="String" allowSort="true" operator="like" width="150"/>
+        <column key="pages" header="题目" classType="String" align="left" allowSort="false" width="150" fnRender="fnRenderPaperEditButton" />
+         
+        <column key="starttime" header="开始时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
+        <column key="deadline" header="结束时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
+        <column key="modify" header="出题时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
+        <column key="source" header="出题人" classType="String" allowSort="true" width="150"/>
+        <column key="product.name" header="产品" classType="Dict" allowSort="true" operator="eq" width="150"/>
+        <column key="answercount" header="答题人数" classType="Integer" allowSort="true" width="150"/>
+        <column key="allowcount" header="允许重复次数" classType="Integer" allowSort="true" width="150"/>
+        <column key="randomindex" header="随机题序" classType="Boolean" allowSort="true" width="150"/>
+</query>
+
+
+<!--本xml片段为代码生成器生成，时间：2018-06-09 15:18:31-->
+<query id="score" key="id" tableName="考试成绩列表" className="com.app.demos.entity.Score" widthType="px">
+        <column key="rowIndex" header="序号" width="80"/>
+        <column key="name" header="姓名" classType="String" allowSort="true" operator="like" width="150"/>
+        <column key="uid" header="用户id" classType="String" allowSort="true" width="150"/>
+        <column key="score" header="成绩" classType="Integer" allowSort="true" width="150"/>
+        <column key="paperid" header="试卷id" classType="String" allowSort="true" width="150"/>
+        <column key="answer" header="回答" classType="String" allowSort="true" width="150"/>
+        <column key="createtime" header="考试时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
+        <column key="product.name" header="产品" classType="Dict" allowSort="true" operator="eq" width="150"/>
 </query>
 </queryContext>

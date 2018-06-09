@@ -55,7 +55,7 @@ public class ArticlesMobileController {
 		JSONObject m = (JSONObject) JSON.toJSON(art);
 		m.put("shareLink", baseurl + "xxxx");
 		m.put("body", m.get("body").toString().replaceAll("\n", "<br>"));
-		String mtime = dateString((Date) m.get("lmodify"));
+		String mtime = QueryConditions.dateString((Date) m.get("lmodify"));
 		m.put("ptime", mtime);
 
 		String imgextra = (String) m.get("imgextra");
@@ -96,7 +96,7 @@ public class ArticlesMobileController {
 	public Map<String, Object> getlist(@PathVariable String products, @PathVariable String scope,
 			@PathVariable int startPage, @PathVariable int pageSize, HttpServletRequest request) {
 
-		String reqObj = QueryString(products, scope, startPage, pageSize);
+		String reqObj = QueryConditions.QueryString("articles",products, scope, startPage, pageSize);
 
 		Map<String, Object> data;
 		try {
@@ -118,7 +118,7 @@ public class ArticlesMobileController {
 		ArrayList<Object> list = new ArrayList<Object>();
 		for (Articles art : articlelist) {
 			JSONObject m = (JSONObject) JSON.toJSON(art);
-			String mtime = dateString((Date) m.get("lmodify"));
+			String mtime = QueryConditions.dateString((Date) m.get("lmodify"));
 			m.put("lmodify", mtime);
 			m.put("mtime", mtime);
 			m.put("ptime", mtime);
@@ -154,42 +154,5 @@ public class ArticlesMobileController {
 		return list;
 	}
 
-	String QueryString(String products, String scope, int startPage, int pageSize) {
-		// String reqObj =
-		// "{\"queryId\":\"articles\",\"pageInfo\":null,\"query\":null,\"conditions\":[]}";
-		JSONObject reqJs = new JSONObject();
-		reqJs.put("queryId", "articles");
-		JSONArray conditions = new JSONArray();
-		JSONObject sp = new JSONObject();
-		sp.put("key", "scope.code");
-		sp.put("value", scope);
-		sp.put("isCondition", true);
-		conditions.add(sp);
-
-		if (!products.equals("ALL")) { // 非all
-			JSONObject pdjs = new JSONObject();
-			pdjs.put("key", "product.code");
-			pdjs.put("value", products);
-			pdjs.put("isCondition", true);
-			pdjs.put("operator", "in");
-			conditions.add(pdjs);
-		}
-
-		reqJs.put("conditions", conditions);
-
-		JSONObject page = new JSONObject();
-		page.put("pageNum", startPage / pageSize + 1);
-		page.put("pageSize", pageSize);
-		reqJs.put("pageInfo", page);
-
-		return reqJs.toJSONString();
-
-	}
-
-	String dateString(Date object) {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		String dateString = formatter.format(object);
-		return dateString;
-	}
 
 }

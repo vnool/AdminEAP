@@ -6,9 +6,6 @@ import com.cnpc.framework.base.entity.BaseEntity;
 import com.cnpc.framework.base.entity.Dict;
 import com.cnpc.framework.base.entity.Org;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
@@ -29,7 +26,12 @@ public class Videos extends BaseEntity {
 	// @GeneratedValue(strategy = GenerationType.AUTO)
 	// private Integer id;
 
-	private String vid;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public String vid;
 	
 	@Header(name = "标题")
 	@Column(name = "title")
@@ -37,6 +39,7 @@ public class Videos extends BaseEntity {
 	
 	
 	@Header(name = "摘要") 
+	@Column(name = "description")
 	public String description;
 
 	@Header(name = "内容", tagType = "doc" , width=150)
@@ -65,8 +68,20 @@ public class Videos extends BaseEntity {
 	
 	//topicDesc
 	@Header(name = "头像") 
+	@Column(name = "topicImg")
 	public String topicImg;
 
+	 @Header(name = "分类", tagType = "radio",condition="eq")
+	 @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name = "scope",referencedColumnName="code")
+	 private Dict scope;
+	 
+	 @Header(name = "产品", tagType = "radio",condition="eq")
+	 @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name = "product", referencedColumnName="code")
+	 private Dict product;
+	 
+	 
    //播放次数
 	public Integer playCount;
 	
@@ -78,18 +93,137 @@ public class Videos extends BaseEntity {
 	@Column(name = "replyCount", columnDefinition = "BIGINT default 0")
 	private Integer replyCount;
 	
-	private String replyid;
+	public String replyid;
+	
+	
+	 public String getVid() {
+		return vid;
+	}
+
+	public void setVid(String vid) {
+		this.vid = vid;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getPtime() {
+		return ptime;
+	}
+
+	public void setPtime(Date ptime) {
+		this.ptime = ptime;
+	}
+
+	public String getVideosource() {
+		return videosource;
+	}
+
+	public void setVideosource(String videosource) {
+		this.videosource = videosource;
+	}
+
+	public Integer getVotecount() {
+		return votecount;
+	}
+
+	public void setVotecount(Integer votecount) {
+		this.votecount = votecount;
+	}
+
+	public Integer getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(Integer replyCount) {
+		this.replyCount = replyCount;
+	}
+
+	public String getReplyid() {
+		return replyid;
+	}
+
+	public void setReplyid(String replyid) {
+		this.replyid = replyid;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getCover() {
+		return cover;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+
+	public String getMp4_url() {
+		return mp4_url;
+	}
+
+	public void setMp4_url(String mp4_url) {
+		this.mp4_url = mp4_url;
+	}
+
+	public String getTopicName() {
+		return topicName;
+	}
+
+	public void setTopicName(String topicName) {
+		this.topicName = topicName;
+	}
+
+	public String getTopicImg() {
+		return topicImg;
+	}
+
+	public void setTopicImg(String topicImg) {
+		this.topicImg = topicImg;
+	}
+
+	public Integer getPlayCount() {
+		return playCount;
+	}
+
+	public void setPlayCount(Integer playCount) {
+		this.playCount = playCount;
+	}
+
+	public Dict getScope() {
+		return scope;
+	}
+
+	public void setScope(Dict scope) {
+		this.scope = scope;
+	}
+
+	public Dict getProduct() {
+		return product;
+	}
+
+	public void setProduct(Dict product) {
+		this.product = product;
+	}
+	 
  
-//	@Transient
-//	public Date ptime=new Date();
-//	@Transient
-//	public Date mtime=new Date();
-//	
-//	Articles(){
-//		ptime=new Date();
-//		mtime=new Date();
-//	}
-	/**
-	 * @return the digest
-	 */ 
 }

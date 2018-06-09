@@ -1,13 +1,13 @@
-<!-- 以下代码为代码生成器生成，生成时间: 2018-06-06 16:22:42，作者：billjiang/475572229@qq.com-->
+<!-- 以下代码为代码生成器生成，生成时间: 2018-06-09 15:14:56，作者：billjiang/475572229@qq.com-->
 <section class="content-header">
     <h1>
-        培训视频管理
+        试卷管理
         <small>列表</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="${basePath}"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li><a href="#">系统工具</a></li>
-        <li class="active">培训视频管理</li>
+        <li><a href="#">考场</a></li>
+        <li class="active">试卷管理</li>
     </ol>
 </section>
 
@@ -18,25 +18,24 @@
                 <!-- /.box-header -->
                 <div class="dataTables_filter" id="searchDiv" style="display: none">
                     <!--查询条件-->
-                 <select  placeholder="选择内容" class="form-control select2"  id="scope_code"   name="scope.code" data-flag="dictSelector" data-code="VIDEOS" data-value="code" style="width: 120px;"  data-placeholder="选择内容"   data-blank="true"></select>
-                 
-                  <select name="product.code" id="product_code" title="选择产品" 
-                  data-flag="dictSelector" data-code="PRODUCT"  data-value="code"
-                  data-placeholder="选择产品" class="form-control select2" style="width: 120px;" data-blank="true"></select>
-
+                    <input type="search" placeholder="请输入标题" title="标题" name="title"
+                                           class="form-control" id="title" operator="like" likeOption="true">
+                    <input type="search" placeholder="请输入描述" title="描述" name="digest"
+                                           class="form-control" id="digest" operator="like" likeOption="true">
+                     <select type="radio" name="product.code" data-flag="dictSelector" data-code="PRODUCT" data-value="code" data-placeholder="选择产品" class="form-control select2" style="width: 120px;" data-blank="true"></select>
 
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary" data-btn-type="search">查询</button>
                         <button type="button" class="btn btn-default" data-btn-type="reset">重置</button>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-success" data-btn-type="add"><i class="fa fa-pencil"> </i>新增培训视频</button>
+                        <button type="button" class="btn btn-success" data-btn-type="add"><i class="fa fa-pencil"> </i>新增试卷</button>
                         <button type="button" class="btn btn-info" data-btn-type="edit">编辑</button>
                         <button type="button" class="btn btn-danger" data-btn-type="delete">删除</button>
                     </div>
                 </div>
                 <div class="box-body">
-                    <table id="videos_table" class="table table-bordered table-striped table-hover">
+                    <table id="papers_table" class="table table-bordered table-striped table-hover">
                     </table>
                 </div>
             </div>
@@ -45,22 +44,24 @@
 </section>
 
 <script>
+
+
     var form = $("#searchDiv").form({baseEntity: false});
     form.initComponent();
-    var videosTable, winId = "videosWin";
+    var papersTable, winId = "papersWin";
     $(function (){
-        videosTable = new CommonTable("videos_table", "videos", "searchDiv", null);
+        papersTable = new CommonTable("papers_table", "papers", "searchDiv", null);
         //绑定按钮事件
         $("button[data-btn-type]").click(function () {
-            var action = $(this).data("btn-type");
-            var rowId = videosTable.getSelectedRowId();
+           var action = $(this).data("btn-type");
+            var rowId = papersTable.getSelectedRowId();
             switch (action) {
                 case "add":
                     modals.openWin({
                         winId: winId,
-                        title: '新增培训视频',
+                        title: '新增试卷',
                         width: "900px",
-                        url: basePath + "/videos/edit"
+                        url: basePath + "/papers/edit"
                     })
                     break;
                 case "edit":
@@ -70,9 +71,9 @@
                     }
                     modals.openWin({
                         winId: winId,
-                        title: '编辑培训视频【' + videosTable.getSelectedRowData().name + '】',
+                        title: '编辑试卷【' + papersTable.getSelectedRowData().name + '】',
                         width: '900px',
-                        url: basePath + "/videos/edit?id=" + rowId
+                        url: basePath + "/papers/edit?id=" + rowId
                     });
                     break;
                 case 'delete':
@@ -81,11 +82,11 @@
                         return false;
                     }
                     modals.confirm("是否要删除该行数据？", function () {
-                        ajaxPost(basePath + "/videos/delete/" + rowId, null, function (data) {
+                        ajaxPost(basePath + "/papers/delete/" + rowId, null, function (data) {
                             if (data.success) {
-                                videosTable.reloadRowData();
+                                papersTable.reloadRowData();
                             } else {
-                                modals.info("培训视频数据被引用，不可删除！");
+                                modals.info("试卷数据被引用，不可删除！");
                             }
                         });
                     })
@@ -93,4 +94,22 @@
             }
         })
     })
+
+
+    function fnRenderPaperEditButton(v, a){
+       console.log(v);
+       console.log(a);
+       return "已有20题"+"<button class='btn btn-success' onclick='editPaperQuestions(\""+ v +"\");return false;'> 编辑</button>";
+    }
+
+    function editPaperQuestions(id){
+        //@ sourceURL=paperlist.js
+ 
+         modals.openWin({
+            winId: winId,
+            title: '编辑试卷【 】',
+            width: '900px',
+            url: basePath + "/papers/edit?id=" + id
+        });
+    }
 </script>
