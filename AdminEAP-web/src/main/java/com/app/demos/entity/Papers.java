@@ -5,6 +5,7 @@ import com.cnpc.framework.annotation.Model;
 import com.cnpc.framework.base.entity.BaseEntity;
 import com.cnpc.framework.base.entity.Dict;
 import com.cnpc.framework.base.entity.Org;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.hibernate.annotations.CreationTimestamp;
  
@@ -18,8 +19,10 @@ import java.util.Date;
 @Entity
 @Model(id = "papers", name = "试卷", parentMenu = "exambox", curdShowType = "page", pages = "list,addUpdate")
 @Table(name = "edu_papers")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler", "fieldHandler" })
 public class Papers extends BaseEntity {
 
+	private static final long serialVersionUID = 5569761987303812190L;
 	// @Id
 	// @Column(name = "id",columnDefinition = "BIGINT default 0")
 	// @GeneratedValue(strategy = GenerationType.AUTO)

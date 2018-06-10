@@ -66,8 +66,8 @@
         <column key="name" header="姓名" classType="String" allowSort="true" operator="like" width="150"/>
         <column key="uid" header="用户id" classType="String" allowSort="true" width="150"/>
         <column key="score" header="成绩" classType="Integer" allowSort="true" width="150"/>
-        <column key="paperid" header="试卷id" classType="String" allowSort="true" width="150"/>
-        <column key="answer" header="回答" classType="String" allowSort="true" width="150"/>
+        <column key="paper.title" header="试卷" classType="Paper" operator="eq" allowSort="true" width="150"/>
+        <column key="id" header="回答" classType="String" allowSort="true" width="150" fnRender="fnRenderShowAnswerBtn"/>
         <column key="createtime" header="考试时间" classType="Date" allowSort="true" dateFormat="yyyy-mm-dd" operator="between" width="150"/>
         <column key="product.name" header="产品" classType="Dict" allowSort="true" operator="eq" width="150"/>
 </query>

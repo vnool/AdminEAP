@@ -1,5 +1,6 @@
 package com.app.demos.controller;
 
+ 
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -16,10 +17,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cnpc.framework.base.service.BaseService;
+import com.cnpc.framework.util.SecurityUtil;
 import com.cnpc.framework.annotation.RefreshCSRFToken;
 import com.cnpc.framework.annotation.VerifyCSRFToken;
 import com.cnpc.framework.base.pojo.Result;
+import com.app.demos.entity.Papers;
 import com.app.demos.entity.Score;
+import org.apache.shiro.SecurityUtils;
+import com.cnpc.framework.base.entity.User;
+
 
 /**
 * 考试成绩管理控制器
@@ -71,8 +77,27 @@ public class ScoreController {
             baseService.update(score);
         }
         return new Result(true);
+    } 
+    @RequestMapping(value="/savescore")
+    @ResponseBody
+    public Result savescore(String obj){ 
+        Score score= JSON.parseObject(obj, Score.class);
+        User user = SecurityUtil.getUser();     
+       // Papers paper = baseService.get(Papers.class, score.getPaper().getId()); 
+        Papers paper = score.getPaper();
+        score.setUid(user.getId() );
+        score.setName(user.getName()); 
+        score.setProduct(baseService.get(Dict.class, paper.getProduct().getId()));
+        score.setScore(1);
+        if(StrUtil.isEmpty(score.getId())){
+            baseService.save(score);
+        }
+        else{
+            score.setUpdateDateTime(new Date());
+            baseService.update(score);
+        }
+        return new Result(true);
     }
-
 
 
     @RequestMapping(value="/delete/{id}",method = RequestMethod.POST)

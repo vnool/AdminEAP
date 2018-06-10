@@ -21,6 +21,8 @@ import java.util.Date;
 @Table(name = "edu_scores")
 public class Score extends BaseEntity {
 
+	private static final long serialVersionUID = 5569761987303812250L;
+	
 	@Header(name = "姓名", condition="like" )
 	@Column(name = "name")
 	private String name;
@@ -32,10 +34,13 @@ public class Score extends BaseEntity {
 	@Header(name = "成绩",  width = 150)
 	@Column(name = "score" )
 	public Integer score;
+ 
 	
-	@Header(name = "试卷id" )
-	@Column(name = "paperid" )
-	public String paperid;
+	@Header(name = "试卷" ,condition="eq") 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "paper", referencedColumnName="id")
+	public Papers paper;
+	
 	
 	@Header(name = "回答" )
 	@Column(name = "answer")
@@ -86,33 +91,7 @@ public class Score extends BaseEntity {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-
-
-
-	public int getScore() {
-		return score;
-	}
-
-
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
-
-
-	public String getPaperid() {
-		return paperid;
-	}
-
-
-
-	public void setPaperid(String paperid) {
-		this.paperid = paperid;
-	}
-
-
-
+ 
 	public String getAnswer() {
 		return answer;
 	}
@@ -145,6 +124,27 @@ public class Score extends BaseEntity {
 
 	public void setProduct(Dict product) {
 		this.product = product;
+	}
+
+
+
+	public Papers getPaper() {
+		return paper;
+	}
+
+
+
+	public void setPaper(Papers paper) {
+		this.paper = paper;
+	}
+
+
+	public Integer getScore() {
+		return score;
+	}
+ 
+	public void setScore(Integer score) {
+		this.score = score;
 	}
  
  

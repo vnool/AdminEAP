@@ -20,7 +20,8 @@
                     <!--查询条件-->
                     <input type="search" placeholder="请输入姓名" title="姓名" name="name"
                                            class="form-control" id="name" operator="like" likeOption="true">
-                     <input type="radio" name="product.id" data-flag="dictSelector" data-code="PRODUCT">
+                     <select type="radio" name="product.code" data-value="code"  data-flag="dictSelector" data-code="PRODUCT" data-placeholder="选择产品" class="form-control select2" style="width: 120px;" data-blank="true">
+                     </select>
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary" data-btn-type="search">查询</button>
                         <button type="button" class="btn btn-default" data-btn-type="reset">重置</button>
@@ -89,4 +90,10 @@
             }
         })
     })
+
+    function fnRenderShowAnswerBtn(id){
+        var showUrl = "";
+        var html = "<a class='btn btn-success' href='"+showUrl+"' target=_blank>查看答卷</a>";
+        return html;
+    }
 </script>

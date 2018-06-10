@@ -2,18 +2,32 @@
   <script src="https://surveyjs.azureedge.net/1.0.25/survey.jquery.min.js"></script>
 <div id="surveyContainer"></div>
 <script type="text/javascript">
-var pageID ="${id}";
+var pagerID ="${id}";
 Survey.Survey.cssType = "bootstrap";
 Survey.surveyLocalization.currentLocale="zh-cn";
-
+Survey.JsonObject
+        .metaData
+        .addProperty("questionbase", {
+            name: "myid:number",
+            default: 0,
+            visible: false 
+        });
 
 function sendDataToServer(survey) {
-    //send Ajax request to your web server.
-    alert("The results are:" + JSON.stringify(survey.data));
+    var saveurl =  "../score/savescore" ;
+    var data = {"answer":survey.data, "paperid" : pagerID};
+    $.post({
+        url:saveurl,
+        data: "obj=" + encodeURI(JSON.stringify(data)),
+        success:function(d){
+
+        }
+    });
+
 }
 
 
-var dataurl =  "get/" + pageID;
+var dataurl =  "get/" + pagerID;
 
 $.get(dataurl, function(result) {
     if (result.pages != undefined && result.pages.length > 10) {

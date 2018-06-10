@@ -89,8 +89,8 @@ if (!window["%hammerhead%"]) {
 
 
         var qt = SurveyEditor.editorLocalization.locales['zh-cn'].qt;
-        //q.title = qt[t] + counter;
-        //q.name = "question" + globalCounter;
+        q.title = qt[t] + counter;
+        q.name = "question" + globalCounter;
 
 
         q.myid = globalCounter;

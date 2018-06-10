@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.persistence.Table;
+
 /**
  * @author bin
  */
@@ -58,35 +59,38 @@ public class BaseDaoImpl implements BaseDao {
 		this.getCurrentSession().saveOrUpdate(obj);
 		return obj;
 	}
-	
-    public void updatePart(Class<?> cls, Map<String, Object> params){
-    	ClassMetadata meta = this.getCurrentSession().getSessionFactory().getClassMetadata(cls);  
-    	//实体名称  
-    	String entityName = meta.getEntityName();  
-    	//主键名称  
-    	String pkName = meta.getIdentifierPropertyName(); 
-    	
-    	
-    	Table t= cls.getAnnotation( Table.class);
-    	String tableName = t.name(); 
-    	
-    	String sql="UPDATE "+tableName+" SET "; //Address = 'Zhongshan 23', City = 'Nanjing'
-    	Set sets = new HashSet();;		
-    	int i=0;
-			for (String key : params.keySet()) {
-				if(key.equals(pkName)) continue; 
-				sets.add( key+"=:"+key) ;
-				i++;
-			}
-		String keyvalues = sets.toString(); 
-		
-    	sql += keyvalues.substring(1, keyvalues.length()-1); 
-    	
-    	sql += " WHERE " + pkName +"=:"+pkName; 
-    			
-    	//params.put("_tablename", tableName);
-    	executeSql(sql,  params) ;
-    } 
+
+	public void updatePart(Class<?> cls, Map<String, Object> params) {
+		ClassMetadata meta = this.getCurrentSession().getSessionFactory().getClassMetadata(cls);
+		// 实体名称
+		String entityName = meta.getEntityName();
+		// 主键名称
+		String pkName = meta.getIdentifierPropertyName();
+
+		Table t = cls.getAnnotation(Table.class);
+		String tableName = t.name();
+
+		String sql = "UPDATE " + tableName + " SET "; // Address = 'Zhongshan
+														// 23', City = 'Nanjing'
+		Set sets = new HashSet();
+		 
+		int i = 0;
+		for (String key : params.keySet()) {
+			if (key.equals(pkName))
+				continue;
+			sets.add(key + "=:" + key);
+			i++;
+		}
+		String keyvalues = sets.toString();
+
+		sql += keyvalues.substring(1, keyvalues.length() - 1);
+
+		sql += " WHERE " + pkName + "=:" + pkName;
+
+		// params.put("_tablename", tableName);
+		executeSql(sql, params);
+	}
+
 	public <T> void batchSave(List<T> entityList) {
 
 		Session session = getCurrentSession();
@@ -154,8 +158,8 @@ public class BaseDaoImpl implements BaseDao {
 
 	@SuppressWarnings("unchecked")
 	public <T> T get(String hql) {
-		Session  s= this.getCurrentSession();
-	    
+		Session s = this.getCurrentSession();
+
 		Query query = s.createQuery(hql);
 		List<T> ls = query.list();
 		if (ls != null && ls.size() > 0) {
@@ -166,7 +170,7 @@ public class BaseDaoImpl implements BaseDao {
 
 	@SuppressWarnings("unchecked")
 	public <T> T get(String hql, Map<String, Object> params) {
-		Session s = this.getCurrentSession() ;
+		Session s = this.getCurrentSession();
 		Query query = s.createQuery(hql);
 		if (params != null && !params.isEmpty()) {
 			for (String key : params.keySet()) {
@@ -243,7 +247,7 @@ public class BaseDaoImpl implements BaseDao {
 	}
 
 	public int executeHql(String hql) {
-		Session s =this.getCurrentSession();
+		Session s = this.getCurrentSession();
 		Query query = s.createQuery(hql);
 		return query.executeUpdate();
 	}
@@ -507,22 +511,20 @@ public class BaseDaoImpl implements BaseDao {
 
 	public int getCountByCriteria(DetachedCriteria criteria) {
 
-		//return getCountByCriteria2(criteria);
+		// return getCountByCriteria2(criteria);
 
-		 Session s = getCurrentSession();
-		 Criteria c = criteria.getExecutableCriteria(s);
-		
-		
-		 Projection p = Projections.rowCount();
-		 Criteria c1 = c.setProjection(p);
-		 Object uR = c1.uniqueResult();
-		 if (uR == null){
-			 System.out.print("\n查询不到，或者hibernate的实体类未找到");
-			  return 0;
-		 }
-		
-		
-		 return ((Long) uR).intValue();
+		Session s = getCurrentSession();
+		Criteria c = criteria.getExecutableCriteria(s);
+
+		Projection p = Projections.rowCount();
+		Criteria c1 = c.setProjection(p);
+		Object uR = c1.uniqueResult();
+		if (uR == null) {
+			System.out.print("\n查询不到，或者hibernate的实体类未找到");
+			return 0;
+		}
+
+		return ((Long) uR).intValue();
 	}
 
 	public int getCountByCriteria2(final DetachedCriteria detachedCriteria) {
@@ -531,7 +533,6 @@ public class BaseDaoImpl implements BaseDao {
 		CriteriaImpl impl = (CriteriaImpl) criteria; // 转化成了criteria的一个实现...
 		Projection projection = impl.getProjection();
 		ResultTransformer transformer = impl.getResultTransformer();
-		 
 
 		Long totalCount = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();// 难道criteria使用之后，里面的一些属性会被清空？
 
@@ -543,7 +544,6 @@ public class BaseDaoImpl implements BaseDao {
 		if (transformer != null) {
 			criteria.setResultTransformer(transformer);
 		}
- 
 
 		return totalCount.intValue();
 	}
