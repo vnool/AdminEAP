@@ -97,7 +97,7 @@ public class Videos extends BaseEntity {
 	
 	
 	 public String getVid() {
-		return vid;
+		return vid; 
 	}
 
 	public void setVid(String vid) {
