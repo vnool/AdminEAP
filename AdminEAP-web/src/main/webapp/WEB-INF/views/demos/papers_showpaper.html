@@ -1,0 +1,33 @@
+  <script type="text/javascript" src="../resources/adminlte/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+  <script src="https://surveyjs.azureedge.net/1.0.25/survey.jquery.min.js"></script>
+<div id="surveyContainer"></div>
+<script type="text/javascript">
+var pageID ="${id}";
+Survey.Survey.cssType = "bootstrap";
+Survey.surveyLocalization.currentLocale="zh-cn";
+
+
+function sendDataToServer(survey) {
+    //send Ajax request to your web server.
+    alert("The results are:" + JSON.stringify(survey.data));
+}
+
+
+var dataurl =  "get/" + pageID;
+
+$.get(dataurl, function(result) {
+    if (result.pages != undefined && result.pages.length > 10) {
+        var surveyJSON = result.pages;
+        var survey = new Survey.Model(surveyJSON);
+        $("#surveyContainer").Survey({
+            model: survey,
+            onComplete: sendDataToServer
+        });
+
+    }
+
+});
+
+
+
+</script>

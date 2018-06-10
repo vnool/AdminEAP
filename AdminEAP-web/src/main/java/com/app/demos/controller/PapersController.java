@@ -47,10 +47,10 @@ public class PapersController {
 	}
 
 	@RefreshCSRFToken
-	@RequestMapping(value = "/editpaper", method = RequestMethod.GET)
-	public String editpaper(String id, HttpServletRequest request) {
+	@RequestMapping(value = "/showpaper", method = RequestMethod.GET)
+	public String showpaper(String id, HttpServletRequest request) {
 		request.setAttribute("id", id);
-		return "../../resources/surveyeditor/example/index";
+		return "demos/papers_showpaper";
 	}
 
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
