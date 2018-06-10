@@ -1,10 +1,14 @@
 package com.cnpc.framework.base.dao.impl;
 
+import com.cnpc.framework.annotation.Model;
 import com.cnpc.framework.base.dao.BaseDao;
 import com.cnpc.framework.base.pojo.PageInfo;
 import org.hibernate.*;
+import org.hibernate.annotations.Entity;
 import org.hibernate.criterion.*;
 import org.hibernate.internal.CriteriaImpl;
+import org.hibernate.mapping.PrimaryKey;
+import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.transform.ResultTransformer;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.Type;
@@ -15,9 +19,11 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Set;
+import javax.persistence.Table;
 /**
  * @author bin
  */
@@ -52,7 +58,35 @@ public class BaseDaoImpl implements BaseDao {
 		this.getCurrentSession().saveOrUpdate(obj);
 		return obj;
 	}
-
+	
+    public void updatePart(Class<?> cls, Map<String, Object> params){
+    	ClassMetadata meta = this.getCurrentSession().getSessionFactory().getClassMetadata(cls);  
+    	//实体名称  
+    	String entityName = meta.getEntityName();  
+    	//主键名称  
+    	String pkName = meta.getIdentifierPropertyName(); 
+    	
+    	
+    	Table t= cls.getAnnotation( Table.class);
+    	String tableName = t.name(); 
+    	
+    	String sql="UPDATE "+tableName+" SET "; //Address = 'Zhongshan 23', City = 'Nanjing'
+    	Set sets = new HashSet();;		
+    	int i=0;
+			for (String key : params.keySet()) {
+				if(key.equals(pkName)) continue; 
+				sets.add( key+"=:"+key) ;
+				i++;
+			}
+		String keyvalues = sets.toString(); 
+		
+    	sql += keyvalues.substring(1, keyvalues.length()-1); 
+    	
+    	sql += " WHERE " + pkName +"=:"+pkName; 
+    			
+    	//params.put("_tablename", tableName);
+    	executeSql(sql,  params) ;
+    } 
 	public <T> void batchSave(List<T> entityList) {
 
 		Session session = getCurrentSession();

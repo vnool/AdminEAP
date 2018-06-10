@@ -23,277 +23,282 @@ import com.cnpc.framework.utils.StrUtil;
 @Service("baseService")
 public class BaseServiceImpl implements BaseService {
 
-    @Resource
-    public BaseDao baseDao;
+	@Resource
+	public BaseDao baseDao;
 
-    @Resource
-    public RedisDao redisDao;
+	@Resource
+	public RedisDao redisDao;
 
-    public <T> Serializable save(T obj) {
+	public <T> Serializable save(T obj) {
 
-        return baseDao.save(obj);
-    }
+		return baseDao.save(obj);
+	}
 
-    public <T> void delete(T obj) {
+	public <T> void delete(T obj) {
 
-        baseDao.delete(obj);
-    }
+		baseDao.delete(obj);
+	}
 
-    public <T> void update(T obj) {
+	public <T> void update(T obj) {
 
-        baseDao.update(obj);
-    }
+		baseDao.update(obj);
+	}
 
-    public Object saveOrUpdate(Object obj) {
+	public <T> void updatePart(Class cls, Map<String, Object> params) {
 
-        return baseDao.saveOrUpdate(obj);
-    }
+		baseDao.updatePart(cls, params);
+	}
 
-    public <T> void batchSave(List<T> entityList) {
+	public Object saveOrUpdate(Object obj) {
 
-        baseDao.batchSave(entityList);
-    }
+		return baseDao.saveOrUpdate(obj);
+	}
 
-    public <T> void batchUpdate(List<T> entityList) {
+	public <T> void batchSave(List<T> entityList) {
 
-        baseDao.batchUpdate(entityList);
-    }
+		baseDao.batchSave(entityList);
+	}
 
-    public <T> void batchDelete(List<T> entityList) {
+	public <T> void batchUpdate(List<T> entityList) {
 
-        baseDao.batchDelete(entityList);
-    }
+		baseDao.batchUpdate(entityList);
+	}
 
-    public <T> void batchSaveOrUpdate(List<T> entityList) {
+	public <T> void batchDelete(List<T> entityList) {
 
-        baseDao.batchSaveOrUpdate(entityList);
-    }
+		baseDao.batchDelete(entityList);
+	}
 
-    public <T> List<T> list(Class<T> clazz) {
+	public <T> void batchSaveOrUpdate(List<T> entityList) {
 
-        return baseDao.list(clazz);
-    }
+		baseDao.batchSaveOrUpdate(entityList);
+	}
 
-    public <T> T get(Class<T> clazz, Serializable id) {
+	public <T> List<T> list(Class<T> clazz) {
 
-        return baseDao.get(clazz, id);
-    }
+		return baseDao.list(clazz);
+	}
 
-    public <T> T get(String hql) {
+	public <T> T get(Class<T> clazz, Serializable id) {
 
-        return baseDao.get(hql);
-    }
+		return baseDao.get(clazz, id);
+	}
 
-    public <T> T get(String hql, Map<String, Object> params) {
+	public <T> T get(String hql) {
 
-        return baseDao.get(hql, params);
-    }
+		return baseDao.get(hql);
+	}
 
-    public <T> List<T> find(String hql) {
+	public <T> T get(String hql, Map<String, Object> params) {
 
-        return baseDao.find(hql);
-    }
+		return baseDao.get(hql, params);
+	}
 
-    public <T> List<T> find(String hql, Map<String, Object> params) {
+	public <T> List<T> find(String hql) {
 
-        return baseDao.find(hql, params);
-    }
+		return baseDao.find(hql);
+	}
 
-    public <T> List<T> find(String hql, int page, int rows) {
+	public <T> List<T> find(String hql, Map<String, Object> params) {
 
-        return baseDao.find(hql, page, rows);
-    }
+		return baseDao.find(hql, params);
+	}
 
-    public <T> List<T> find(String hql, Map<String, Object> params, int page, int rows) {
+	public <T> List<T> find(String hql, int page, int rows) {
 
-        return baseDao.find(hql, params, page, rows);
-    }
+		return baseDao.find(hql, page, rows);
+	}
 
-    public long count(String hql) {
+	public <T> List<T> find(String hql, Map<String, Object> params, int page, int rows) {
 
-        // return baseDao.count(hql);
+		return baseDao.find(hql, params, page, rows);
+	}
 
-        Long count = baseDao.count(hql);
-        ;
-        if (count == null) {
-            return 0;
-        }
-        return count;
+	public long count(String hql) {
 
-    }
+		// return baseDao.count(hql);
 
-    public Long count(String hql, Map<String, Object> params) {
+		Long count = baseDao.count(hql);
+		;
+		if (count == null) {
+			return 0;
+		}
+		return count;
 
-        return baseDao.count(hql, params);
-    }
+	}
 
-    public int executeHql(String hql) {
+	public Long count(String hql, Map<String, Object> params) {
 
-        return baseDao.executeHql(hql);
-    }
+		return baseDao.count(hql, params);
+	}
 
-    public int executeHql(String hql, Map<String, Object> params) {
-        return baseDao.executeHql(hql, params);
-    }
+	public int executeHql(String hql) {
 
-    public <T> T getBySql(String sql) {
+		return baseDao.executeHql(hql);
+	}
 
-        return baseDao.getBySql(sql);
-    }
+	public int executeHql(String hql, Map<String, Object> params) {
+		return baseDao.executeHql(hql, params);
+	}
 
-    public <T> T getBySql(String sql, Map<String, Object> params) {
+	public <T> T getBySql(String sql) {
 
-        return baseDao.getBySql(sql, params);
-    }
+		return baseDao.getBySql(sql);
+	}
 
-    public <T> List<T> findBySql(String sql, Class<T> clazz) {
+	public <T> T getBySql(String sql, Map<String, Object> params) {
 
-        return baseDao.findBySql(sql, clazz);
-    }
+		return baseDao.getBySql(sql, params);
+	}
 
-    public <T> List<T> findBySql(String sql, Map<String, Object> params, Class<T> clazz) {
+	public <T> List<T> findBySql(String sql, Class<T> clazz) {
 
-        return baseDao.findBySql(sql, params, clazz);
-    }
+		return baseDao.findBySql(sql, clazz);
+	}
 
-    public <T> List<T> findBySql(String sql, int page, int rows, Class<T> clazz) {
+	public <T> List<T> findBySql(String sql, Map<String, Object> params, Class<T> clazz) {
 
-        return baseDao.findBySql(sql, page, rows, clazz);
-    }
+		return baseDao.findBySql(sql, params, clazz);
+	}
 
-    public <T> List<T> findBySql(String sql, Map<String, Object> params, int page, int rows, Class<T> clazz) {
+	public <T> List<T> findBySql(String sql, int page, int rows, Class<T> clazz) {
 
-        return baseDao.findBySql(sql, params, page, rows, clazz);
-    }
+		return baseDao.findBySql(sql, page, rows, clazz);
+	}
 
-    public List<Map<String, Object>> findMapBySql(String sql) {
+	public <T> List<T> findBySql(String sql, Map<String, Object> params, int page, int rows, Class<T> clazz) {
 
-        return baseDao.findMapBySql(sql);
-    }
+		return baseDao.findBySql(sql, params, page, rows, clazz);
+	}
 
-    public List<Map<String, Object>> findMapBySql(String sql, Map<String, Object> params) {
+	public List<Map<String, Object>> findMapBySql(String sql) {
 
-        return baseDao.findMapBySql(sql, params);
-    }
+		return baseDao.findMapBySql(sql);
+	}
 
-    public List<Map<String, Object>> findMapBySql(String sql, int page, int rows) {
+	public List<Map<String, Object>> findMapBySql(String sql, Map<String, Object> params) {
 
-        return baseDao.findMapBySql(sql, page, rows);
-    }
+		return baseDao.findMapBySql(sql, params);
+	}
 
-    public List<Map<String, Object>> findMapBySql(String sql, Map<String, Object> params, int page, int rows) {
+	public List<Map<String, Object>> findMapBySql(String sql, int page, int rows) {
 
-        return baseDao.findMapBySql(sql, params, page, rows);
-    }
+		return baseDao.findMapBySql(sql, page, rows);
+	}
 
-    public List findMapBySql(String sql, Object[] params, Type[] types, Class clazz) {
+	public List<Map<String, Object>> findMapBySql(String sql, Map<String, Object> params, int page, int rows) {
 
-        return baseDao.findMapBySql(sql, params, types, clazz);
-    }
+		return baseDao.findMapBySql(sql, params, page, rows);
+	}
 
-    public <T> List<T> find(String sql, Map<String, Object> params, Class<T> clazz) {
-        return baseDao.find(sql, params, clazz);
-    }
+	public List findMapBySql(String sql, Object[] params, Type[] types, Class clazz) {
 
-    public List findMapBySql(String sql, String countStr, PageInfo pageInfo, Object[] params, Type[] types, Class clazz) {
+		return baseDao.findMapBySql(sql, params, types, clazz);
+	}
 
-        if (StrUtil.isEmpty(countStr))
-            countStr = "count(*)";
-        String countSql = "select " + countStr + " from (" + sql + ") as table_alias";// .substring(sql.toLowerCase().indexOf("from"));
-        int count = this.countBySql(countSql, params, types).intValue();
-        pageInfo.setCount(count);
-        return baseDao
-                .findMapBySql(sql, pageInfo.getPageSize() * (pageInfo.getPageNum() - 1), pageInfo.getPageSize(), params, types, clazz);
-    }
+	public <T> List<T> find(String sql, Map<String, Object> params, Class<T> clazz) {
+		return baseDao.find(sql, params, clazz);
+	}
 
-    public Long countBySql(String sql, Object[] params, Type[] types) {
+	public List findMapBySql(String sql, String countStr, PageInfo pageInfo, Object[] params, Type[] types,
+			Class clazz) {
 
-        return baseDao.countBySql(sql, params, types);
-    }
+		if (StrUtil.isEmpty(countStr))
+			countStr = "count(*)";
+		String countSql = "select " + countStr + " from (" + sql + ") as table_alias";// .substring(sql.toLowerCase().indexOf("from"));
+		int count = this.countBySql(countSql, params, types).intValue();
+		pageInfo.setCount(count);
+		return baseDao.findMapBySql(sql, pageInfo.getPageSize() * (pageInfo.getPageNum() - 1), pageInfo.getPageSize(),
+				params, types, clazz);
+	}
 
-    public Long countBySql(String sql) {
+	public Long countBySql(String sql, Object[] params, Type[] types) {
 
-        return baseDao.countBySql(sql);
-    }
+		return baseDao.countBySql(sql, params, types);
+	}
 
-    public Long countBySql(String sql, Map<String, Object> params) {
+	public Long countBySql(String sql) {
 
-        return baseDao.countBySql(sql, params);
-    }
+		return baseDao.countBySql(sql);
+	}
 
-    public int executeSql(String sql) {
+	public Long countBySql(String sql, Map<String, Object> params) {
 
-        return baseDao.executeSql(sql);
-    }
+		return baseDao.countBySql(sql, params);
+	}
 
-    public int executeSql(String sql,Map<String,Object> params) {
+	public int executeSql(String sql) {
 
-        return baseDao.executeSql(sql,params);
-    }
+		return baseDao.executeSql(sql);
+	}
 
-    public <T> List<T> getListByCriteria(DetachedCriteria criteria, PageInfo page) {
+	public int executeSql(String sql, Map<String, Object> params) {
 
-        return baseDao.getListByCriteria(criteria, page);
-    }
+		return baseDao.executeSql(sql, params);
+	}
 
-    public List<?> getListByCriteria(DetachedCriteria criteria, Integer startPage, Integer pageSize) {
+	public <T> List<T> getListByCriteria(DetachedCriteria criteria, PageInfo page) {
 
-        return baseDao.getListByCriteria(criteria, startPage, pageSize);
-    }
+		return baseDao.getListByCriteria(criteria, page);
+	}
 
-    public int getCountByCriteria(DetachedCriteria criteria) {
+	public List<?> getListByCriteria(DetachedCriteria criteria, Integer startPage, Integer pageSize) {
 
-        return baseDao.getCountByCriteria(criteria);
-    }
+		return baseDao.getListByCriteria(criteria, startPage, pageSize);
+	}
 
-    public List findByExample(Object example) {
+	public int getCountByCriteria(DetachedCriteria criteria) {
 
-        return baseDao.findByExample(example);
-    }
+		return baseDao.getCountByCriteria(criteria);
+	}
 
-    public List findByExample(Object example, String condition, boolean enableLike) {
+	public List findByExample(Object example) {
 
-        return baseDao.findByExample(example, condition, enableLike);
-    }
+		return baseDao.findByExample(example);
+	}
 
-    public boolean isExist(String hql, Map<String, Object> param) {
+	public List findByExample(Object example, String condition, boolean enableLike) {
 
-        return count(hql, param) > 0;
-    }
+		return baseDao.findByExample(example, condition, enableLike);
+	}
 
-    public <T> List<T> findByCriteria(DetachedCriteria criteria) {
+	public boolean isExist(String hql, Map<String, Object> param) {
 
-        return baseDao.findByCriteria(criteria);
+		return count(hql, param) > 0;
+	}
 
-    }
+	public <T> List<T> findByCriteria(DetachedCriteria criteria) {
 
-    public Object getMaxByExample(Object exampleEntity, String maxProperty, String condition, boolean enableLike) {
-        return baseDao.getMaxByExample(exampleEntity, maxProperty, condition, enableLike);
-    }
+		return baseDao.findByCriteria(criteria);
 
+	}
 
-    //redis接口通用方法
-    public void deleteCacheByKey(String key) {
-        redisDao.delete(key);
-    }
+	public Object getMaxByExample(Object exampleEntity, String maxProperty, String condition, boolean enableLike) {
+		return baseDao.getMaxByExample(exampleEntity, maxProperty, condition, enableLike);
+	}
 
-    public <T> boolean addCacheByKey(String key, T object) {
-        return redisDao.add(key, object);
-    }
+	// redis接口通用方法
+	public void deleteCacheByKey(String key) {
+		redisDao.delete(key);
+	}
 
-    public <T> boolean saveCacheByKey(String key, T object) {
-        return redisDao.save(key, object);
-    }
+	public <T> boolean addCacheByKey(String key, T object) {
+		return redisDao.add(key, object);
+	}
 
-    public String getCacheByKey(String key) {
-        return redisDao.get(key);
-    }
+	public <T> boolean saveCacheByKey(String key, T object) {
+		return redisDao.save(key, object);
+	}
 
-    public <T> T getCacheByKey(String key, Class clazz) {
-        return redisDao.get(key, clazz);
-    }
+	public String getCacheByKey(String key) {
+		return redisDao.get(key);
+	}
 
-    public List findMapBySql(String sql, Map<String, Object> params, int page, int rows, Class clazz) {
-        return baseDao.findMapBySql(sql, params, page, rows, clazz);
-    }
+	public <T> T getCacheByKey(String key, Class clazz) {
+		return redisDao.get(key, clazz);
+	}
+
+	public List findMapBySql(String sql, Map<String, Object> params, int page, int rows, Class clazz) {
+		return baseDao.findMapBySql(sql, params, page, rows, clazz);
+	}
 }

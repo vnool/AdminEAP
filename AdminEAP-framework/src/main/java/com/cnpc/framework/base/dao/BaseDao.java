@@ -35,7 +35,8 @@ public interface BaseDao {
      * @param obj 所要修改的对象
      */
     <T> void update(T obj);
-
+    
+    void updatePart(Class<?> cls, Map<String, Object> params);
     /**
      * 保存或修改
      *
