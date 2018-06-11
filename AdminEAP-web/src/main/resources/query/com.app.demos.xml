@@ -64,7 +64,7 @@
 <query id="score" key="id" tableName="考试成绩列表" className="com.app.demos.entity.Score" widthType="px">
         <column key="rowIndex" header="序号" width="80"/>
         <column key="name" header="姓名" classType="String" allowSort="true" operator="like" width="150"/>
-        <column key="uid" header="用户id" classType="String" allowSort="true" width="150"/>
+        <column key="uid" header="用户id" classType="String" hidden="true" allowSort="true" width="150"/>
         <column key="score" header="成绩" classType="Integer" allowSort="true" width="150"/>
         <column key="paper.title" header="试卷" classType="Paper" operator="eq" allowSort="true" width="150"/>
         <column key="id" header="回答" classType="String" allowSort="true" width="150" fnRender="fnRenderShowAnswerBtn"/>

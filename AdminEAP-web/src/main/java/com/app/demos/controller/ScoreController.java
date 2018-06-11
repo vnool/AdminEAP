@@ -82,7 +82,8 @@ public class ScoreController {
     @ResponseBody
     public Result savescore(String obj){ 
         Score score= JSON.parseObject(obj, Score.class);
-        User user = SecurityUtil.getUser();     
+        User user = SecurityUtil.getUser();   
+       // user = baseService.get(Papers.class, score.getPaper().getId()); 
        // Papers paper = baseService.get(Papers.class, score.getPaper().getId()); 
         Papers paper = score.getPaper();
         score.setUid(user.getId() );

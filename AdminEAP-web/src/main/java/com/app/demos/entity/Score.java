@@ -73,20 +73,13 @@ public class Score extends BaseEntity {
 	public String getName() {
 		return name;
 	}
-
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
-
 	public String getUid() {
 		return uid;
 	}
-
-
 
 	public void setUid(String uid) {
 		this.uid = uid;
@@ -96,19 +89,13 @@ public class Score extends BaseEntity {
 		return answer;
 	}
 
-
-
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
 
-
-
 	public Date getCreatetime() {
 		return createtime;
 	}
-
-
 
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
