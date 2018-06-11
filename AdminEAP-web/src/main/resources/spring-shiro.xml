@@ -81,6 +81,7 @@
             <value>
                 <!--/=anon-->
                 /file/download/**=anon
+                /papers/**=anon
                 /login=anon
                 /logout=logout
                 /register=anon

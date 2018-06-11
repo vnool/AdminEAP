@@ -2,7 +2,9 @@ package com.app.demos.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
- 
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -15,14 +17,16 @@ public class QueryConditions{
 		// "{\"queryId\":\"articles\",\"pageInfo\":null,\"query\":null,\"conditions\":[]}";
 		JSONObject reqJs = new JSONObject();
 		reqJs.put("queryId", MediaType);
+		
 		JSONArray conditions = new JSONArray();
+		
 		JSONObject sp = new JSONObject();
 		sp.put("key", "scope.code");
 		sp.put("value", scope);
 		sp.put("isCondition", true);
 		conditions.add(sp);
 
-		if (!products.equals("ALL")) { // 非all
+		if (!StringUtils.isEmpty(products ) && !products.equals("ALL")) { // 非all
 			JSONObject pdjs = new JSONObject();
 			pdjs.put("key", "product.code");
 			pdjs.put("value", products);

@@ -1,0 +1,78 @@
+<!-- 以下代码为代码生成器生成，生成时间: 2018-06-09 15:14:56，作者：billjiang/475572229@qq.com-->
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum=1.0,user-scalable=no">
+ <meta name="format-detection" content="telephone=no, email=no">
+      <title>试卷列表</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../resources/adminlte/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+
+  <section class="content-header">
+    <h1 >
+        神锤大学 
+        <small>试卷列表</small>
+    </h1>
+    
+</section>
+
+<section class="content">
+      
+</section>
+
+<style type="text/css">
+h1{text-align: center;}
+ .content a{ 
+     display: block;
+     text-decoration:none;
+     border-bottom: 1px solid #ccc;
+     padding: 8px 8px;
+     padding-top:10px;
+     color: #444;
+  }
+  .content a i{
+    float: right;
+    font-style: normal;
+    font-size: 10pt;
+    color:#999;
+  }
+  .content a b{
+    width: 30px;
+    display: inline-block;
+
+  }
+</style>
+<script>
+        
+
+    $(function (){
+        gepage(0, 20, "ALL");
+         
+    }); 
+
+    function gepage(start, size, product){
+           var url = "pagelist/" + product + "/" + start + "-" + size; 
+           $.post({
+                url: url, 
+                success:function(d){
+                    if(!d.rows) return;
+                    var html = "";
+                    for(var i in d.rows){
+                        var data = d.rows[i];
+                        var showurl = "showpaper?id="+data.id;
+                        var row = "<a href='"+showurl+"'><b>"+ (parseInt(i)+1)+".</b> "+ data.title +" &nbsp;<i>("+data.product+")</i></a>";
+                        html+=row;
+                    }
+                    $('.content').append(html);
+                     
+                }
+           });
+        }
+
+</script>
+
+  
+  </body>
+  </html>
