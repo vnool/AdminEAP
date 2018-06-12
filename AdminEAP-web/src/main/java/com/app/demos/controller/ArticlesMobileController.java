@@ -125,7 +125,11 @@ public class ArticlesMobileController {
 			m.put("postid", m.get("id"));
 			String body = m.getString("body");
 			if (m.getString("digest").length() < 3 && !StringUtil.isEmpty(body)) {
-				m.put("digest", body.substring(0, 20));
+				if(body.length() > 20) {
+					m.put("digest", body.substring(0, 20));
+				}else{
+					m.put("digest", body );
+				}
 			}
 			m.remove("body");
 

@@ -93,6 +93,7 @@ public class PapersController {
 				  Map<String,String> o = new HashMap<String,String>();
 				  o.put("title", paper.getTitle());
 				  o.put("id", paper.getId());
+				  o.put("time", paper.getDeadline().getTime()+"");
 				  o.put("product", paper.getProduct().getName());
 				  listX.add(o);
 			 }

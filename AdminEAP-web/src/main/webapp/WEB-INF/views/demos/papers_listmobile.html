@@ -19,7 +19,7 @@
 </section>
 
 <section class="content">
-      
+      <center><br><br>试卷信息加载中....</center>
 </section>
 
 <style type="text/css">
@@ -32,12 +32,12 @@ h1{text-align: center;}
      padding-top:10px;
      color: #444;
   }
-  .content a i{
-    float: right;
+  .content a i{ 
     font-style: normal;
     font-size: 10pt;
     color:#999;
   }
+  .toright{float: right;}
   .content a b{
     width: 30px;
     display: inline-block;
@@ -51,18 +51,29 @@ h1{text-align: center;}
         gepage(0, 20, "ALL");
          
     }); 
-
+     
+    var firstLoad = true;
     function gepage(start, size, product){
            var url = "pagelist/" + product + "/" + start + "-" + size; 
            $.post({
                 url: url, 
                 success:function(d){
-                    if(!d.rows) return;
+                    if(!d.rows) {
+                        if(firstLoad){
+                         $('.content').html('加载失败');
+                        }
+                        return;
+                    }
+                     if(firstLoad){
+                         $('.content').html('');
+                     }
                     var html = "";
                     for(var i in d.rows){
                         var data = d.rows[i];
                         var showurl = "showpaper?id="+data.id;
-                        var row = "<a href='"+showurl+"'><b>"+ (parseInt(i)+1)+".</b> "+ data.title +" &nbsp;<i>("+data.product+")</i></a>";
+                        var row = "<a href='"+showurl+"'><b>"+ (parseInt(i)+1)+".</b>"+ data.title 
+                              +" <br><b></b><i>结束: "+formatDateTime(parseInt(data.time))+"</i>"
+                              +"<i class='toright'>("+data.product+")</i></a>";
                         html+=row;
                     }
                     $('.content').append(html);
@@ -71,6 +82,23 @@ h1{text-align: center;}
            });
         }
 
+ 
+function formatDateTime(inputTime) {    
+    var date = new Date(inputTime);  
+    var y = date.getFullYear();    
+    var m = date.getMonth() + 1;    
+    m = m < 10 ? ('0' + m) : m;    
+    var d = date.getDate();    
+    d = d < 10 ? ('0' + d) : d;    
+    var h = date.getHours();  
+    h = h < 10 ? ('0' + h) : h;  
+    var minute = date.getMinutes();  
+    var second = date.getSeconds();  
+    minute = minute < 10 ? ('0' + minute) : minute;    
+    second = second < 10 ? ('0' + second) : second;   
+    //return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second; 
+    return y + '-' + m + '-' + d+' '+h+':'+minute ;       
+};  
 </script>
 
   
