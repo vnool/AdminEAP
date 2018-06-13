@@ -36,7 +36,7 @@ export var enStrings = {
   //Strings in Editor
   ed: {
     survey: "Survey",
-    settings: "Survey Settings",
+    settings: "设置",
     editSurvey: "Edit Survey",
     addNewPage: "Add New Page",
     moveRight: "Scroll to the Right",

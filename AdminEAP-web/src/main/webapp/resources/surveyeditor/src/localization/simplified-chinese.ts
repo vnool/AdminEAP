@@ -32,7 +32,8 @@ var simplifiedChineseTranslation = {
   },
   // strings for editor
   ed: {
-    survey: "调查问卷",
+    survey: "调查试卷",
+    settings:"设置",
     editSurvey: "修改",
     addNewPage: "添加新页面",
     deletePage: "删除页面",
@@ -40,12 +41,12 @@ var simplifiedChineseTranslation = {
     newPageName: "页面",
     newQuestionName: "问题",
     newPanelName: "面板",
-    testSurvey: "测试问卷",
-    testSurveyAgain: "再次测试问卷",
-    testSurveyWidth: "问卷宽度: ",
-    embedSurvey: "将问卷嵌入网页",
-    saveSurvey: "保存问卷",
-    designer: "问卷设计器",
+    testSurvey: "测试试卷",
+    testSurveyAgain: "再次测试试卷",
+    testSurveyWidth: "试卷宽度: ",
+    embedSurvey: "将试卷嵌入网页",
+    saveSurvey: "保存试卷",
+    designer: "试卷设计器",
     jsonEditor: "JSON 编辑器",
     undo: "撤销",
     redo: "恢复",
@@ -56,7 +57,7 @@ var simplifiedChineseTranslation = {
     delSelObject: "删除所选对象",
     editSelObject: "编辑所选对象",
     correctJSON: "请修正 JSON 数据",
-    surveyResults: "问卷结果: ",
+    surveyResults: "试卷结果: ",
     modified: "已修改",
     saving: "保存中...",
     saved: "已保存"
@@ -163,7 +164,7 @@ var simplifiedChineseTranslation = {
       question: "问题",
       completedHtml: "完成后的Html",
       loadingHtml: "加载中的Html",
-      timer: "问卷计时器",
+      timer: "试卷计时器",
       trigger: "触发器",
       fileOptions: "选项",
       html: "HTML 编辑器",
@@ -181,17 +182,17 @@ var simplifiedChineseTranslation = {
     editProperty: "编辑属性: '{0}'",
     items: "[ 项目数量: {0} ]",
     enterNewValue: "请设定值",
-    noquestions: "问卷中还没有创建任何问题",
+    noquestions: "试卷中还没有创建任何问题",
     createtrigger: "请创建触发器",
     triggerOn: "当 ",
     triggerMakePagesVisible: "使页面可见:",
     triggerMakeQuestionsVisible: "使问题可见:",
-    triggerCompleteText: "如果满足条件，则完成问卷",
+    triggerCompleteText: "如果满足条件，则完成试卷",
     triggerNotSet: "触发器尚未设置",
     triggerRunIf: "满足下列条件时执行",
     triggerSetToName: "修改下列问题值: ",
     triggerSetValue: "修改为: ",
-    triggerIsVariable: "在问卷提交结果中不要包含该变量"
+    triggerIsVariable: "在试卷提交结果中不要包含该变量"
   },
   // strings for operators
   op: {
@@ -216,8 +217,8 @@ var simplifiedChineseTranslation = {
     bootstrap: "使用 Bootstrap 时",
     standard: "不使用 Bootstrap 时",
     showOnPage: "嵌入页面显示",
-    showInWindow: "使用单独的问卷窗口",
-    loadFromServer: "从服务器加载问卷 JSON 数据",
+    showInWindow: "使用单独的试卷窗口",
+    loadFromServer: "从服务器加载试卷 JSON 数据",
     titleScript: "脚本和样式",
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
@@ -230,7 +231,7 @@ var simplifiedChineseTranslation = {
     textvalidator: "文本"
   },
   triggers: {
-    completetrigger: "完成问卷",
+    completetrigger: "完成试卷",
     setvaluetrigger: "设置问题值",
     visibletrigger: "修改可见性"
   },
@@ -300,7 +301,7 @@ var simplifiedChineseTranslation = {
     },
     survey_title: {
       name: "标题",
-      title: "问卷标题在每页上都会显示"
+      title: "试卷标题在每页上都会显示"
     },
     page_title: {
       name: "标题",
